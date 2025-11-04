@@ -12,7 +12,7 @@ interface VideoIntroModalProps {
 }
 
 export function VideoIntroModal({
-  videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ",
+  videoUrl = "https://player.vimeo.com/video/1133461747?badge=0&autopause=0&player_id=0&app_id=58479",
   title = "Welcome to P55 Account!",
   description = "Watch this quick 2-minute intro to learn how to create your first high-converting affiliate page.",
 }: VideoIntroModalProps) {
@@ -82,9 +82,9 @@ export function VideoIntroModal({
             <iframe
               src={videoUrl}
               title="P55 Account Introduction"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
               allowFullScreen
-              className="absolute inset-0 w-full h-full"
+              className="absolute inset-0 w-full h-full border-0"
             />
           </div>
 

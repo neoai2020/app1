@@ -21,13 +21,15 @@ export function FeaturedVideoCard() {
                 </Button>
               </div>
             ) : (
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Welcome Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
+              <div className="relative w-full h-full">
+                <iframe
+                  src="https://player.vimeo.com/video/1133461747?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1"
+                  title="P55 Account Welcome"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
             )}
           </div>
 

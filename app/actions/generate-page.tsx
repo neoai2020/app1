@@ -30,6 +30,24 @@ async function generateWithRapidAPI(prompt: string): Promise<string> {
   return data.result || data.message || data.content || ""
 }
 
+function normalizeAffiliateLink(link: string): string {
+  // Remove any whitespace
+  link = link.trim()
+
+  // If the link already has a protocol, return it as is
+  if (link.startsWith("http://") || link.startsWith("https://")) {
+    return link
+  }
+
+  // If it starts with //, add https:
+  if (link.startsWith("//")) {
+    return "https:" + link
+  }
+
+  // Otherwise, add https://
+  return "https://" + link
+}
+
 function generateSlug(title: string): string {
   return title
     .toLowerCase()
@@ -51,6 +69,9 @@ export default async function generatePageAction(nicheId: string, offerId: strin
     }
 
     console.log("[v0] Generating page for user:", user.id)
+
+    const normalizedAffiliateLink = normalizeAffiliateLink(affiliateLink)
+    console.log("[v0] Normalized affiliate link:", normalizedAffiliateLink)
 
     const { data: niche, error: nicheError } = await supabase.from("niches").select("*").eq("id", nicheId).single()
 
@@ -170,7 +191,7 @@ Write naturally as a continuation with proper HTML tags:`
       console.log("[v0] Final article length:", articleContent.length)
     }
 
-    articleContent = articleContent.replace(/\[LINK\]/g, affiliateLink)
+    articleContent = articleContent.replace(/\[LINK\]/g, normalizedAffiliateLink)
 
     const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
     const title = h1Match
@@ -187,7 +208,7 @@ Write naturally as a continuation with proper HTML tags:`
         offer_id: offerId,
         title,
         content: articleContent,
-        affiliate_link: affiliateLink,
+        affiliate_link: normalizedAffiliateLink, // Store normalized link
         status: "active",
       })
       .select()
