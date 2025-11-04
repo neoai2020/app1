@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { SharePageDialog } from "@/components/share-page-dialog"
+import Link from "next/link"
 
 interface PageActionsProps {
   pageId: string
@@ -42,15 +43,17 @@ export function PageActions({ pageId, status, affiliateLink }: PageActionsProps)
     setLoading(false)
   }
 
+  const articleUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/article/${pageId}`
+
   return (
     <div className="flex items-center gap-3">
       <Button asChild variant="default" className="flex-1 h-12 text-base font-bold glow-cyan">
-        <a href={affiliateLink} target="_blank" rel="noopener noreferrer">
+        <Link href={`/article/${pageId}`} target="_blank">
           <ExternalLink className="w-5 h-5 mr-2" />
           View Page
-        </a>
+        </Link>
       </Button>
-      <SharePageDialog pageUrl={affiliateLink} pageTitle="Check out this amazing offer!" />
+      <SharePageDialog pageUrl={articleUrl} pageTitle="Check out this amazing offer!" />
       <Button
         variant="outline"
         onClick={handleToggleStatus}
