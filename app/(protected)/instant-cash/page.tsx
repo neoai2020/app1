@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowLeft, Loader2, ExternalLink } from "lucide-react"
+import { ArrowLeft, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -70,56 +70,26 @@ export default function InstantCashPage() {
             No experience needed. No commitments. Just your opinion — and instant cash.
           </p>
         </div>
-      </div>
 
-      <div className="w-full bg-gray-100 border-t-4 border-cyan-500">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative w-full" style={{ height: "800px" }}>
-            {isLoading && !iframeError && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
-                <div className="text-center">
-                  <Loader2 className="w-8 h-8 animate-spin text-cyan-500 mx-auto mb-4" />
-                  <p className="text-gray-900 font-medium">Loading surveys…</p>
-                </div>
-              </div>
-            )}
+        <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-12 text-center border-2 border-cyan-200 shadow-lg">
+          <div className="max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Ready to Start Earning?</h3>
+            <p className="text-lg text-gray-700 mb-8">
+              Click the button below to access hundreds of paid surveys from Toluna. Start earning cash rewards for
+              sharing your opinions today!
+            </p>
 
-            {iframeError ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-white">
-                <div className="text-center max-w-md px-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Unable to load surveys directly</h3>
-                  <p className="text-gray-700 mb-6">
-                    Please click the button below to open Toluna surveys in a new tab:
-                  </p>
-                  <a
-                    href="https://www.toluna.com/en"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-                  >
-                    Open Toluna Surveys
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            ) : (
-              <iframe
-                src="https://www.toluna.com/en"
-                className="w-full h-full border-0"
-                onLoad={() => {
-                  console.log("[v0] Iframe loaded successfully")
-                  setIsLoading(false)
-                }}
-                onError={() => {
-                  console.log("[v0] Iframe failed to load")
-                  setIframeError(true)
-                  setIsLoading(false)
-                }}
-                title="Toluna Surveys"
-                allow="payment; geolocation"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
-              />
-            )}
+            <a
+              href="https://www.toluna.com/en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold text-xl py-5 px-10 rounded-xl transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            >
+              <span>Start Taking Surveys Now</span>
+              <ExternalLink className="w-6 h-6" />
+            </a>
+
+            <p className="mt-6 text-sm text-gray-600">Opens in a new tab • 100% Free • Instant Rewards</p>
           </div>
         </div>
       </div>
