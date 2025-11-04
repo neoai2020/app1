@@ -34,10 +34,11 @@ export default function SignUpPage() {
           data: {
             full_name: fullName,
           },
+          emailConfirm: false, // Disable email verification
         },
       })
       if (error) throw error
-      router.push("/auth/verify-email")
+      router.push("/dashboard") // Redirect directly to dashboard instead of verify-email page
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred")
     } finally {
