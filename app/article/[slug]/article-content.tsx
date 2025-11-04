@@ -1,40 +1,21 @@
 "use client"
 
-import { createClient } from "@/lib/supabase/server"
-import { notFound } from "next/navigation"
 import Link from "next/link"
 
-interface PageProps {
-  params: {
-    slug: string
+interface ArticleContentProps {
+  page: {
+    id: string
+    title: string
+    content: string
+    affiliate_link: string
+    views: number
+    created_at: string
+    niches?: { name: string }
+    offers?: { title: string }
   }
 }
 
-export default async function ClientArticlePage({ params }: PageProps) {
-  const supabase = await createClient()
-
-  // Fetch the page by slug (publicly accessible)
-  const { data: page, error } = await supabase
-    .from("pages")
-    .select(`
-      *,
-      niches (name),
-      offers (title)
-    `)
-    .eq("slug", params.slug)
-    .eq("status", "active")
-    .single()
-
-  if (error || !page) {
-    notFound()
-  }
-
-  // Increment view count
-  await supabase
-    .from("pages")
-    .update({ views: (page.views || 0) + 1 })
-    .eq("id", page.id)
-
+export default function ArticleContent({ page }: ArticleContentProps) {
   // Format content with proper line breaks
   const formattedContent = page.content.split("\n").map((paragraph: string, index: number) => {
     if (!paragraph.trim()) return null
@@ -44,6 +25,19 @@ export default async function ClientArticlePage({ params }: PageProps) {
       </p>
     )
   })
+
+  const handleAffiliateClick = async () => {
+    // Track click
+    try {
+      await fetch("/api/track-click", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pageId: page.id }),
+      })
+    } catch (error) {
+      console.error("Failed to track click:", error)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#0A0E12]">
@@ -80,13 +74,7 @@ export default async function ClientArticlePage({ params }: PageProps) {
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={async () => {
-                  // Track click
-                  await fetch("/api/track-click", {
-                    method: "POST",
-                    body: JSON.stringify({ pageId: page.id }),
-                  })
-                }}
+                onClick={handleAffiliateClick}
                 className="inline-block px-8 py-4 bg-gradient-to-r from-[#00F0FF] to-[#7A5CFF] text-white font-bold rounded-full hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all duration-300"
               >
                 Click Here to Learn More →
