@@ -81,7 +81,8 @@ export function PageGenerator({ nicheId, offerId, onBack }: PageGeneratorProps) 
     } catch (error) {
       clearInterval(progressInterval)
       console.error("[v0] Error generating page:", error)
-      alert(error instanceof Error ? error.message : "Failed to generate page. Please try again.")
+      const errorMessage = error instanceof Error ? error.message : "Failed to generate page. Please try again."
+      alert(errorMessage)
       setGenerating(false)
       setProgress(0)
     }

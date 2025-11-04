@@ -9,10 +9,9 @@ interface PageProps {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  const { slug } = await params
+  const { slug: pageId } = await params
   const supabase = await createClient()
 
-  // Fetch the page by slug (publicly accessible)
   const { data: page, error } = await supabase
     .from("pages")
     .select(`
@@ -20,7 +19,7 @@ export default async function ArticlePage({ params }: PageProps) {
       niches (name),
       offers (title)
     `)
-    .eq("slug", slug)
+    .eq("id", pageId)
     .eq("status", "active")
     .single()
 
@@ -38,10 +37,10 @@ export default async function ArticlePage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params
+  const { slug: pageId } = await params
   const supabase = await createClient()
 
-  const { data: page } = await supabase.from("pages").select("title, content").eq("slug", slug).single()
+  const { data: page } = await supabase.from("pages").select("title, content").eq("id", pageId).single()
 
   if (!page) {
     return {

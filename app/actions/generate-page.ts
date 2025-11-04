@@ -162,8 +162,6 @@ Write naturally as a continuation:`
 
     const lines = articleContent.split("\n").filter((line) => line.trim())
     const title = lines[0]?.substring(0, 200) || `${offer.title} - Complete Review & Guide`
-    const baseSlug = generateSlug(title)
-    const slug = `${baseSlug}-${Date.now().toString(36)}`
 
     console.log("[v0] Content generated, inserting into database")
 
@@ -176,7 +174,6 @@ Write naturally as a continuation:`
         title,
         content: articleContent,
         affiliate_link: affiliateLink,
-        slug,
         status: "active",
       })
       .select()
@@ -184,7 +181,7 @@ Write naturally as a continuation:`
 
     if (insertError) {
       console.error("[v0] Error inserting page:", insertError)
-      return { success: false, error: "Failed to save page" }
+      return { success: false, error: `Database error: ${insertError.message}` }
     }
 
     console.log("[v0] Page created successfully:", newPage.id)
@@ -195,8 +192,7 @@ Write naturally as a continuation:`
     return {
       success: true,
       pageId: newPage.id,
-      slug: newPage.slug,
-      publicUrl: `/article/${newPage.slug}`,
+      publicUrl: `/article/${newPage.id}`,
     }
   } catch (error) {
     console.error("[v0] Error in generatePageAction:", error)
