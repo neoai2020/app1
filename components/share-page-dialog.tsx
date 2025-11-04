@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Share2, Facebook, Twitter, Linkedin, Mail, MessageCircle, Copy, Check } from "lucide-react"
 import { useState } from "react"
+import { FaPinterest, FaReddit, FaTelegram } from "react-icons/fa"
 
 interface SharePageDialogProps {
   pageUrl: string
@@ -25,6 +26,9 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(pageTitle + " " + pageUrl)}`,
+    pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(pageUrl)}&description=${encodeURIComponent(pageTitle)}`,
+    reddit: `https://reddit.com/submit?url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(pageTitle)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`,
     email: `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(pageUrl)}`,
   }
 
@@ -55,7 +59,6 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
         </DialogHeader>
 
         <div className="space-y-4 pt-4">
-          {/* Social Media Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <Button
               onClick={() => handleShare("facebook")}
@@ -86,9 +89,27 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
               WhatsApp
             </Button>
             <Button
-              onClick={() => handleShare("email")}
-              className="h-14 text-base font-bold glass bg-transparent col-span-2"
+              onClick={() => handleShare("pinterest")}
+              className="h-14 text-base font-bold bg-[#E60023] hover:bg-[#E60023]/90 text-white"
             >
+              <FaPinterest className="w-5 h-5 mr-2" />
+              Pinterest
+            </Button>
+            <Button
+              onClick={() => handleShare("reddit")}
+              className="h-14 text-base font-bold bg-[#FF4500] hover:bg-[#FF4500]/90 text-white"
+            >
+              <FaReddit className="w-5 h-5 mr-2" />
+              Reddit
+            </Button>
+            <Button
+              onClick={() => handleShare("telegram")}
+              className="h-14 text-base font-bold bg-[#0088cc] hover:bg-[#0088cc]/90 text-white"
+            >
+              <FaTelegram className="w-5 h-5 mr-2" />
+              Telegram
+            </Button>
+            <Button onClick={() => handleShare("email")} className="h-14 text-base font-bold glass bg-transparent">
               <Mail className="w-5 h-5 mr-2" />
               Email
             </Button>

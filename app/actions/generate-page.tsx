@@ -74,6 +74,15 @@ export default async function generatePageAction(nicheId: string, offerId: strin
 
     const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words promoting "${offer.title}" in the ${niche.name} niche.
 
+FORMAT THE ARTICLE AS HTML with proper structure:
+- Use <h1> for the main headline
+- Use <h2> for major section headings
+- Use <h3> for subsection headings
+- Use <p> for paragraphs
+- Use <strong> for emphasis
+- Use <a href="[LINK]" class="affiliate-link">text</a> for inline affiliate links (use [LINK] as placeholder)
+- Include 8-10 inline affiliate links throughout the article naturally
+
 ARTICLE REQUIREMENTS:
 - Minimum 2,000 words (this is critical - do not write less)
 - Write in a conversational, engaging tone that builds trust
@@ -84,57 +93,64 @@ ARTICLE REQUIREMENTS:
 - Include social proof and credibility markers
 - Create urgency without being pushy
 
-STRUCTURE:
-1. Compelling headline that promises a specific benefit
-2. Opening hook that grabs attention (300+ words)
-   - Start with a relatable problem or story
-   - Build empathy and connection
-   - Tease the solution
+STRUCTURE WITH HTML TAGS:
+<h1>Compelling headline that promises a specific benefit</h1>
 
-3. The Problem Section (400+ words)
-   - Deep dive into the pain points
-   - Make the reader feel understood
-   - Amplify the cost of not solving the problem
+<h2>The Problem You're Facing</h2>
+<p>Opening hook that grabs attention (300+ words)</p>
+<p>Start with a relatable problem or story</p>
+<p>Build empathy and connection</p>
+<p>Include an <a href="[LINK]" class="affiliate-link">inline link</a> naturally</p>
 
-4. The Solution - Introduce ${offer.title} (500+ words)
-   - Explain what it is and how it works
-   - Focus on the transformation it provides
-   - Share specific features that deliver results
-   - Include how it's different from alternatives
+<h2>Why Traditional Solutions Don't Work</h2>
+<p>Deep dive into the pain points (400+ words)</p>
+<p>Make the reader feel understood</p>
+<p>Amplify the cost of not solving the problem</p>
 
-5. Benefits & Results (400+ words)
-   - List 5-7 key benefits with explanations
-   - Include specific outcomes users can expect
-   - Use bullet points for easy scanning
+<h2>Introducing ${offer.title}: The Solution You've Been Looking For</h2>
+<p>Explain what it is and how it works (500+ words)</p>
+<p>Focus on the transformation it provides</p>
+<p>Share specific features that deliver results</p>
+<p>Include <a href="[LINK]" class="affiliate-link">multiple inline links</a> throughout</p>
 
-6. Social Proof Section (200+ words)
-   - Mention success stories (you can create realistic examples)
-   - Include statistics if relevant
-   - Build credibility
+<h3>How It Works</h3>
+<p>Step-by-step explanation</p>
 
-7. Addressing Objections (300+ words)
-   - "Is this right for me?"
-   - "How long does it take?"
-   - "What if it doesn't work?"
-   - Provide reassuring answers
+<h3>What Makes It Different</h3>
+<p>Unique selling points</p>
 
-8. Strong Call-to-Action (200+ words)
-   - Create urgency (limited time, bonuses, etc.)
-   - Clear next steps
-   - Reinforce the transformation
-   - Include the phrase "Click here to get started" multiple times
+<h2>The Benefits You'll Experience</h2>
+<p>List 5-7 key benefits with explanations (400+ words)</p>
+<p>Include specific outcomes users can expect</p>
+<p>Add <a href="[LINK]" class="affiliate-link">links to learn more</a></p>
 
-IMPORTANT INSTRUCTIONS:
+<h2>Real Results from Real People</h2>
+<p>Social proof section (200+ words)</p>
+<p>Mention success stories</p>
+<p>Include statistics if relevant</p>
+
+<h2>Is This Right for You?</h2>
+<p>Addressing objections (300+ words)</p>
+<p>"Is this right for me?"</p>
+<p>"How long does it take?"</p>
+<p>"What if it doesn't work?"</p>
+
+<h2>How to Get Started Today</h2>
+<p>Strong call-to-action (200+ words)</p>
+<p>Create urgency (limited time, bonuses, etc.)</p>
+<p>Clear next steps with <a href="[LINK]" class="affiliate-link">action links</a></p>
+<p>Reinforce the transformation</p>
+
+IMPORTANT:
 - Write naturally and conversationally
 - Use short paragraphs (2-3 sentences max)
 - Include subheadings every 200-300 words
 - Use transition phrases to maintain flow
-- End with a powerful call-to-action
-- DO NOT include any HTML tags or markdown - just plain text with line breaks
-- DO NOT mention "affiliate link" or "commission" - keep it natural
-- Where you want to include a link, write [AFFILIATE_LINK] and I'll replace it
+- Include 8-10 inline affiliate links throughout (use [LINK] as placeholder)
+- DO NOT mention "affiliate link" or "commission"
+- Write complete HTML with proper tags
 
-Write the complete article now:`
+Write the complete HTML article now:`
 
     let articleContent = await generateWithRapidAPI(prompt)
 
@@ -142,26 +158,24 @@ Write the complete article now:`
 
     if (articleContent.length < 4000) {
       console.log("[v0] Article too short, generating part 2...")
-      const part2Prompt = `Continue the previous article about "${offer.title}". Add 1,000 more words covering:
-- More detailed benefits and use cases
-- Step-by-step guide on getting started
-- Frequently asked questions
-- Final compelling call-to-action
-Write naturally as a continuation:`
+      const part2Prompt = `Continue the previous HTML article about "${offer.title}". Add 1,000 more words with proper HTML formatting:
+- Use <h2> and <h3> for headings
+- Use <p> for paragraphs
+- Include more <a href="[LINK]" class="affiliate-link">inline links</a>
+- Cover: More detailed benefits, step-by-step guide, FAQs, final CTA
+Write naturally as a continuation with proper HTML tags:`
 
       const part2 = await generateWithRapidAPI(part2Prompt)
       articleContent += "\n\n" + part2
       console.log("[v0] Final article length:", articleContent.length)
     }
 
-    articleContent = articleContent.replace(/\[AFFILIATE_LINK\]/g, affiliateLink)
-    articleContent = articleContent.replace(
-      /(click here|get started|learn more|try it now|check it out)/gi,
-      `$1: ${affiliateLink}`,
-    )
+    articleContent = articleContent.replace(/\[LINK\]/g, affiliateLink)
 
-    const lines = articleContent.split("\n").filter((line) => line.trim())
-    const title = lines[0]?.substring(0, 200) || `${offer.title} - Complete Review & Guide`
+    const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
+    const title = h1Match
+      ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200)
+      : `${offer.title} - Complete Review & Guide`
 
     console.log("[v0] Content generated, inserting into database")
 
