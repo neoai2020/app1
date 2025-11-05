@@ -25,18 +25,58 @@ export async function createPageFromTemplate({
       return { success: false, error: "Not authenticated" }
     }
 
-    const { data: niches, error: nicheError } = await supabase.from("niches").select("id").limit(1).single()
+    let nicheId: string | null = null
 
-    if (nicheError || !niches) {
-      console.error("[v0] Error fetching niche:", nicheError)
-      return { success: false, error: "Could not find a niche" }
+    const { data: existingNiche } = await supabase.from("niches").select("id").limit(1).single()
+
+    if (existingNiche) {
+      nicheId = existingNiche.id
+    } else {
+      // Create a default niche if none exists
+      const { data: newNiche, error: createNicheError } = await supabase
+        .from("niches")
+        .insert({
+          name: "General",
+          description: "General niche for all content",
+          icon: "📄",
+        })
+        .select("id")
+        .single()
+
+      if (createNicheError) {
+        console.error("[v0] Error creating default niche:", createNicheError)
+        return { success: false, error: "Could not create default niche" }
+      }
+
+      nicheId = newNiche.id
     }
 
-    const { data: offers, error: offerError } = await supabase.from("offers").select("id").limit(1).single()
+    let offerId: string | null = null
 
-    if (offerError || !offers) {
-      console.error("[v0] Error fetching offer:", offerError)
-      return { success: false, error: "Could not find an offer" }
+    const { data: existingOffer } = await supabase.from("offers").select("id").limit(1).single()
+
+    if (existingOffer) {
+      offerId = existingOffer.id
+    } else {
+      // Create a default offer if none exists
+      const { data: newOffer, error: createOfferError } = await supabase
+        .from("offers")
+        .insert({
+          title: "Default Offer",
+          description: "Default affiliate offer",
+          commission_rate: "50%",
+          niche_id: nicheId,
+          affiliate_network: "General",
+        })
+        .select("id")
+        .single()
+
+      if (createOfferError) {
+        console.error("[v0] Error creating default offer:", createOfferError)
+        return { success: false, error: "Could not create default offer" }
+      }
+
+      offerId = newOffer.id
     }
 
     // Create the page
@@ -44,8 +84,8 @@ export async function createPageFromTemplate({
       .from("pages")
       .insert({
         user_id: user.id,
-        niche_id: niches.id, // Added required niche_id
-        offer_id: offers.id, // Added required offer_id
+        niche_id: nicheId,
+        offer_id: offerId,
         title,
         content,
         affiliate_link: affiliateLink,
