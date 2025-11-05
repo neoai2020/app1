@@ -10,6 +10,7 @@ import { Zap, ArrowLeft, Copy, CheckCircle2, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { createPageFromTemplate } from "./actions"
 import { useRouter } from "next/navigation"
+import { Facebook } from "lucide-react"
 
 interface Template {
   id: string
@@ -18,6 +19,31 @@ interface Template {
   content: string
   avgEarnings: string
   author: string
+  bestFor: string
+}
+
+interface Message {
+  id: string
+  platform: string
+  niche: string
+  message: string
+  instructions: string[]
+  earnings: string
+  bestTime: string
+  tips: string[]
+  icon: any
+}
+
+interface TrafficMessage {
+  id: string
+  niche: string
+  platform: string
+  message: string
+  instructions: string[]
+  earningsMin: number
+  earningsMax: number
+  bestTime: string
+  proTips: string[]
   bestFor: string
 }
 
@@ -278,18 +304,98 @@ RECOMMENDED BUDGET: Start with $15-25/day`,
   },
 ]
 
+const messages: Message[] = [
+  // WEIGHT LOSS - Facebook
+  {
+    id: "wl-fb-1",
+    platform: "Facebook",
+    niche: "Weight Loss",
+    message: `🔥 I lost 23 pounds in 6 weeks without starving myself!
+
+I was skeptical at first, but this method actually works. No crazy diets, no hours at the gym.
+
+Just a simple system that anyone can follow.
+
+If you're tired of yo-yo dieting and want real results, check this out: [AFFILIATE_LINK]
+
+Drop a 💪 if you're ready to transform your body!`,
+    instructions: [
+      'Step 1: Join 10-15 weight loss Facebook groups (search "weight loss support", "fitness motivation", "healthy living")',
+      "Step 2: Read the group rules - most allow personal stories but not direct selling",
+      "Step 3: Post this message as a personal success story (not as a link post)",
+      "Step 4: Respond to every comment within the first hour to boost engagement",
+      "Step 5: Post in 3-5 groups per day (don't spam all at once or you'll get banned)",
+      "Step 6: Best times to post: 7-9 AM, 12-1 PM, 7-9 PM (when people are most active)",
+    ],
+    earnings: "On average, this post generates $75-$200 per day across multiple groups",
+    bestTime: "7-9 AM or 7-9 PM",
+    tips: [
+      "Add a before/after photo (use stock images or create one) for 3x more engagement",
+      "Respond to comments with encouragement, not sales pitches",
+      "If someone asks for the link, send it in a private message",
+      "Post the same message in different groups, but space them out by 2-3 hours",
+    ],
+    icon: Facebook,
+  },
+]
+
+const trafficMessages: TrafficMessage[] = [
+  // Weight Loss - Facebook (10 messages)
+  {
+    id: "wl-fb-1",
+    niche: "Weight Loss",
+    platform: "Facebook",
+    message:
+      "🔥 I lost 23 pounds in 6 weeks without starving myself or spending hours at the gym! This simple method changed everything for me. If you're struggling with weight loss, you NEED to see this: [AFFILIATE_LINK]",
+    instructions: [
+      "Step 1: Join 10-15 weight loss Facebook groups (search 'weight loss support', 'fitness motivation', 'healthy living')",
+      "Step 2: Spend 2-3 days being active in the groups - like posts, leave helpful comments, build trust FIRST",
+      "Step 3: Post this message as a regular post (NOT in comments initially)",
+      "Step 4: When people comment asking questions, reply within 1 hour and be helpful",
+      "Step 5: Post once per day in different groups (NEVER spam the same group multiple times)",
+      "Step 6: Use a personal profile photo and real name for better trust and engagement",
+    ],
+    earningsMin: 75,
+    earningsMax: 250,
+    bestTime: "7-9 AM or 7-9 PM (when people check Facebook before/after work)",
+    proTips: [
+      "Add a before/after photo (use stock images from Unsplash if needed) - this increases engagement by 300%",
+      "Respond to every comment within 1 hour for maximum visibility in the group",
+      "Don't post the exact same message twice - vary the wording slightly each time",
+      "Join groups with 5,000+ members for best results - smaller groups have less traffic",
+    ],
+    bestFor: "Weight loss supplements, fitness programs, diet plans, meal prep services",
+  },
+]
+
 export function InstantIncomeContent({ userId }: { userId: string }) {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null)
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null)
+  const [selectedTrafficMessage, setSelectedTrafficMessage] = useState<TrafficMessage | null>(null)
   const [affiliateLink, setAffiliateLink] = useState("")
   const [isCreating, setIsCreating] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [populatedMessage, setPopulatedMessage] = useState("")
+  const [copied, setCopied] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>("All")
+  const [selectedNiche, setSelectedNiche] = useState("all")
   const router = useRouter()
 
   const categories = ["All", "Social Media", "Email", "Ad Copy"]
+  const niches = [
+    "all",
+    ...Array.from(new Set(messages.map((m) => m.niche))),
+    ...Array.from(new Set(trafficMessages.map((tm) => tm.niche))),
+  ]
 
   const filteredTemplates =
     selectedCategory === "All" ? templates : templates.filter((t) => t.category === selectedCategory)
+
+  const filteredMessages = selectedNiche === "all" ? messages : messages.filter((m) => m.niche === selectedNiche)
+
+  const filteredTrafficMessages =
+    selectedNiche === "all" ? trafficMessages : trafficMessages.filter((tm) => tm.niche === selectedNiche)
 
   const handleUseTemplate = async () => {
     if (!selectedTemplate || !affiliateLink.trim()) return
@@ -317,8 +423,44 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
     }
   }
 
+  const handleUseMessage = (message: Message) => {
+    setSelectedMessage(message)
+    setShowModal(true)
+    setAffiliateLink("")
+    setPopulatedMessage("")
+    setCopied(false)
+  }
+
+  const handleGenerateMessage = () => {
+    if (!selectedMessage || !affiliateLink) return
+
+    const populated = selectedMessage.message.replace(/\[AFFILIATE_LINK\]/g, affiliateLink)
+    setPopulatedMessage(populated)
+  }
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(populatedMessage)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleUseTrafficMessage = (message: TrafficMessage) => {
+    setSelectedTrafficMessage(message)
+    setShowModal(true)
+    setAffiliateLink("")
+    setPopulatedMessage("")
+    setCopied(false)
+  }
+
+  const handleGenerateTrafficMessage = () => {
+    if (!selectedTrafficMessage || !affiliateLink) return
+
+    const populated = selectedTrafficMessage.message.replace(/\[AFFILIATE_LINK\]/g, affiliateLink)
+    setPopulatedMessage(populated)
+  }
+
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-violet-950 via-slate-900 to-slate-950 p-4 md:p-8">
       <Button asChild variant="ghost" className="text-violet-400 hover:text-violet-300">
         <Link href="/dashboard">
           <ArrowLeft className="w-5 h-5 mr-2" />
@@ -435,6 +577,82 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
         ))}
       </div>
 
+      {/* Niche Filter */}
+      <div className="flex gap-3 flex-wrap mt-6">
+        {niches.map((niche) => (
+          <Button
+            key={niche}
+            onClick={() => setSelectedNiche(niche)}
+            variant={selectedNiche === niche ? "default" : "outline"}
+            className={
+              selectedNiche === niche
+                ? "bg-violet-500 hover:bg-violet-600 text-white font-bold"
+                : "border-violet-500/30 text-violet-300 hover:bg-violet-500/20 font-bold"
+            }
+            size="lg"
+          >
+            {niche.charAt(0).toUpperCase() + niche.slice(1)}
+          </Button>
+        ))}
+      </div>
+
+      {/* Messages Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        {filteredMessages.map((message) => (
+          <Card
+            key={message.id}
+            className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-violet-500/20 hover:border-violet-400/50 transition-all cursor-pointer"
+            onClick={() => handleUseMessage(message)}
+          >
+            <CardContent className="p-8">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-violet-500/20 text-violet-300 text-sm font-bold rounded-full">
+                      {message.platform}
+                    </span>
+                    <span className="text-emerald-400 font-black text-lg">{message.earnings}</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-2">{message.message}</h3>
+                  <p className="text-gray-400 font-semibold mb-3">Best Time: {message.bestTime}</p>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-violet-500 flex items-center justify-center">
+                  {message.icon}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Traffic Messages Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        {filteredTrafficMessages.map((trafficMessage) => (
+          <Card
+            key={trafficMessage.id}
+            className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-violet-500/20 hover:border-violet-400/50 transition-all cursor-pointer"
+            onClick={() => handleUseTrafficMessage(trafficMessage)}
+          >
+            <CardContent className="p-8">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="px-3 py-1 bg-violet-500/20 text-violet-300 text-sm font-bold rounded-full">
+                      {trafficMessage.platform}
+                    </span>
+                    <span className="text-emerald-400 font-black text-lg">
+                      ${trafficMessage.earningsMin}-${trafficMessage.earningsMax}/day
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-2">{trafficMessage.message}</h3>
+                  <p className="text-gray-400 font-semibold mb-3">Best Time: {trafficMessage.bestTime}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
       {/* Template Modal */}
       <Dialog open={!!selectedTemplate} onOpenChange={() => setSelectedTemplate(null)}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 border-violet-500/30">
@@ -493,6 +711,97 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
                 </>
               )}
             </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Message Modal */}
+      <Dialog open={showModal} onOpenChange={setShowModal}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-gray-900 border-violet-500/30">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-black text-white">
+              {selectedMessage?.message || selectedTrafficMessage?.message}
+            </DialogTitle>
+            <DialogDescription className="text-lg font-semibold text-gray-300">
+              {selectedMessage?.earnings ||
+                `${selectedTrafficMessage?.earningsMin}-${selectedTrafficMessage?.earningsMax}/day`}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            <div className="bg-gray-800/50 rounded-xl p-6 border border-violet-500/20">
+              <h4 className="text-xl font-black text-white mb-4">Instructions:</h4>
+              <ul className="list-disc pl-6 text-gray-300 font-mono text-base leading-relaxed font-semibold">
+                {(selectedMessage?.instructions || selectedTrafficMessage?.instructions).map((instruction, index) => (
+                  <li key={index}>{instruction}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="bg-violet-500/10 rounded-xl p-6 border border-violet-500/30">
+              <h4 className="text-xl font-black text-white mb-4">Tips:</h4>
+              <ul className="list-disc pl-6 text-violet-300 font-bold">
+                {(selectedMessage?.tips || selectedTrafficMessage?.proTips).map((tip, index) => (
+                  <li key={index}>{tip}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <Label htmlFor="affiliate-link" className="text-lg font-black text-white">
+                Enter Your Affiliate Link:
+              </Label>
+              <Input
+                id="affiliate-link"
+                type="url"
+                placeholder="https://your-affiliate-link.com"
+                value={affiliateLink}
+                onChange={(e) => setAffiliateLink(e.target.value)}
+                className="bg-gray-800 border-violet-500/30 text-white text-lg font-semibold"
+              />
+              <p className="text-sm text-gray-400 font-semibold">
+                We'll automatically create a page with this template and your affiliate link
+              </p>
+            </div>
+
+            <Button
+              onClick={selectedMessage ? handleGenerateMessage : handleGenerateTrafficMessage}
+              disabled={!affiliateLink.trim()}
+              className="w-full bg-violet-500 hover:bg-violet-600 text-white font-black text-xl py-6"
+              size="lg"
+            >
+              Generate Message
+            </Button>
+
+            {populatedMessage && (
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 rounded-xl p-6 border border-violet-500/20">
+                  <h4 className="text-xl font-black text-white mb-4">Generated Message:</h4>
+                  <pre className="text-gray-300 whitespace-pre-wrap font-mono text-base leading-relaxed font-semibold">
+                    {populatedMessage}
+                  </pre>
+                </div>
+
+                <Button
+                  onClick={handleCopy}
+                  disabled={copied}
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-black text-xl py-6"
+                  size="lg"
+                >
+                  {copied ? (
+                    <>
+                      <CheckCircle2 className="w-6 h-6 mr-2" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-6 h-6 mr-2" />
+                      Copy Message
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
