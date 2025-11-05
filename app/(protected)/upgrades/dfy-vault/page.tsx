@@ -14,6 +14,8 @@ export default async function DFYVaultPage() {
 
   const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
 
+  console.log("[v0] DFY Vault - User upgrade level:", profile?.upgrade_level)
+
   const hasAccess =
     profile?.upgrade_level === "dfy_vault" ||
     profile?.upgrade_level === "instant_income" ||

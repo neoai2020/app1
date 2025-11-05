@@ -32,6 +32,9 @@ export async function unlockUpgrade(upgradeLevel: "dfy_vault" | "instant_income"
     revalidatePath("/dashboard")
     revalidatePath("/upgrades")
     revalidatePath("/training")
+    revalidatePath("/upgrades/dfy-vault")
+    revalidatePath("/upgrades/instant-income")
+    revalidatePath("/upgrades/automated-income")
 
     return { success: true }
   } catch (error) {

@@ -17,6 +17,8 @@ export default async function InstantIncomePage() {
 
   const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
 
+  console.log("[v0] Instant Income - User upgrade level:", profile?.upgrade_level)
+
   const hasAccess = profile?.upgrade_level === "instant_income" || profile?.upgrade_level === "automated_income"
 
   if (!hasAccess) {

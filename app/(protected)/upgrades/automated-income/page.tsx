@@ -30,6 +30,8 @@ export default async function AutomatedIncomePage() {
 
   const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
 
+  console.log("[v0] Automated Income - User upgrade level:", profile?.upgrade_level)
+
   const hasAccess = profile?.upgrade_level === "automated_income"
 
   if (!hasAccess) {
