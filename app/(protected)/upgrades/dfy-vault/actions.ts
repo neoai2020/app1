@@ -25,11 +25,27 @@ export async function createPageFromTemplate({
       return { success: false, error: "Not authenticated" }
     }
 
+    const { data: niches, error: nicheError } = await supabase.from("niches").select("id").limit(1).single()
+
+    if (nicheError || !niches) {
+      console.error("[v0] Error fetching niche:", nicheError)
+      return { success: false, error: "Could not find a niche" }
+    }
+
+    const { data: offers, error: offerError } = await supabase.from("offers").select("id").limit(1).single()
+
+    if (offerError || !offers) {
+      console.error("[v0] Error fetching offer:", offerError)
+      return { success: false, error: "Could not find an offer" }
+    }
+
     // Create the page
     const { data, error } = await supabase
       .from("pages")
       .insert({
         user_id: user.id,
+        niche_id: niches.id, // Added required niche_id
+        offer_id: offers.id, // Added required offer_id
         title,
         content,
         affiliate_link: affiliateLink,
