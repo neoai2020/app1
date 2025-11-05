@@ -66,7 +66,10 @@ export function LiveStatsWidget() {
   const [isStoryVisible, setIsStoryVisible] = useState(false)
 
   useEffect(() => {
+    console.log("[v0] LiveStatsWidget mounted, starting increment interval")
+
     const incrementStats = () => {
+      console.log("[v0] Incrementing stats...")
       setStats((prev) => {
         const newStats = {
           articlesPublished: prev.articlesPublished + Math.floor(Math.random() * 3) + 1, // +1 to +3
@@ -75,6 +78,8 @@ export function LiveStatsWidget() {
           activeMembers: prev.activeMembers + Math.floor(Math.random() * 2), // +0 to +1
           totalMoney: prev.totalMoney + Math.floor(Math.random() * 50) + 20, // +20 to +70
         }
+
+        console.log("[v0] New stats:", newStats)
 
         // Save to localStorage
         const today = new Date().toDateString()
@@ -92,16 +97,16 @@ export function LiveStatsWidget() {
       }, 300)
     }
 
-    // Increment every 4-6 seconds
-    const interval = setInterval(
-      () => {
-        incrementStats()
-      },
-      4000 + Math.random() * 2000,
-    )
+    // Run increment every 5 seconds consistently
+    const interval = setInterval(incrementStats, 5000)
 
-    return () => clearInterval(interval)
-  }, [])
+    console.log("[v0] Interval set with ID:", interval)
+
+    return () => {
+      console.log("[v0] Cleaning up interval:", interval)
+      clearInterval(interval)
+    }
+  }, []) // Empty dependency array is correct - we only want this to run once
 
   useEffect(() => {
     const showRandomStory = () => {
