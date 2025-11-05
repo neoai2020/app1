@@ -11,30 +11,9 @@ export function FeaturedVideoCard() {
   return (
     <Card className="glass-strong border-border/50 glow-cyan overflow-hidden">
       <CardContent className="p-0">
-        <div className="grid md:grid-cols-2 gap-0">
-          {/* Video Player */}
-          <div className="relative aspect-video md:aspect-auto bg-muted">
-            {!isPlaying ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
-                <Button size="lg" onClick={() => setIsPlaying(true)} className="h-20 w-20 rounded-full glow-cyan p-0">
-                  <Play className="w-10 h-10 ml-1" />
-                </Button>
-              </div>
-            ) : (
-              <div className="relative w-full h-full">
-                <iframe
-                  src="https://player.vimeo.com/video/1133461747?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1"
-                  title="P55 Account Welcome"
-                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full border-0"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Video Info */}
-          <div className="p-8 flex flex-col justify-center space-y-6">
+        <div className="space-y-0">
+          {/* Video Info - Now on top */}
+          <div className="p-8 space-y-6">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 text-primary text-sm font-bold mb-4">
                 <Clock className="w-4 h-4" />
@@ -62,6 +41,27 @@ export function FeaturedVideoCard() {
                 <p className="text-base text-foreground">Generate & share your page</p>
               </div>
             </div>
+          </div>
+
+          {/* Video Player - Now below */}
+          <div className="relative aspect-video bg-muted">
+            {!isPlaying ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
+                <Button size="lg" onClick={() => setIsPlaying(true)} className="h-20 w-20 rounded-full glow-cyan p-0">
+                  <Play className="w-10 h-10 ml-1" />
+                </Button>
+              </div>
+            ) : (
+              <div className="relative w-full h-full">
+                <iframe
+                  src="https://player.vimeo.com/video/1133461747?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1"
+                  title="P55 Account Welcome"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              </div>
+            )}
           </div>
         </div>
       </CardContent>

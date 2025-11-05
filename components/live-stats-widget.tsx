@@ -114,15 +114,13 @@ export function LiveStatsWidget() {
   }, [])
 
   return (
-    <Card className="glass-strong border-2 border-cyan-500/30 shadow-xl overflow-hidden relative">
+    <Card className="glass-strong border-2 border-cyan-500/30 shadow-xl overflow-hidden relative scale-75 origin-top">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-emerald-500/5 to-amber-500/5" />
 
       <CardHeader className="relative z-10 pb-3 text-center">
-        <CardTitle className="text-xl font-bold text-foreground flex items-center justify-center gap-2">
-          <span className="text-2xl">💵</span>
-          <span className="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">
-            What's Happening Inside P55 Right Now
-          </span>
+        <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
+          <span className="text-3xl">💵</span>
+          <span>What's Happening Inside P55 Right Now</span>
         </CardTitle>
         <p className="text-sm text-muted-foreground mt-1 font-medium">
           Members are generating real results every single day through their P55 Accounts.
@@ -177,9 +175,7 @@ export function LiveStatsWidget() {
         >
           <p className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">Total Money Generated Today</p>
           <div className="flex items-center justify-center gap-2">
-            <p className="text-3xl font-black bg-gradient-to-r from-emerald-400 via-amber-400 to-emerald-400 bg-clip-text text-transparent">
-              ${stats.totalMoney.toLocaleString()}
-            </p>
+            <p className="text-3xl font-black text-emerald-400">${stats.totalMoney.toLocaleString()}</p>
             <TrendingUp className="w-6 h-6 text-emerald-400" />
           </div>
         </div>
