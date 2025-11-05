@@ -1,6 +1,17 @@
 "use client"
 
-import { Home, Zap, FileText, GraduationCap, Crown, Settings, LogOut, Share2, DollarSign } from "lucide-react"
+import {
+  Home,
+  Zap,
+  FileText,
+  GraduationCap,
+  Crown,
+  Settings,
+  LogOut,
+  Share2,
+  DollarSign,
+  TrendingUp,
+} from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
@@ -10,6 +21,7 @@ const menuItems = [
   { title: "Build P55 Page", url: "/create", icon: Zap },
   { title: "Your P55 Pages", url: "/pages", icon: FileText },
   { title: "Instant Cash Injection", url: "/instant-cash", icon: DollarSign },
+  { title: "New System to Earn $1,000-$5,000 Per Day", url: "/bonus-training", icon: TrendingUp },
   { title: "Share & Promote", url: "/share", icon: Share2 },
   { title: "P55 Training", url: "/training", icon: GraduationCap },
   { title: "Upgrade", url: "/upgrades", icon: Crown },
