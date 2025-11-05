@@ -5,6 +5,7 @@ import { QuickActionCard } from "@/components/quick-action-card"
 import { MotivationalTicker } from "@/components/motivational-ticker"
 import { VideoIntroModal } from "@/components/video-intro-modal"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
+import { LiveStatsWidget } from "@/components/live-stats-widget"
 import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -51,8 +52,11 @@ export default async function DashboardPage() {
         <MotivationalTicker />
       </div>
 
-      {/* Featured Video Card */}
-      <FeaturedVideoCard />
+      {/* Featured Video Card and Live Stats Widget */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <FeaturedVideoCard />
+        <LiveStatsWidget />
+      </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
