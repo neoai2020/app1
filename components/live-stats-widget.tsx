@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { TrendingUp, FileText, DollarSign, MousePointerClick, Users } from "lucide-react"
+import { TrendingUp, FileText, DollarSign, MousePointerClick, Users, CheckCircle2 } from "lucide-react"
+
+const SUCCESS_STORIES = [
+  { name: "Sarah M.", amount: 247, action: "earned from her P55 page" },
+  { name: "Mike T.", amount: 1834, action: "generated this week" },
+]
 
 function getDailyBaseValues() {
   const today = new Date().toDateString()
@@ -37,92 +42,44 @@ export function LiveStatsWidget() {
     members: false,
     money: false,
   })
+  const [currentStory, setCurrentStory] = useState<{ name: string; amount: number; action: string } | null>(null)
+  const [isStoryVisible, setIsStoryVisible] = useState(false)
 
   useEffect(() => {
-    // Articles flicker every 3-5 seconds
-    const articlesInterval = setInterval(
-      () => {
-        setFlickerStates((prev) => ({ ...prev, articles: true }))
-        setStats((prev) => ({
-          ...prev,
-          articlesPublished: prev.articlesPublished + Math.floor(Math.random() * 3) + 1,
-        }))
-        setTimeout(() => setFlickerStates((prev) => ({ ...prev, articles: false })), 300)
-      },
-      3000 + Math.random() * 2000,
-    )
+    const showRandomStory = () => {
+      const randomStory = SUCCESS_STORIES[Math.floor(Math.random() * SUCCESS_STORIES.length)]
+      setCurrentStory(randomStory)
+      setIsStoryVisible(true)
 
-    // Fast Cash flicker every 4-6 seconds
-    const fastCashInterval = setInterval(
-      () => {
-        setFlickerStates((prev) => ({ ...prev, fastCash: true }))
-        setStats((prev) => ({
-          ...prev,
-          avgFastCash: Number.parseFloat((prev.avgFastCash + Math.random() * 0.04 + 0.01).toFixed(2)),
-        }))
-        setTimeout(() => setFlickerStates((prev) => ({ ...prev, fastCash: false })), 300)
-      },
-      4000 + Math.random() * 2000,
-    )
+      setTimeout(() => {
+        setIsStoryVisible(false)
+      }, 5000)
+    }
 
-    // Clicks flicker every 2-4 seconds
-    const clicksInterval = setInterval(
+    const initialStoryTimeout = setTimeout(showRandomStory, 3000)
+    const storyInterval = setInterval(
       () => {
-        setFlickerStates((prev) => ({ ...prev, clicks: true }))
-        setStats((prev) => ({
-          ...prev,
-          affiliateClicks: prev.affiliateClicks + Math.floor(Math.random() * 11) + 5,
-        }))
-        setTimeout(() => setFlickerStates((prev) => ({ ...prev, clicks: false })), 300)
+        showRandomStory()
       },
-      2000 + Math.random() * 2000,
-    )
-
-    // Members flicker every 5-7 seconds
-    const membersInterval = setInterval(
-      () => {
-        setFlickerStates((prev) => ({ ...prev, members: true }))
-        setStats((prev) => ({
-          ...prev,
-          activeMembers: prev.activeMembers + Math.floor(Math.random() * 5) + 1,
-        }))
-        setTimeout(() => setFlickerStates((prev) => ({ ...prev, members: false })), 300)
-      },
-      5000 + Math.random() * 2000,
-    )
-
-    // Money flicker every 3-5 seconds
-    const moneyInterval = setInterval(
-      () => {
-        setFlickerStates((prev) => ({ ...prev, money: true }))
-        setStats((prev) => ({
-          ...prev,
-          totalMoney: prev.totalMoney + Math.floor(Math.random() * 151) + 50,
-        }))
-        setTimeout(() => setFlickerStates((prev) => ({ ...prev, money: false })), 300)
-      },
-      3000 + Math.random() * 2000,
+      60000 + Math.random() * 60000,
     )
 
     return () => {
-      clearInterval(articlesInterval)
-      clearInterval(fastCashInterval)
-      clearInterval(clicksInterval)
-      clearInterval(membersInterval)
-      clearInterval(moneyInterval)
+      clearTimeout(initialStoryTimeout)
+      clearInterval(storyInterval)
     }
   }, [])
 
   return (
-    <Card className="glass-strong border-2 border-cyan-500/30 shadow-xl overflow-hidden relative scale-75 origin-top">
+    <Card className="glass-strong border-2 border-cyan-500/30 shadow-xl overflow-hidden relative scale-90 origin-top">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-emerald-500/5 to-amber-500/5" />
 
       <CardHeader className="relative z-10 pb-3 text-center">
-        <CardTitle className="text-2xl font-bold text-white flex items-center justify-center gap-2">
+        <CardTitle className="text-3xl font-bold text-white flex items-center justify-center gap-2">
           <span className="text-3xl">💵</span>
           <span>What's Happening Inside P55 Right Now</span>
         </CardTitle>
-        <p className="text-sm text-muted-foreground mt-1 font-medium">
+        <p className="text-sm text-gray-300 mt-1 font-medium">
           Members are generating real results every single day through their P55 Accounts.
         </p>
       </CardHeader>
@@ -134,7 +91,7 @@ export function LiveStatsWidget() {
           >
             <div className="flex items-center justify-center gap-1 mb-1">
               <FileText className="w-4 h-4 text-cyan-400" />
-              <p className="text-xs font-semibold text-muted-foreground">Articles Today</p>
+              <p className="text-xs font-semibold text-gray-300">Articles Today</p>
             </div>
             <p className="text-2xl font-bold text-cyan-400">{stats.articlesPublished.toLocaleString()}</p>
           </div>
@@ -144,7 +101,7 @@ export function LiveStatsWidget() {
           >
             <div className="flex items-center justify-center gap-1 mb-1">
               <DollarSign className="w-4 h-4 text-emerald-400" />
-              <p className="text-xs font-semibold text-muted-foreground">Avg Fast Cash</p>
+              <p className="text-xs font-semibold text-gray-300">Avg Fast Cash</p>
             </div>
             <p className="text-2xl font-bold text-emerald-400">{stats.avgFastCash}</p>
           </div>
@@ -154,7 +111,7 @@ export function LiveStatsWidget() {
           >
             <div className="flex items-center justify-center gap-1 mb-1">
               <MousePointerClick className="w-4 h-4 text-violet-400" />
-              <p className="text-xs font-semibold text-muted-foreground">Clicks Tracked</p>
+              <p className="text-xs font-semibold text-gray-300">Clicks Tracked</p>
             </div>
             <p className="text-2xl font-bold text-violet-400">{stats.affiliateClicks.toLocaleString()}</p>
           </div>
@@ -164,7 +121,7 @@ export function LiveStatsWidget() {
           >
             <div className="flex items-center justify-center gap-1 mb-1">
               <Users className="w-4 h-4 text-amber-400" />
-              <p className="text-xs font-semibold text-muted-foreground">Active This Week</p>
+              <p className="text-xs font-semibold text-gray-300">Active This Week</p>
             </div>
             <p className="text-2xl font-bold text-amber-400">{stats.activeMembers.toLocaleString()}</p>
           </div>
@@ -173,16 +130,39 @@ export function LiveStatsWidget() {
         <div
           className={`p-4 rounded-xl bg-gradient-to-r from-emerald-500/20 via-amber-500/20 to-emerald-500/20 border-2 border-emerald-400/50 shadow-xl shadow-emerald-500/20 transition-all duration-300 text-center ${flickerStates.money ? "scale-[1.02] border-emerald-300/70 shadow-emerald-500/40" : ""}`}
         >
-          <p className="text-xs font-bold text-foreground mb-2 uppercase tracking-wide">Total Money Generated Today</p>
+          <p className="text-xs font-bold text-gray-200 mb-2 uppercase tracking-wide">Total Money Generated Today</p>
           <div className="flex items-center justify-center gap-2">
             <p className="text-3xl font-black text-emerald-400">${stats.totalMoney.toLocaleString()}</p>
             <TrendingUp className="w-6 h-6 text-emerald-400" />
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/50" />
-          <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Live</p>
+        <div className="min-h-[80px] flex items-center justify-center">
+          {isStoryVisible && currentStory ? (
+            <div className="w-full animate-in slide-in-from-bottom-3 fade-in duration-500">
+              <div className="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 p-[2px] rounded-lg">
+                <div className="bg-background/95 rounded-lg p-3 flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <p className="text-xs font-bold text-foreground mb-1">
+                      {currentStory.name} just {currentStory.action}!
+                    </p>
+                    <div className="flex items-center justify-center gap-1">
+                      <DollarSign className="w-3 h-3 text-emerald-400" />
+                      <p className="text-sm font-black text-emerald-400">${currentStory.amount.toLocaleString()}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-lg shadow-emerald-500/50" />
+              <p className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Live</p>
+            </div>
+          )}
         </div>
       </CardContent>
     </Card>

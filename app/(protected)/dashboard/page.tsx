@@ -6,10 +6,8 @@ import { MotivationalTicker } from "@/components/motivational-ticker"
 import { VideoIntroModal } from "@/components/video-intro-modal"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { LiveStatsWidget } from "@/components/live-stats-widget"
-import { SuccessStories } from "@/components/success-stories"
 import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -41,7 +39,6 @@ export default async function DashboardPage() {
   return (
     <>
       <VideoIntroModal />
-      <SuccessStories />
 
       <div className="space-y-8 max-w-7xl mx-auto">
         {/* Welcome Section */}
@@ -58,7 +55,7 @@ export default async function DashboardPage() {
         {/* Featured Video Card and Live Stats Widget */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <FeaturedVideoCard />
-          <LiveStatsWidget />
+          <LiveStatsWidget testimonials={testimonials} />
         </div>
 
         {/* Stats Grid */}
@@ -110,36 +107,6 @@ export default async function DashboardPage() {
             />
           </div>
         </div>
-
-        {/* Success Stories */}
-        {testimonials && testimonials.length > 0 && (
-          <Card className="glass-strong border-border/50">
-            <CardHeader>
-              <CardTitle className="text-3xl font-bold text-foreground">Recent Success Stories</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="flex gap-4 p-4 rounded-xl glass">
-                  <Avatar className="w-14 h-14">
-                    <AvatarImage src={testimonial.user_avatar || "/placeholder.svg"} />
-                    <AvatarFallback className="bg-primary/20 text-primary text-lg font-bold">
-                      {testimonial.user_name.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="text-lg font-bold text-foreground">{testimonial.user_name}</p>
-                      {testimonial.earnings && (
-                        <span className="text-base font-bold text-accent">{testimonial.earnings} earned</span>
-                      )}
-                    </div>
-                    <p className="text-base text-muted-foreground leading-relaxed">{testimonial.content}</p>
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
 
         {/* Progress Tracker */}
         <Card className="glass-strong border-border/50 glow-violet">
