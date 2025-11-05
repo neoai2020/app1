@@ -36,49 +36,49 @@ const trainings = [
     title: "SEO Basics: Getting Your Pages Found on Google",
     duration: "28 minutes",
     module: 1,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/DvwS7cV9GmQ",
   },
   {
     title: "How to Find the Best Keywords (Simple Method)",
     duration: "22 minutes",
     module: 2,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/hOnxu8qRxQw",
   },
   {
     title: "Writing Headlines That Get Clicks",
     duration: "18 minutes",
     module: 3,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/e3wKxfRjF4g",
   },
   {
     title: "Adding Images and Videos to Your Pages",
     duration: "15 minutes",
     module: 4,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/yoD8RMq2OkU",
   },
   {
     title: "Getting Your First 100 Visitors",
     duration: "32 minutes",
     module: 5,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/Hou5TBn7W-s",
   },
   {
     title: "How to Track Your Results",
     duration: "20 minutes",
     module: 6,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/gXzSEBi8S8Y",
   },
   {
     title: "Improving Your Pages for More Sales",
     duration: "25 minutes",
     module: 7,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/VUrkEd3vvAU",
   },
   {
     title: "Building Backlinks the Easy Way",
     duration: "30 minutes",
     module: 8,
-    videoUrl: "https://player.vimeo.com/video/1133461747",
+    videoUrl: "https://www.youtube.com/embed/yl4oKLgqMV8",
   },
 ]
 
@@ -87,9 +87,7 @@ export function DFYVaultContent() {
   const [selectedVideo, setSelectedVideo] = useState<{ title: string; url: string } | null>(null)
 
   const handleUseTemplate = (template: (typeof templates)[0]) => {
-    router.push(
-      `/generate-page?template=${encodeURIComponent(template.name)}&niche=${encodeURIComponent(template.niche)}`,
-    )
+    router.push("/create")
   }
 
   const handleDownloadResource = (resourceName: string) => {
@@ -138,9 +136,9 @@ export function DFYVaultContent() {
             <Crown className="w-12 h-12 text-white" />
           </div>
           <div>
-            <h1 className="text-5xl lg:text-6xl font-extrabold text-white mb-4">Welcome to DFY Vault!</h1>
-            <p className="text-2xl text-cyan-300 font-bold mb-4">Your Done-For-You Template Library is Ready</p>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed font-semibold">
+            <h1 className="text-5xl lg:text-6xl font-black text-white mb-4">Welcome to DFY Vault!</h1>
+            <p className="text-2xl text-cyan-300 font-extrabold mb-4">Your Done-For-You Template Library is Ready</p>
+            <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed font-bold">
               Congratulations! You now have access to 50+ proven templates that have generated over $500,000 in
               commissions. Everything is ready to use - just pick a template, add your affiliate link, and start
               earning.
@@ -150,27 +148,27 @@ export function DFYVaultContent() {
 
         <Card className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-cyan-500/30 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-3xl text-white flex items-center gap-3 font-extrabold">
+            <CardTitle className="text-3xl text-white flex items-center gap-3 font-black">
               <CheckCircle2 className="w-8 h-8 text-cyan-400" />
               Your Simple 3-Step Action Plan
             </CardTitle>
-            <p className="text-gray-200 text-lg mt-2 font-semibold">Follow these steps to start making money today:</p>
+            <p className="text-gray-200 text-lg mt-2 font-bold">Follow these steps to start making money today:</p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="bg-cyan-500/10 rounded-xl p-8 border border-cyan-500/30">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0 text-2xl font-extrabold text-white shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0 text-2xl font-black text-white shadow-lg">
                   1
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-extrabold text-white mb-3">Pick a Template Below</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-semibold">
+                  <h3 className="text-2xl font-black text-white mb-3">Pick a Template Below</h3>
+                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-bold">
                     Scroll down and choose any template that interests you. We have templates for weight loss, making
                     money online, tech products, and 17 other popular niches. Click the "Use This Template" button on
                     any template you like.
                   </p>
                   <div className="bg-cyan-500/20 rounded-lg p-4 border border-cyan-500/30">
-                    <p className="text-cyan-100 font-bold text-base">
+                    <p className="text-cyan-100 font-extrabold text-base">
                       💡 Tip: Start with a niche you know about or are interested in. It's easier to promote something
                       you understand!
                     </p>
@@ -181,18 +179,18 @@ export function DFYVaultContent() {
 
             <div className="bg-blue-500/10 rounded-xl p-8 border border-blue-500/30">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 text-2xl font-extrabold text-white shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 text-2xl font-black text-white shadow-lg">
                   2
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-extrabold text-white mb-3">Add Your Affiliate Link</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-semibold">
+                  <h3 className="text-2xl font-black text-white mb-3">Add Your Affiliate Link</h3>
+                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-bold">
                     When you click "Use This Template", it will open in your page generator. You'll see a box that says
                     "Affiliate Link" - paste your affiliate link there. Don't have an affiliate link yet? We'll show you
                     where to get one in the training videos below.
                   </p>
                   <div className="bg-blue-500/20 rounded-lg p-4 border border-blue-500/30">
-                    <p className="text-blue-100 font-bold text-base">
+                    <p className="text-blue-100 font-extrabold text-base">
                       💡 Tip: Your affiliate link is the special link that tracks your sales. You get this from the
                       company whose product you're promoting.
                     </p>
@@ -203,18 +201,18 @@ export function DFYVaultContent() {
 
             <div className="bg-emerald-500/10 rounded-xl p-8 border border-emerald-500/30">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 text-2xl font-extrabold text-white shadow-lg">
+                <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 text-2xl font-black text-white shadow-lg">
                   3
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-extrabold text-white mb-3">Share Your Page & Get Paid</h3>
-                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-semibold">
+                  <h3 className="text-2xl font-black text-white mb-3">Share Your Page & Get Paid</h3>
+                  <p className="text-lg text-gray-200 leading-relaxed mb-4 font-bold">
                     Once your page is created, click the "Share" button to get your page link. Share this link on
                     Facebook, Instagram, Twitter, or send it to friends via email or text message. When people click
                     your link and buy, you earn commissions!
                   </p>
                   <div className="bg-emerald-500/20 rounded-lg p-4 border border-emerald-500/30">
-                    <p className="text-emerald-100 font-bold text-base">
+                    <p className="text-emerald-100 font-extrabold text-base">
                       💡 Tip: The more you share, the more you earn. Post your link 2-3 times per day on different
                       platforms for best results!
                     </p>
@@ -227,11 +225,11 @@ export function DFYVaultContent() {
 
         <Card className="bg-gray-900/50 border-cyan-500/20 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-3xl text-white flex items-center gap-3 font-extrabold">
+            <CardTitle className="text-3xl text-white flex items-center gap-3 font-black">
               <FileText className="w-8 h-8 text-cyan-400" />
               50+ Ready-to-Use Templates
             </CardTitle>
-            <p className="text-gray-200 text-lg mt-2 font-semibold">
+            <p className="text-gray-200 text-lg mt-2 font-bold">
               Click "Use This Template" on any template below to get started immediately
             </p>
           </CardHeader>
@@ -244,15 +242,15 @@ export function DFYVaultContent() {
                 >
                   <CardContent className="p-6">
                     <div className="mb-4">
-                      <span className="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm font-bold rounded-full mb-3">
+                      <span className="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm font-black rounded-full mb-3">
                         {template.niche}
                       </span>
-                      <h3 className="text-xl font-extrabold text-white mb-2">{template.name}</h3>
-                      <p className="text-gray-300 text-sm font-semibold">{template.category}</p>
+                      <h3 className="text-xl font-black text-white mb-2">{template.name}</h3>
+                      <p className="text-gray-300 text-sm font-bold">{template.category}</p>
                     </div>
                     <Button
                       onClick={() => handleUseTemplate(template)}
-                      className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold"
+                      className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-extrabold"
                       size="lg"
                     >
                       <Download className="w-5 h-5 mr-2" />
@@ -263,12 +261,12 @@ export function DFYVaultContent() {
               ))}
             </div>
             <div className="mt-8 text-center bg-cyan-500/10 rounded-xl p-6 border border-cyan-500/20">
-              <p className="text-xl text-cyan-300 font-bold mb-4">Want all 50+ templates at once?</p>
+              <p className="text-xl text-cyan-300 font-extrabold mb-4">Want all 50+ templates at once?</p>
               <Button
                 onClick={handleDownloadAllTemplates}
                 variant="outline"
                 size="lg"
-                className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-bold"
+                className="border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-extrabold"
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Complete Template Pack (ZIP)
@@ -279,11 +277,11 @@ export function DFYVaultContent() {
 
         <Card className="bg-gray-900/50 border-cyan-500/20 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-3xl text-white flex items-center gap-3 font-extrabold">
+            <CardTitle className="text-3xl text-white flex items-center gap-3 font-black">
               <Video className="w-8 h-8 text-cyan-400" />
               Step-by-Step Training Videos
             </CardTitle>
-            <p className="text-gray-200 text-lg mt-2 font-semibold">
+            <p className="text-gray-200 text-lg mt-2 font-bold">
               Watch these videos in order to learn everything you need to succeed (No experience required!)
             </p>
           </CardHeader>
@@ -301,16 +299,16 @@ export function DFYVaultContent() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm font-extrabold rounded-full">
+                          <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-sm font-black rounded-full">
                             Module {training.module}
                           </span>
-                          <span className="text-gray-300 text-sm font-semibold">{training.duration}</span>
+                          <span className="text-gray-300 text-sm font-bold">{training.duration}</span>
                         </div>
-                        <h3 className="text-xl font-extrabold text-white mb-2">{training.title}</h3>
+                        <h3 className="text-xl font-black text-white mb-2">{training.title}</h3>
                       </div>
                       <Button
                         onClick={() => handleWatchVideo(training)}
-                        className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold px-8"
+                        className="bg-cyan-500 hover:bg-cyan-600 text-white font-extrabold px-8"
                         size="lg"
                       >
                         Watch Now
@@ -325,11 +323,11 @@ export function DFYVaultContent() {
 
         <Card className="bg-gray-900/50 border-cyan-500/20 shadow-xl">
           <CardHeader>
-            <CardTitle className="text-3xl text-white flex items-center gap-3 font-extrabold">
+            <CardTitle className="text-3xl text-white flex items-center gap-3 font-black">
               <BookOpen className="w-8 h-8 text-cyan-400" />
               Bonus Resources & Tools
             </CardTitle>
-            <p className="text-gray-200 text-lg mt-2 font-semibold">Extra materials to help you succeed faster</p>
+            <p className="text-gray-200 text-lg mt-2 font-bold">Extra materials to help you succeed faster</p>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -338,15 +336,15 @@ export function DFYVaultContent() {
                   <div className="w-16 h-16 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                     <FileText className="w-8 h-8 text-cyan-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">200+ Proven Headlines</h3>
-                  <p className="text-gray-200 text-lg leading-relaxed font-semibold">
+                  <h3 className="text-2xl font-black text-white">200+ Proven Headlines</h3>
+                  <p className="text-gray-200 text-lg leading-relaxed font-bold">
                     Copy and paste these high-converting headlines into your pages. These headlines have generated
                     millions in sales.
                   </p>
                   <Button
                     onClick={() => handleDownloadResource("200+ Proven Headlines")}
                     variant="outline"
-                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-bold"
+                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-extrabold"
                     size="lg"
                   >
                     <Download className="w-5 h-5 mr-2" />
@@ -360,15 +358,15 @@ export function DFYVaultContent() {
                   <div className="w-16 h-16 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                     <BookOpen className="w-8 h-8 text-cyan-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">SEO Checklist (PDF)</h3>
-                  <p className="text-gray-200 text-lg leading-relaxed font-semibold">
+                  <h3 className="text-2xl font-black text-white">SEO Checklist (PDF)</h3>
+                  <p className="text-gray-200 text-lg leading-relaxed font-bold">
                     Simple checklist to make sure Google finds your pages. Just follow the steps - no technical
                     knowledge needed.
                   </p>
                   <Button
                     onClick={() => handleDownloadResource("SEO Checklist")}
                     variant="outline"
-                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-bold"
+                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-extrabold"
                     size="lg"
                   >
                     <Download className="w-5 h-5 mr-2" />
@@ -382,14 +380,14 @@ export function DFYVaultContent() {
                   <div className="w-16 h-16 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                     <FileText className="w-8 h-8 text-cyan-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">100+ Call-to-Action Phrases</h3>
-                  <p className="text-gray-200 text-lg leading-relaxed font-semibold">
+                  <h3 className="text-2xl font-black text-white">100+ Call-to-Action Phrases</h3>
+                  <p className="text-gray-200 text-lg leading-relaxed font-bold">
                     The exact words that get people to click and buy. Use these proven phrases to boost your sales.
                   </p>
                   <Button
                     onClick={() => handleDownloadResource("100+ Call-to-Action Phrases")}
                     variant="outline"
-                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-bold"
+                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-extrabold"
                     size="lg"
                   >
                     <Download className="w-5 h-5 mr-2" />
@@ -403,15 +401,15 @@ export function DFYVaultContent() {
                   <div className="w-16 h-16 rounded-xl bg-cyan-500/20 flex items-center justify-center">
                     <BookOpen className="w-8 h-8 text-cyan-400" />
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white">Beginner's Success Guide</h3>
-                  <p className="text-gray-200 text-lg leading-relaxed font-semibold">
+                  <h3 className="text-2xl font-black text-white">Beginner's Success Guide</h3>
+                  <p className="text-gray-200 text-lg leading-relaxed font-bold">
                     Complete guide for absolute beginners. Learn where to find affiliate programs, how to get approved,
                     and more.
                   </p>
                   <Button
                     onClick={() => handleDownloadResource("Beginner's Success Guide")}
                     variant="outline"
-                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-bold"
+                    className="w-full border-cyan-500 text-cyan-300 hover:bg-cyan-500/20 bg-transparent font-extrabold"
                     size="lg"
                   >
                     <Download className="w-5 h-5 mr-2" />
@@ -425,12 +423,12 @@ export function DFYVaultContent() {
 
         <Card className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border-cyan-500/30 shadow-xl">
           <CardContent className="p-8 text-center space-y-4">
-            <h3 className="text-3xl font-extrabold text-white">Need Help? We're Here for You!</h3>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-semibold">
+            <h3 className="text-3xl font-black text-white">Need Help? We're Here for You!</h3>
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-bold">
               Have questions? Stuck on something? Our support team is ready to help you succeed. Email us anytime at
               support@p55account.com and we'll respond within 24 hours.
             </p>
-            <Button asChild className="bg-cyan-500 hover:bg-cyan-600 text-white font-extrabold text-lg px-12" size="lg">
+            <Button asChild className="bg-cyan-500 hover:bg-cyan-600 text-white font-black text-lg px-12" size="lg">
               <a href="mailto:support@p55account.com?subject=DFY Vault Support Request">Contact Support</a>
             </Button>
           </CardContent>
@@ -440,14 +438,14 @@ export function DFYVaultContent() {
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
         <DialogContent className="max-w-5xl bg-gray-900 border-cyan-500/30">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-extrabold text-white">{selectedVideo?.title}</DialogTitle>
+            <DialogTitle className="text-2xl font-black text-white">{selectedVideo?.title}</DialogTitle>
           </DialogHeader>
           <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
             {selectedVideo && (
               <iframe
-                src={`${selectedVideo.url}?autoplay=1&controls=1`}
+                src={`${selectedVideo.url}?autoplay=1`}
                 className="absolute top-0 left-0 w-full h-full rounded-lg"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             )}
