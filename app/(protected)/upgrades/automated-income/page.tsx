@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check, Rocket, ArrowLeft } from "lucide-react"
+import { Check, Rocket, ArrowLeft, Mail, BarChart3, Zap, Users, FileText } from "lucide-react"
 import Link from "next/link"
 
 export default async function AutomatedIncomePage() {
@@ -15,6 +15,194 @@ export default async function AutomatedIncomePage() {
     redirect("/auth/login")
   }
 
+  const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
+
+  const hasAccess = profile?.upgrade_level === "automated_income"
+
+  // If user has access, show the deliverables
+  if (hasAccess) {
+    const emailSequences = [
+      { name: "Welcome Series (7 emails)", opens: "42%", clicks: "18%" },
+      { name: "Product Launch Sequence (5 emails)", opens: "38%", clicks: "22%" },
+      { name: "Re-engagement Campaign (4 emails)", opens: "35%", clicks: "15%" },
+      { name: "Abandoned Cart Series (3 emails)", opens: "45%", clicks: "28%" },
+      { name: "Upsell Sequence (6 emails)", opens: "40%", clicks: "20%" },
+    ]
+
+    const automationTools = [
+      { name: "Email Automation Builder", description: "Drag-and-drop email sequence creator" },
+      { name: "Traffic Automation System", description: "Auto-post to social media platforms" },
+      { name: "Lead Magnet Delivery", description: "Automatic lead magnet fulfillment" },
+      { name: "Retargeting Pixel Manager", description: "Track and retarget visitors automatically" },
+    ]
+
+    return (
+      <div className="space-y-8 max-w-7xl mx-auto">
+        <Button asChild variant="ghost" className="text-primary hover:text-primary/80">
+          <Link href="/dashboard">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Dashboard
+          </Link>
+        </Button>
+
+        <div className="text-center space-y-4">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-accent to-primary flex items-center justify-center mx-auto glow-jade">
+            <Rocket className="w-10 h-10 text-background" />
+          </div>
+          <h1 className="text-4xl lg:text-5xl font-bold text-foreground">Automated Income</h1>
+          <p className="text-xl text-muted-foreground">Build Your Passive Income Machine</p>
+        </div>
+
+        <Card className="glass-strong border-border/50 glow-jade">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-3">
+              <Mail className="w-6 h-6 text-accent" />
+              Email Automation Sequences
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {emailSequences.map((sequence, index) => (
+                <Card key={index} className="glass border-border/50 hover:border-accent/50 transition-colors">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
+                          <Mail className="w-6 h-6 text-accent" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-foreground">{sequence.name}</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {sequence.opens} open rate • {sequence.clicks} click rate
+                          </p>
+                        </div>
+                      </div>
+                      <Button className="bg-accent hover:bg-accent/90 text-background">Import Sequence</Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-strong border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-3">
+              <Zap className="w-6 h-6 text-accent" />
+              Automation Tools
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {automationTools.map((tool, index) => (
+                <Card key={index} className="glass border-border/50 hover:border-accent/50 transition-colors">
+                  <CardContent className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">{tool.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-4">{tool.description}</p>
+                    <Button className="w-full" size="sm">
+                      Launch Tool
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-strong border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-3">
+              <BarChart3 className="w-6 h-6 text-accent" />
+              Advanced Analytics Dashboard
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+              <Card className="glass border-border/50">
+                <CardContent className="p-6 text-center">
+                  <p className="text-3xl font-bold text-accent mb-1">$12,847</p>
+                  <p className="text-sm text-muted-foreground">Total Revenue</p>
+                </CardContent>
+              </Card>
+              <Card className="glass border-border/50">
+                <CardContent className="p-6 text-center">
+                  <p className="text-3xl font-bold text-accent mb-1">2,341</p>
+                  <p className="text-sm text-muted-foreground">Email Subscribers</p>
+                </CardContent>
+              </Card>
+              <Card className="glass border-border/50">
+                <CardContent className="p-6 text-center">
+                  <p className="text-3xl font-bold text-accent mb-1">8.4%</p>
+                  <p className="text-sm text-muted-foreground">Conversion Rate</p>
+                </CardContent>
+              </Card>
+              <Card className="glass border-border/50">
+                <CardContent className="p-6 text-center">
+                  <p className="text-3xl font-bold text-accent mb-1">$247</p>
+                  <p className="text-sm text-muted-foreground">Avg. Order Value</p>
+                </CardContent>
+              </Card>
+            </div>
+            <Button className="w-full" size="lg">
+              View Full Analytics Dashboard
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card className="glass-strong border-border/50">
+          <CardHeader>
+            <CardTitle className="text-2xl flex items-center gap-3">
+              <Users className="w-6 h-6 text-accent" />
+              Private Mastermind Access
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <p className="text-lg text-muted-foreground">
+                Join our exclusive community of top-earning affiliates. Get weekly coaching calls, networking
+                opportunities, and insider strategies.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card className="glass border-border/50">
+                  <CardContent className="p-6 text-center space-y-3">
+                    <Users className="w-10 h-10 text-accent mx-auto" />
+                    <h3 className="text-lg font-bold text-foreground">Weekly Calls</h3>
+                    <p className="text-sm text-muted-foreground">Live Q&A with experts</p>
+                    <Button variant="outline" className="w-full bg-transparent">
+                      Join Next Call
+                    </Button>
+                  </CardContent>
+                </Card>
+                <Card className="glass border-border/50">
+                  <CardContent className="p-6 text-center space-y-3">
+                    <FileText className="w-10 h-10 text-accent mx-auto" />
+                    <h3 className="text-lg font-bold text-foreground">Case Studies</h3>
+                    <p className="text-sm text-muted-foreground">Real success breakdowns</p>
+                    <Button variant="outline" className="w-full bg-transparent">
+                      View Library
+                    </Button>
+                  </CardContent>
+                </Card>
+                <Card className="glass border-border/50">
+                  <CardContent className="p-6 text-center space-y-3">
+                    <Zap className="w-10 h-10 text-accent mx-auto" />
+                    <h3 className="text-lg font-bold text-foreground">Hot Offers</h3>
+                    <p className="text-sm text-muted-foreground">Exclusive affiliate deals</p>
+                    <Button variant="outline" className="w-full bg-transparent">
+                      Browse Offers
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // If no access, show sales page
   const features = [
     "Everything in Instant Income",
     "Email Automation System (30+ sequences)",
