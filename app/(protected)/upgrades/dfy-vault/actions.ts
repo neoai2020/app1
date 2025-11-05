@@ -89,7 +89,7 @@ export async function createPageFromTemplate({
         title,
         content,
         affiliate_link: affiliateLink,
-        status: "published",
+        status: "active",
         views: 0,
         clicks: 0,
       })
