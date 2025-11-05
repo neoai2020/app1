@@ -54,8 +54,8 @@ export default async function DashboardPage() {
 
       {/* Featured Video Card and Live Stats Widget */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <LiveStatsWidget />
         <FeaturedVideoCard />
+        <LiveStatsWidget />
       </div>
 
       {/* Stats Grid */}
