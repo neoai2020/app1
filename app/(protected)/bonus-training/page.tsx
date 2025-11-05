@@ -1,13 +1,33 @@
-import type { Metadata } from "next"
-import Script from "next/script"
+"use client"
+
+import { useEffect } from "react"
 import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "Bonus Training - P55 Account",
-  description: "Watch the bonus training that took me to earning $1,000-5,000 per day",
-}
-
 export default function BonusTrainingPage() {
+  useEffect(() => {
+    // Load the video player script
+    const script = document.createElement("script")
+    script.src =
+      "https://scripts.converteai.net/6aca37b8-079c-44ce-b2b1-3cd32f55a27d/players/690b19c2cb5344d7fad33ce0/player.js"
+    script.async = true
+    script.id = "scr_690b19c2cb5344d7fad33ce0"
+
+    // Add error handling
+    script.onerror = () => {
+      console.error("[v0] Failed to load video player script")
+    }
+
+    document.head.appendChild(script)
+
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.getElementById("scr_690b19c2cb5344d7fad33ce0")
+      if (existingScript) {
+        existingScript.remove()
+      }
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-4xl mx-auto">
@@ -65,20 +85,6 @@ export default function BonusTrainingPage() {
           </Link>
         </div>
       </div>
-
-      {/* Video Script */}
-      <Script
-        id="scr_690b19c2cb5344d7fad33ce0"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            var s=document.createElement("script");
-            s.src="https://scripts.converteai.net/6aca37b8-079c-44ce-b2b1-3cd32f55a27d/players/690b19c2cb5344d7fad33ce0/player.js";
-            s.async=true;
-            document.head.appendChild(s);
-          `,
-        }}
-      />
     </div>
   )
 }

@@ -33,8 +33,28 @@ function getDailyBaseValues() {
   }
 }
 
+function getInitialStats() {
+  if (typeof window === "undefined") return getDailyBaseValues()
+
+  const stored = localStorage.getItem("p55-live-stats")
+  const today = new Date().toDateString()
+
+  if (stored) {
+    const parsed = JSON.parse(stored)
+    // Check if it's the same day
+    if (parsed.date === today) {
+      return parsed.stats
+    }
+  }
+
+  // New day or no stored data - get fresh base values
+  const baseValues = getDailyBaseValues()
+  localStorage.setItem("p55-live-stats", JSON.stringify({ date: today, stats: baseValues }))
+  return baseValues
+}
+
 export function LiveStatsWidget() {
-  const [stats, setStats] = useState(getDailyBaseValues())
+  const [stats, setStats] = useState(getInitialStats())
   const [flickerStates, setFlickerStates] = useState({
     articles: false,
     fastCash: false,
@@ -44,6 +64,44 @@ export function LiveStatsWidget() {
   })
   const [currentStory, setCurrentStory] = useState<{ name: string; amount: number; action: string } | null>(null)
   const [isStoryVisible, setIsStoryVisible] = useState(false)
+
+  useEffect(() => {
+    const incrementStats = () => {
+      setStats((prev) => {
+        const newStats = {
+          articlesPublished: prev.articlesPublished + Math.floor(Math.random() * 3) + 1, // +1 to +3
+          avgFastCash: Number.parseFloat((prev.avgFastCash + Math.random() * 0.05).toFixed(2)), // +0 to +0.05
+          affiliateClicks: prev.affiliateClicks + Math.floor(Math.random() * 15) + 5, // +5 to +20
+          activeMembers: prev.activeMembers + Math.floor(Math.random() * 2), // +0 to +1
+          totalMoney: prev.totalMoney + Math.floor(Math.random() * 50) + 20, // +20 to +70
+        }
+
+        // Save to localStorage
+        const today = new Date().toDateString()
+        localStorage.setItem("p55-live-stats", JSON.stringify({ date: today, stats: newStats }))
+
+        return newStats
+      })
+
+      // Trigger random flicker effect
+      const keys = Object.keys(flickerStates) as Array<keyof typeof flickerStates>
+      const randomKey = keys[Math.floor(Math.random() * keys.length)]
+      setFlickerStates((prev) => ({ ...prev, [randomKey]: true }))
+      setTimeout(() => {
+        setFlickerStates((prev) => ({ ...prev, [randomKey]: false }))
+      }, 300)
+    }
+
+    // Increment every 4-6 seconds
+    const interval = setInterval(
+      () => {
+        incrementStats()
+      },
+      4000 + Math.random() * 2000,
+    )
+
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const showRandomStory = () => {
