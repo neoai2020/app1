@@ -619,6 +619,54 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
               </div>
             </div>
 
+            <div className="bg-blue-500/10 rounded-xl p-6 border-2 border-blue-500/30 space-y-4">
+              <h3 className="text-xl font-bold text-blue-300 flex items-center gap-2">
+                <CheckCircle2 className="w-6 h-6" />
+                Where to Get Your Affiliate Link
+              </h3>
+              <p className="text-base text-gray-200 font-semibold leading-relaxed">
+                We recommend using <strong className="text-blue-300">DigiStore24</strong> - a free affiliate marketplace
+                where you can find thousands of products to promote and earn commissions.
+              </p>
+              <div className="bg-gray-900/50 rounded-lg p-4 space-y-3">
+                <p className="text-sm font-bold text-gray-300">How to Get Started (3 Easy Steps):</p>
+                <ol className="space-y-2 text-sm text-gray-300 font-semibold">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">1.</span>
+                    <span>
+                      Go to{" "}
+                      <a
+                        href="http://digistore24.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 underline hover:text-blue-300"
+                      >
+                        digistore24.com
+                      </a>{" "}
+                      and create a FREE account (takes 2 minutes)
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">2.</span>
+                    <span>Browse products in your chosen niche above and click "Promote" on any product</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">3.</span>
+                    <span>Copy your unique affiliate link and paste it in the box below</span>
+                  </li>
+                </ol>
+              </div>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-blue-500/50 text-blue-300 hover:bg-blue-500/20 font-bold bg-transparent"
+              >
+                <a href="http://digistore24.com" target="_blank" rel="noopener noreferrer">
+                  Create Free DigiStore24 Account →
+                </a>
+              </Button>
+            </div>
+
             <div className="space-y-4">
               <Label htmlFor="affiliate-link" className="text-xl font-black text-white">
                 Step 2: Enter Your Affiliate Link

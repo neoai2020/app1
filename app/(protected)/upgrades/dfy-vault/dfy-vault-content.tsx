@@ -772,6 +772,55 @@ export function DFYVaultContent() {
                 </p>
               </div>
             )}
+
+            <div className="bg-blue-500/10 rounded-xl p-5 border-2 border-blue-500/30 space-y-3">
+              <h3 className="text-lg font-bold text-blue-300 flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
+                Where to Get Your Affiliate Link
+              </h3>
+              <p className="text-sm text-gray-200 font-semibold leading-relaxed">
+                We recommend <strong className="text-blue-300">DigiStore24</strong> - a free affiliate marketplace with
+                thousands of products to promote.
+              </p>
+              <div className="bg-gray-800/50 rounded-lg p-3 space-y-2">
+                <p className="text-xs font-bold text-gray-300">Quick Start:</p>
+                <ol className="space-y-1.5 text-xs text-gray-300 font-semibold">
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">1.</span>
+                    <span>
+                      Create free account at{" "}
+                      <a
+                        href="http://digistore24.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 underline hover:text-blue-300"
+                      >
+                        digistore24.com
+                      </a>
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">2.</span>
+                    <span>Find a product matching this article's niche</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-blue-400 font-black">3.</span>
+                    <span>Copy your affiliate link and paste below</span>
+                  </li>
+                </ol>
+              </div>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="w-full border-blue-500/50 text-blue-300 hover:bg-blue-500/20 font-bold text-xs bg-transparent"
+              >
+                <a href="http://digistore24.com" target="_blank" rel="noopener noreferrer">
+                  Get Free DigiStore24 Account →
+                </a>
+              </Button>
+            </div>
+
             <div className="space-y-3">
               <Label htmlFor="affiliate-link" className="text-white text-lg font-bold">
                 Your Affiliate Link

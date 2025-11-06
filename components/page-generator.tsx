@@ -125,6 +125,54 @@ export function PageGenerator({ nicheId, offerId, onBack }: PageGeneratorProps) 
 
       <Card className="glass-strong glow-cyan border-border/50">
         <CardContent className="p-8 space-y-6">
+          <div className="bg-cyan-500/10 rounded-xl p-6 border-2 border-cyan-500/30 space-y-4">
+            <h3 className="text-xl font-bold text-cyan-300 flex items-center gap-2">
+              <Sparkles className="w-6 h-6" />
+              Where to Get Your Affiliate Link
+            </h3>
+            <p className="text-base text-gray-200 font-semibold leading-relaxed">
+              We recommend using <strong className="text-cyan-300">DigiStore24</strong> - a free affiliate marketplace
+              with thousands of products you can promote and earn commissions from.
+            </p>
+            <div className="bg-gray-900/50 rounded-lg p-4 space-y-3">
+              <p className="text-sm font-bold text-gray-300">Quick Start (3 Steps):</p>
+              <ol className="space-y-2 text-sm text-gray-300 font-semibold">
+                <li className="flex items-start gap-2">
+                  <span className="text-cyan-400 font-black">1.</span>
+                  <span>
+                    Go to{" "}
+                    <a
+                      href="http://digistore24.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cyan-400 underline hover:text-cyan-300"
+                    >
+                      digistore24.com
+                    </a>{" "}
+                    and create a free account
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-cyan-400 font-black">2.</span>
+                  <span>Browse products in your niche and click "Promote"</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-cyan-400 font-black">3.</span>
+                  <span>Copy your unique affiliate link and paste it below</span>
+                </li>
+              </ol>
+            </div>
+            <Button
+              asChild
+              variant="outline"
+              className="w-full border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/20 font-bold bg-transparent"
+            >
+              <a href="http://digistore24.com" target="_blank" rel="noopener noreferrer">
+                Create Free DigiStore24 Account →
+              </a>
+            </Button>
+          </div>
+
           <div className="space-y-3">
             <Label htmlFor="affiliateLink" className="text-lg font-semibold">
               Your Affiliate Link
