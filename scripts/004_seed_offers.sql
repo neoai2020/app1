@@ -6,7 +6,7 @@ SELECT
   'Ultimate Weight Loss System',
   'Proven 30-day weight loss program with meal plans and workout guides. High conversion rate with 60-day money back guarantee.',
   50.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/weight-loss-offer',
   'Must include disclaimer: Results may vary. Consult physician before starting any diet program.'
 FROM niches WHERE slug = 'health-fitness'
@@ -16,7 +16,7 @@ SELECT
   'Keto Diet Masterclass',
   'Complete keto diet course with recipes, shopping lists, and personal coaching. Recurring monthly subscription.',
   35.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/keto-offer',
   'FDA disclaimer required. Individual results may vary.'
 FROM niches WHERE slug = 'health-fitness'
@@ -38,7 +38,7 @@ SELECT
   'Affiliate Marketing Blueprint',
   'Step-by-step course teaching affiliate marketing from scratch. Includes templates, tools, and community access.',
   75.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/affiliate-course',
   'Income disclaimer required: Earnings not guaranteed. Results depend on individual effort.'
 FROM niches WHERE slug = 'make-money-online'
@@ -58,7 +58,7 @@ SELECT
   'Crypto Trading Signals',
   'Premium cryptocurrency trading signals with 85% accuracy rate. Monthly subscription with daily alerts.',
   40.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/crypto-signals',
   'Risk disclaimer required: Trading involves substantial risk of loss. Past performance not indicative of future results.'
 FROM niches WHERE slug = 'make-money-online';
@@ -70,7 +70,7 @@ SELECT
   'Text Chemistry Program',
   'Proven texting strategies to attract and keep your ideal partner. Digital course with bonus materials.',
   45.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/text-chemistry',
   'Results disclaimer: Individual experiences may vary.'
 FROM niches WHERE slug = 'relationships-dating'
@@ -80,7 +80,7 @@ SELECT
   'His Secret Obsession',
   'Relationship psychology course revealing what men really want. Best-selling program with high conversion.',
   55.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/secret-obsession',
   'Standard relationship advice disclaimer required.'
 FROM niches WHERE slug = 'relationships-dating';
@@ -92,7 +92,7 @@ SELECT
   'Manifestation Magic Audio Program',
   'Binaural beats and guided meditation for manifestation. Instant digital download with 60-day guarantee.',
   38.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/manifestation',
   'Results disclaimer: Individual experiences vary. Not a substitute for medical advice.'
 FROM niches WHERE slug = 'personal-development'
@@ -146,7 +146,7 @@ SELECT
   'DIY Woodworking Plans',
   'Comprehensive woodworking plans library with video tutorials. Lifetime access to 16,000+ projects.',
   42.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/woodworking-plans',
   'Standard disclaimer: Skill level and results may vary.'
 FROM niches WHERE slug = 'home-garden';
@@ -158,7 +158,7 @@ SELECT
   'Dog Training Mastery Course',
   'Professional dog training system for all breeds and ages. Includes behavior correction and obedience training.',
   47.00,
-  'ClickBank',
+  'DigiStore24',
   'https://example.com/dog-training',
   'Results vary by dog and owner consistency. Not veterinary advice.'
 FROM niches WHERE slug = 'pet-care'

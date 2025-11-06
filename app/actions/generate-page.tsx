@@ -56,7 +56,7 @@ function generateSlug(title: string): string {
     .substring(0, 100)
 }
 
-export default async function generatePageAction(nicheId: string, offerId: string, affiliateLink: string) {
+export default async function generatePageAction(nicheId: string, affiliateLink: string) {
   try {
     const supabase = await createClient()
 
@@ -80,20 +80,13 @@ export default async function generatePageAction(nicheId: string, offerId: strin
       return { success: false, error: "Failed to fetch niche" }
     }
 
-    const { data: offer, error: offerError } = await supabase.from("offers").select("*").eq("id", offerId).single()
-
-    if (offerError) {
-      console.error("[v0] Error fetching offer:", offerError)
-      return { success: false, error: "Failed to fetch offer" }
+    if (!niche) {
+      return { success: false, error: "Invalid niche" }
     }
 
-    if (!niche || !offer) {
-      return { success: false, error: "Invalid niche or offer" }
-    }
+    console.log("[v0] Generating content for niche:", niche.name)
 
-    console.log("[v0] Generating content for:", offer.title)
-
-    const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words promoting "${offer.title}" in the ${niche.name} niche.
+    const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words in the ${niche.name} niche.
 
 FORMAT THE ARTICLE AS HTML with proper structure:
 - Use <h1> for the main headline
@@ -113,9 +106,10 @@ ARTICLE REQUIREMENTS:
 - Use persuasive copywriting techniques
 - Include social proof and credibility markers
 - Create urgency without being pushy
+- Write about a popular product or solution in the ${niche.name} niche
 
 STRUCTURE WITH HTML TAGS:
-<h1>Compelling headline that promises a specific benefit</h1>
+<h1>Compelling headline that promises a specific benefit in ${niche.name}</h1>
 
 <h2>The Problem You're Facing</h2>
 <p>Opening hook that grabs attention (300+ words)</p>
@@ -128,7 +122,7 @@ STRUCTURE WITH HTML TAGS:
 <p>Make the reader feel understood</p>
 <p>Amplify the cost of not solving the problem</p>
 
-<h2>Introducing ${offer.title}: The Solution You've Been Looking For</h2>
+<h2>Introducing the Solution You've Been Looking For</h2>
 <p>Explain what it is and how it works (500+ words)</p>
 <p>Focus on the transformation it provides</p>
 <p>Share specific features that deliver results</p>
@@ -179,7 +173,7 @@ Write the complete HTML article now:`
 
     if (articleContent.length < 4000) {
       console.log("[v0] Article too short, generating part 2...")
-      const part2Prompt = `Continue the previous HTML article about "${offer.title}". Add 1,000 more words with proper HTML formatting:
+      const part2Prompt = `Continue the previous HTML article about ${niche.name}. Add 1,000 more words with proper HTML formatting:
 - Use <h2> and <h3> for headings
 - Use <p> for paragraphs
 - Include more <a href="[LINK]" class="affiliate-link">inline links</a>
@@ -194,9 +188,7 @@ Write naturally as a continuation with proper HTML tags:`
     articleContent = articleContent.replace(/\[LINK\]/g, normalizedAffiliateLink)
 
     const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
-    const title = h1Match
-      ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200)
-      : `${offer.title} - Complete Review & Guide`
+    const title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
 
     console.log("[v0] Content generated, inserting into database")
 
@@ -205,10 +197,10 @@ Write naturally as a continuation with proper HTML tags:`
       .insert({
         user_id: user.id,
         niche_id: nicheId,
-        offer_id: offerId,
+        offer_id: null,
         title,
         content: articleContent,
-        affiliate_link: normalizedAffiliateLink, // Store normalized link
+        affiliate_link: normalizedAffiliateLink,
         status: "active",
       })
       .select()

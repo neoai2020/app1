@@ -17,7 +17,7 @@ SELECT
   'Ultimate Weight Loss System',
   'Proven 12-week program that helps people lose 20-50 pounds safely',
   '50% per sale ($47 product)',
-  'ClickBank'
+  'DigiStore24'
 FROM public.niches n WHERE n.name = 'Weight Loss'
 ON CONFLICT DO NOTHING;
 
@@ -27,7 +27,7 @@ SELECT
   'Affiliate Marketing Masterclass',
   'Complete training on building a profitable affiliate business',
   '40% per sale ($197 product)',
-  'ClickBank'
+  'DigiStore24'
 FROM public.niches n WHERE n.name = 'Make Money Online'
 ON CONFLICT DO NOTHING;
 
@@ -37,7 +37,7 @@ SELECT
   'Text Chemistry Formula',
   'Texting secrets that make men obsess over you',
   '75% per sale ($67 product)',
-  'ClickBank'
+  'DigiStore24'
 FROM public.niches n WHERE n.name = 'Dating & Relationships'
 ON CONFLICT DO NOTHING;
 

@@ -11,11 +11,10 @@ import generatePageAction from "@/app/actions/generate-page"
 
 interface PageGeneratorProps {
   nicheId: string
-  offerId: string
   onBack: () => void
 }
 
-export function PageGenerator({ nicheId, offerId, onBack }: PageGeneratorProps) {
+export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
   const [affiliateLink, setAffiliateLink] = useState("")
   const [generating, setGenerating] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -24,7 +23,7 @@ export function PageGenerator({ nicheId, offerId, onBack }: PageGeneratorProps) 
   const router = useRouter()
 
   const messages = [
-    "Analyzing your niche and offer...",
+    "Analyzing your niche...",
     "Researching top-performing content...",
     "Writing compelling headline...",
     "Crafting engaging introduction...",
@@ -63,7 +62,7 @@ export function PageGenerator({ nicheId, offerId, onBack }: PageGeneratorProps) 
     }, 800)
 
     try {
-      const result = await generatePageAction(nicheId, offerId, affiliateLink)
+      const result = await generatePageAction(nicheId, affiliateLink)
 
       clearInterval(progressInterval)
       setProgress(100)
