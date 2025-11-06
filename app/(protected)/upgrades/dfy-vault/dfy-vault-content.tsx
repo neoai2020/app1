@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Crown, ArrowLeft, FileText, CheckCircle2, TrendingUp, Sparkles } from "lucide-react"
+import { Crown, ArrowLeft, FileText, CheckCircle2, TrendingUp, Sparkles, Play } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
@@ -148,7 +148,7 @@ That's what this system gives you. A proven, tested strategy that's been generat
 
 [INSERT_AFFILIATE_LINK]
 
-Click the link above to get instant access to the complete crypto strategy. You'll learn exactly which coins to buy, when to buy them, and when to sell for maximum profits.
+Click above to get instant access to the complete crypto strategy. You'll learn exactly which coins to buy, when to buy them, and when to sell for maximum profits.
 
 Don't miss out on the biggest wealth-building opportunity of our generation. Start today.`,
   },
@@ -583,6 +583,7 @@ export function DFYVaultContent() {
   const [showLinkModal, setShowLinkModal] = useState(false)
   const [affiliateLink, setAffiliateLink] = useState("")
   const [isCreating, setIsCreating] = useState(false)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const router = useRouter()
 
   const handleUseArticle = (article: (typeof articles)[0]) => {
@@ -641,6 +642,64 @@ export function DFYVaultContent() {
           </p>
         </div>
       </div>
+
+      <Card className="glass-strong border-cyan-500/30 glow-cyan overflow-hidden shadow-2xl">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black">
+              {!isVideoPlaying ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="absolute inset-0">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                      title="DFY Vault Preview"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/40" />
+                  <Button
+                    size="lg"
+                    onClick={() => setIsVideoPlaying(true)}
+                    className="relative z-10 h-24 w-24 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                  >
+                    <Play className="w-12 h-12 ml-1 fill-white" />
+                  </Button>
+                  <div className="absolute bottom-8 left-0 right-0 text-center">
+                    <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch DFY Vault Tutorial</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative w-full h-full">
+                  <iframe
+                    src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                    title="DFY Vault Tutorial"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Video Info */}
+            <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-6 h-6 text-cyan-400" />
+                <span className="text-cyan-400 font-black text-sm uppercase tracking-wider">Watch First</span>
+              </div>
+              <div>
+                <h2 className="text-3xl font-black text-white mb-3">How to Use Your DFY Vault</h2>
+                <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                  Watch this quick tutorial to learn how to copy these proven articles and start making money today. It
+                  only takes 3 minutes!
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <Card className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-cyan-500/30 shadow-xl">
         <CardHeader>

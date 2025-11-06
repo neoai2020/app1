@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import { ArrowLeft, TrendingUp, CheckCircle2, ExternalLink, Clock, Users } from "lucide-react"
+import { ArrowLeft, TrendingUp, CheckCircle2, ExternalLink, Clock, Users, Play, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 interface TrafficSource {
@@ -100,7 +100,7 @@ const trafficSources: TrafficSource[] = [
       "Engage with comments on your post",
     ],
     submissionDescription:
-      "After trying everything, this system finally worked: [YOUR_LINK] - Down 25 pounds in 8 weeks!",
+      "🎯 Struggling to lose weight? I found this system that helped me drop 30 pounds: [YOUR_LINK]",
   },
   {
     id: "wl5",
@@ -711,7 +711,7 @@ const trafficSources: TrafficSource[] = [
       "Join 10-15 active groups",
       "Read posting rules",
       "Share transformation photos and workout tips",
-      "Include your link in posts",
+      "Include your link",
       "Engage daily",
     ],
     submissionDescription: "My complete fitness transformation system: [YOUR_LINK]",
@@ -1989,6 +1989,7 @@ export function AutomatedIncomeContent({ userId }: { userId: string }) {
   const [pageUrl, setPageUrl] = useState("")
   const [selectedNiche, setSelectedNiche] = useState<string>("All")
   const [completedSources, setCompletedSources] = useState<Set<string>>(new Set())
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const niches = [
     "All",
@@ -2038,6 +2039,64 @@ export function AutomatedIncomeContent({ userId }: { userId: string }) {
           </p>
         </div>
       </div>
+
+      <Card className="glass-strong border-emerald-500/30 glow-jade overflow-hidden shadow-2xl">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            {/* Video Player */}
+            <div className="relative aspect-video bg-black">
+              {!isVideoPlaying ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="absolute inset-0">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134298104?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                      title="Automated Income Preview"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/40" />
+                  <Button
+                    size="lg"
+                    onClick={() => setIsVideoPlaying(true)}
+                    className="relative z-10 h-24 w-24 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                  >
+                    <Play className="w-12 h-12 ml-1 fill-white" />
+                  </Button>
+                  <div className="absolute bottom-8 left-0 right-0 text-center">
+                    <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch Automated Income Tutorial</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative w-full h-full">
+                  <iframe
+                    src="https://player.vimeo.com/video/1134298104?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                    title="Automated Income Tutorial"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Video Info */}
+            <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-emerald-500/10 to-green-500/10">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-6 h-6 text-emerald-400" />
+                <span className="text-emerald-400 font-black text-sm uppercase tracking-wider">Watch First</span>
+              </div>
+              <div>
+                <h2 className="text-3xl font-black text-white mb-3">How to Use Automated Income</h2>
+                <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                  Watch this quick tutorial to learn how to submit your link to these 100+ traffic sources and get
+                  automated traffic forever!
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Simple Explanation */}
       <Card className="bg-gradient-to-br from-emerald-900/30 to-green-900/30 border-emerald-500/30 shadow-xl">

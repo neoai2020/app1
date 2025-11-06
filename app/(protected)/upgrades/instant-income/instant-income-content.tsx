@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ArrowLeft, Copy, CheckCircle2, Facebook } from "lucide-react"
+import { ArrowLeft, Copy, CheckCircle2, Facebook, Play, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 interface FacebookPost {
@@ -389,6 +389,7 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
   const [affiliateLink, setAffiliateLink] = useState("")
   const [showPosts, setShowPosts] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const niches = ["all", ...Array.from(new Set(facebookPosts.map((p) => p.niche)))]
 
@@ -430,6 +431,64 @@ export function InstantIncomeContent({ userId }: { userId: string }) {
             </p>
           </div>
         </div>
+
+        <Card className="glass-strong border-violet-500/30 glow-violet overflow-hidden shadow-2xl">
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              {/* Video Player */}
+              <div className="relative aspect-video bg-black">
+                {!isVideoPlaying ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                    <div className="absolute inset-0">
+                      <iframe
+                        src="https://player.vimeo.com/video/1134298240?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                        title="Instant Income Preview"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/40" />
+                    <Button
+                      size="lg"
+                      onClick={() => setIsVideoPlaying(true)}
+                      className="relative z-10 h-24 w-24 rounded-full bg-violet-500 hover:bg-violet-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                    >
+                      <Play className="w-12 h-12 ml-1 fill-white" />
+                    </Button>
+                    <div className="absolute bottom-8 left-0 right-0 text-center">
+                      <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch Instant Income Tutorial</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134298240?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                      title="Instant Income Tutorial"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full border-0"
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Video Info */}
+              <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-violet-500/10 to-purple-500/10">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-6 h-6 text-violet-400" />
+                  <span className="text-violet-400 font-black text-sm uppercase tracking-wider">Watch First</span>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black text-white mb-3">How to Use Instant Income</h2>
+                  <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                    Watch this quick tutorial to learn how to copy these Facebook posts and start making money
+                    instantly. Simple and easy!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <Card className="bg-gradient-to-br from-violet-900/30 to-purple-900/30 border-violet-500/30 shadow-xl">
           <CardHeader>
