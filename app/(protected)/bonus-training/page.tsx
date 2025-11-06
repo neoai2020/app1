@@ -37,9 +37,6 @@ export default function BonusTrainingPage() {
             Watch The Bonus Training That Took Me To Earning{" "}
             <span className="text-emerald-500">$1,000-5,000 Per Day</span>...
           </h1>
-          <p className="text-lg md:text-xl text-red-500 font-semibold">
-            Make sure your sound is turned on. Please wait up to 10 seconds for the video to load.
-          </p>
         </div>
 
         {/* Video Section */}
@@ -79,9 +76,9 @@ export default function BonusTrainingPage() {
             href="https://freedomescapexcelerator.com/2k-per-day"
             target="_blank"
             rel="noopener noreferrer"
-            className="block w-full bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white text-xl font-bold py-6 px-8 rounded-lg text-center transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="block w-full bg-[#FFD700] hover:bg-[#FFC700] text-black text-2xl md:text-3xl font-black py-8 px-8 rounded-lg text-center transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            Click Here To Continue
+            Click Here To Continue &gt;&gt;
           </Link>
         </div>
       </div>
