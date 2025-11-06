@@ -13,13 +13,5 @@ export default async function AutomatedIncomePage() {
     redirect("/auth/login")
   }
 
-  const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
-
-  const hasAccess = profile?.upgrade_level === "automated_income"
-
-  if (!hasAccess) {
-    redirect("/upgrades")
-  }
-
   return <AutomatedIncomeContent userId={user.id} />
 }

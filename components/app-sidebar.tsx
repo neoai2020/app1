@@ -11,6 +11,8 @@ import {
   Share2,
   DollarSign,
   TrendingUp,
+  Sparkles,
+  Rocket,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -24,8 +26,13 @@ const menuItems = [
   { title: "Instant Cash Injection", url: "/instant-cash", icon: DollarSign },
   { title: "New System to Earn $1,000-$5,000 Per Day", url: "/bonus-training", icon: TrendingUp },
   { title: "P55 Training", url: "/training", icon: GraduationCap },
-  { title: "Upgrade", url: "/upgrades", icon: Crown },
   { title: "Settings", url: "/settings", icon: Settings },
+]
+
+const premiumItems = [
+  { title: "DFY Vault", url: "/upgrades/dfy-vault", icon: Crown },
+  { title: "Instant Income", url: "/upgrades/instant-income", icon: Sparkles },
+  { title: "Automated Income", url: "/upgrades/automated-income", icon: Rocket },
 ]
 
 export function AppSidebar() {
@@ -74,6 +81,34 @@ export function AppSidebar() {
             )
           })}
         </nav>
+
+        {/* Premium Features */}
+        <div className="mt-6">
+          <p className="text-base font-semibold text-[#FFD700] px-4 mb-2 flex items-center gap-2">
+            <Sparkles className="w-4 h-4" />
+            Premium Features
+          </p>
+          <nav className="space-y-1 px-2">
+            {premiumItems.map((item) => {
+              const isActive = pathname === item.url
+              const Icon = item.icon
+              return (
+                <Link
+                  key={item.title}
+                  href={item.url}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-lg font-medium transition-all duration-150 border-2 ${
+                    isActive
+                      ? "bg-gradient-to-r from-[#FFD700]/20 to-[#FFA500]/20 border-[#FFD700] text-[#FFD700]"
+                      : "border-[#FFD700]/30 text-white hover:border-[#FFD700] hover:bg-[#FFD700]/10 hover:text-[#FFD700]"
+                  }`}
+                >
+                  <Icon className="w-6 h-6 flex-shrink-0" />
+                  <span>{item.title}</span>
+                </Link>
+              )
+            })}
+          </nav>
+        </div>
       </div>
 
       {/* Footer */}
