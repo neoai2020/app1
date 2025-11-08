@@ -1007,11 +1007,13 @@ export function DFYVaultContent() {
         <CardContent className="p-10 text-center space-y-6">
           <h3 className="text-4xl font-black text-white">Need Help? We're Here for You!</h3>
           <p className="text-2xl text-gray-100 max-w-2xl mx-auto leading-relaxed font-bold">
-            Questions about using these articles? Not sure how to get an affiliate link? Email us anytime and we'll help
-            you get started.
+            Questions about using these articles? Not sure how to get an affiliate link? Visit our support portal
+            anytime and we'll help you get started.
           </p>
           <Button asChild className="bg-cyan-500 hover:bg-cyan-600 text-white font-black text-xl px-16 py-6" size="lg">
-            <a href="mailto:support@p55account.com?subject=DFY Vault Support">Contact Support</a>
+            <a href="https://p55account.zendesk.com/" target="_blank" rel="noopener noreferrer">
+              Contact Support
+            </a>
           </Button>
         </CardContent>
       </Card>

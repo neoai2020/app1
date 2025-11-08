@@ -126,7 +126,16 @@ export default async function TrainingPage() {
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-2">Need More Help?</h3>
             <p className="text-lg text-muted-foreground">
-              Questions about the training? Email us anytime at support@p55account.com
+              Questions about the training? Visit our{" "}
+              <a
+                href="https://p55account.zendesk.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:underline font-bold"
+              >
+                support center
+              </a>{" "}
+              anytime for help
             </p>
           </div>
         </CardContent>
