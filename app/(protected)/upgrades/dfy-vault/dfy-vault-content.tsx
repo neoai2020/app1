@@ -406,6 +406,7 @@ const additionalArticles = [
     bestFor: "Wine services, wine tasting kits",
   },
   {
+    id: 30,
     niche: "Books",
     title: "I Read 52 Books Last Year Thanks to This Reading System",
     earnings: 156,
@@ -413,6 +414,7 @@ const additionalArticles = [
     bestFor: "Reading systems, book subscription services",
   },
   {
+    id: 31,
     niche: "Streaming",
     title: "I Cut My Cable Bill by $120/Month With These Streaming Services",
     earnings: 278,
@@ -420,6 +422,7 @@ const additionalArticles = [
     bestFor: "Streaming services, cable alternatives",
   },
   {
+    id: 32,
     niche: "Phone Apps",
     title: "This App Helped Me Save $3,000 in 6 Months",
     earnings: 312,
@@ -427,6 +430,7 @@ const additionalArticles = [
     bestFor: "Phone apps, money-saving tools",
   },
   {
+    id: 33,
     niche: "VPN",
     title: "I Protect My Privacy Online for Just $3/Month With This VPN",
     earnings: 234,
@@ -434,6 +438,7 @@ const additionalArticles = [
     bestFor: "VPNs, privacy protection tools",
   },
   {
+    id: 34,
     niche: "Cloud Storage",
     title: "I Never Worry About Losing Files Again Thanks to This Service",
     earnings: 189,
@@ -441,6 +446,7 @@ const additionalArticles = [
     bestFor: "Cloud storage services, file backup tools",
   },
   {
+    id: 35,
     niche: "Password Manager",
     title: "This Tool Remembers All My Passwords So I Don't Have To",
     earnings: 167,
@@ -448,6 +454,7 @@ const additionalArticles = [
     bestFor: "Password managers, security tools",
   },
   {
+    id: 36,
     niche: "Antivirus",
     title: "This Software Saved My Computer From a Devastating Virus",
     earnings: 198,
@@ -455,6 +462,7 @@ const additionalArticles = [
     bestFor: "Antivirus software, computer security tools",
   },
   {
+    id: 37,
     niche: "Backup",
     title: "My Computer Crashed But I Didn't Lose Anything Thanks to This",
     earnings: 176,
@@ -462,6 +470,7 @@ const additionalArticles = [
     bestFor: "Backup solutions, data recovery tools",
   },
   {
+    id: 38,
     niche: "Email",
     title: "I Went From 5,000 Unread Emails to Inbox Zero in One Week",
     earnings: 223,
@@ -469,6 +478,7 @@ const additionalArticles = [
     bestFor: "Email management tools, inbox organization apps",
   },
   {
+    id: 39,
     niche: "Calendar",
     title: "This Scheduling Tool Eliminated All My Meeting Conflicts",
     earnings: 189,
@@ -476,6 +486,7 @@ const additionalArticles = [
     bestFor: "Calendar apps, scheduling tools",
   },
   {
+    id: 40,
     niche: "Note Taking",
     title: "I Organize My Entire Life With This Simple Note-Taking App",
     earnings: 156,
@@ -483,6 +494,7 @@ const additionalArticles = [
     bestFor: "Note-taking apps, productivity tools",
   },
   {
+    id: 41,
     niche: "Project Management",
     title: "My Team's Productivity Doubled With This Project Tool",
     earnings: 298,
@@ -490,6 +502,7 @@ const additionalArticles = [
     bestFor: "Project management tools, team collaboration apps",
   },
   {
+    id: 42,
     niche: "CRM",
     title: "I Manage 500 Clients Easily With This Customer Management System",
     earnings: 367,
@@ -497,6 +510,7 @@ const additionalArticles = [
     bestFor: "CRM systems, customer management tools",
   },
   {
+    id: 43,
     niche: "Accounting",
     title: "This Software Does My Bookkeeping in 10 Minutes Per Week",
     earnings: 289,
@@ -504,6 +518,7 @@ const additionalArticles = [
     bestFor: "Accounting software, bookkeeping tools",
   },
   {
+    id: 44,
     niche: "Invoicing",
     title: "I Get Paid Faster Using This Invoicing Platform",
     earnings: 234,
@@ -511,6 +526,7 @@ const additionalArticles = [
     bestFor: "Invoicing platforms, payment processing tools",
   },
   {
+    id: 45,
     niche: "Legal",
     title: "I Created Legal Documents Without a Lawyer Using This Service",
     earnings: 267,
@@ -518,6 +534,7 @@ const additionalArticles = [
     bestFor: "Legal document creation services, law tools",
   },
   {
+    id: 46,
     niche: "Insurance",
     title: "I Saved $1,200/Year on Insurance With This Comparison Tool",
     earnings: 312,
@@ -525,6 +542,7 @@ const additionalArticles = [
     bestFor: "Insurance comparison tools, savings apps",
   },
   {
+    id: 47,
     niche: "Credit Score",
     title: "I Raised My Credit Score 150 Points in 6 Months",
     earnings: 278,
@@ -532,6 +550,7 @@ const additionalArticles = [
     bestFor: "Credit score improvement tools, financial management apps",
   },
   {
+    id: 48,
     niche: "Debt",
     title: "I Paid Off $30,000 in Debt Using This Proven Strategy",
     earnings: 389,
@@ -539,6 +558,7 @@ const additionalArticles = [
     bestFor: "Debt repayment strategies, financial planning tools",
   },
   {
+    id: 49,
     niche: "Investing",
     title: "I'm Building Wealth With Just $50/Month Using This App",
     earnings: 423,
@@ -546,6 +566,7 @@ const additionalArticles = [
     bestFor: "Investing apps, wealth building tools",
   },
   {
+    id: 50,
     niche: "Retirement",
     title: "This Calculator Showed Me I Can Retire 5 Years Earlier",
     earnings: 356,
@@ -583,9 +604,9 @@ export function DFYVaultContent() {
   const [showLinkModal, setShowLinkModal] = useState(false)
   const [affiliateLink, setAffiliateLink] = useState("")
   const [isCreating, setIsCreating] = useState(false)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const [isVideo1Playing, setIsVideo1Playing] = useState(false)
   const [isVideo2Playing, setIsVideo2Playing] = useState(false)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const router = useRouter()
 
   const handleUseArticle = (article: (typeof articles)[0]) => {
@@ -644,6 +665,62 @@ export function DFYVaultContent() {
           </p>
         </div>
       </div>
+
+      <Card className="glass-strong border-cyan-500/30 glow-cyan overflow-hidden shadow-2xl">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            <div className="relative aspect-video bg-black">
+              {!isVideoPlaying ? (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                  <div className="absolute inset-0">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                      title="DFY Vault Preview"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/40" />
+                  <Button
+                    size="lg"
+                    onClick={() => setIsVideoPlaying(true)}
+                    className="relative z-10 h-24 w-24 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                  >
+                    <Play className="w-12 h-12 ml-1 fill-white" />
+                  </Button>
+                  <div className="absolute bottom-8 left-0 right-0 text-center">
+                    <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch DFY Vault Tutorial</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative w-full h-full">
+                  <iframe
+                    src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                    title="DFY Vault Tutorial"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full border-0"
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-6 h-6 text-cyan-400" />
+                <span className="text-cyan-400 font-black text-sm uppercase tracking-wider">Quick Start</span>
+              </div>
+              <div>
+                <h2 className="text-3xl font-black text-white mb-3">How to Use Your DFY Vault</h2>
+                <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                  Watch this quick tutorial to learn how to copy these proven articles and start making money today. It
+                  only takes 3 minutes!
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <div className="space-y-6">
         {/* First Exclusive Training Video */}
@@ -764,62 +841,6 @@ export function DFYVaultContent() {
           </CardContent>
         </Card>
       </div>
-
-      <Card className="glass-strong border-cyan-500/30 glow-cyan overflow-hidden shadow-2xl">
-        <CardContent className="p-0">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-            <div className="relative aspect-video bg-black">
-              {!isVideoPlaying ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
-                  <div className="absolute inset-0">
-                    <iframe
-                      src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
-                      title="DFY Vault Preview"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      className="absolute inset-0 w-full h-full border-0 pointer-events-none"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-black/40" />
-                  <Button
-                    size="lg"
-                    onClick={() => setIsVideoPlaying(true)}
-                    className="relative z-10 h-24 w-24 rounded-full bg-cyan-500 hover:bg-cyan-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
-                  >
-                    <Play className="w-12 h-12 ml-1 fill-white" />
-                  </Button>
-                  <div className="absolute bottom-8 left-0 right-0 text-center">
-                    <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch DFY Vault Tutorial</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative w-full h-full">
-                  <iframe
-                    src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
-                    title="DFY Vault Tutorial"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full border-0"
-                  />
-                </div>
-              )}
-            </div>
-
-            <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-cyan-400" />
-                <span className="text-cyan-400 font-black text-sm uppercase tracking-wider">Quick Start</span>
-              </div>
-              <div>
-                <h2 className="text-3xl font-black text-white mb-3">How to Use Your DFY Vault</h2>
-                <p className="text-xl text-gray-300 leading-relaxed font-bold">
-                  Watch this quick tutorial to learn how to copy these proven articles and start making money today. It
-                  only takes 3 minutes!
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
 
       <Card className="bg-gray-900/50 border-cyan-500/20 shadow-xl">
         <CardHeader>

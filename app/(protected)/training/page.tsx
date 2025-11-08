@@ -30,8 +30,22 @@ export default async function TrainingPage() {
     },
     {
       step: 3,
-      title: "Step 3: Getting Traffic & Making Money",
-      description: "Discover how to drive traffic to your pages and start earning commissions",
+      title: "Step 3: How To Generate 2,459 Clicks A Day For Free",
+      description: "Discover the exact method to generate thousands of free clicks daily",
+      videoId: "1134943080",
+      duration: "18 min",
+    },
+    {
+      step: 4,
+      title: "Step 4: How To Generate Extra Clicks Instantly, in Less Than 20 Seconds",
+      description: "Quick technique to boost your traffic instantly with minimal effort",
+      videoId: "1134944459",
+      duration: "10 min",
+    },
+    {
+      step: 5,
+      title: "EXCLUSIVE BONUS - How To Make Your First $100 TODAY!",
+      description: "Special bonus training showing you how to get your first commission fast",
       videoId: "1134298475",
       duration: "15 min",
     },
@@ -42,7 +56,7 @@ export default async function TrainingPage() {
       <div>
         <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-2">P55 Training Center</h1>
         <p className="text-xl text-muted-foreground">
-          Follow these 3 simple steps to master the P55 system and start making money
+          Follow these 5 simple steps to master the P55 system and start making money
         </p>
       </div>
 
@@ -53,7 +67,7 @@ export default async function TrainingPage() {
           </div>
           <div>
             <p className="text-lg font-bold text-foreground">Complete Training Program</p>
-            <p className="text-base text-muted-foreground">3 essential videos to get you started</p>
+            <p className="text-base text-muted-foreground">5 essential videos to get you started</p>
           </div>
         </div>
       </div>
