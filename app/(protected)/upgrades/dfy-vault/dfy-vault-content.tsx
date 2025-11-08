@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Crown, ArrowLeft, FileText, CheckCircle2, TrendingUp, Sparkles, Play } from "lucide-react"
+import { Crown, ArrowLeft, FileText, TrendingUp, Sparkles, Play } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
@@ -583,6 +583,8 @@ export function DFYVaultContent() {
   const [showLinkModal, setShowLinkModal] = useState(false)
   const [affiliateLink, setAffiliateLink] = useState("")
   const [isCreating, setIsCreating] = useState(false)
+  const [isVideo1Playing, setIsVideo1Playing] = useState(false)
+  const [isVideo2Playing, setIsVideo2Playing] = useState(false)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const router = useRouter()
 
@@ -643,10 +645,129 @@ export function DFYVaultContent() {
         </div>
       </div>
 
+      <div className="space-y-6">
+        {/* First Exclusive Training Video */}
+        <Card className="glass-strong border-yellow-500/50 glow-yellow overflow-hidden shadow-2xl bg-gradient-to-br from-yellow-500/20 to-orange-500/20">
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              <div className="relative aspect-video bg-black">
+                {!isVideo1Playing ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                    <div className="absolute inset-0">
+                      <iframe
+                        src="https://player.vimeo.com/video/1134928111?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                        title="Exclusive Training 1 Preview"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/40" />
+                    <Button
+                      size="lg"
+                      onClick={() => setIsVideo1Playing(true)}
+                      className="relative z-10 h-24 w-24 rounded-full bg-yellow-500 hover:bg-yellow-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                    >
+                      <Play className="w-12 h-12 ml-1 fill-white" />
+                    </Button>
+                    <div className="absolute bottom-8 left-0 right-0 text-center">
+                      <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch Exclusive Training #1</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134928111?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                      title="DFY Exclusive Training 1"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full border-0"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-yellow-500/10 to-orange-500/10">
+                <div className="flex items-center gap-2">
+                  <Crown className="w-6 h-6 text-yellow-400" />
+                  <span className="text-yellow-400 font-black text-sm uppercase tracking-wider">DFY Exclusive</span>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black text-white mb-3 leading-tight">
+                    How To Turn A Measly $5 Into $50, $100, And Even $500 Every Single Day...
+                  </h2>
+                  <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                    This exclusive training reveals the exact strategy to multiply small investments into massive daily
+                    profits using the DFY Vault articles.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Second Exclusive Training Video */}
+        <Card className="glass-strong border-yellow-500/50 glow-yellow overflow-hidden shadow-2xl bg-gradient-to-br from-orange-500/20 to-red-500/20">
+          <CardContent className="p-0">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+              <div className="relative aspect-video bg-black">
+                {!isVideo2Playing ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
+                    <div className="absolute inset-0">
+                      <iframe
+                        src="https://player.vimeo.com/video/1134928160?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                        title="Exclusive Training 2 Preview"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-black/40" />
+                    <Button
+                      size="lg"
+                      onClick={() => setIsVideo2Playing(true)}
+                      className="relative z-10 h-24 w-24 rounded-full bg-orange-500 hover:bg-orange-400 text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+                    >
+                      <Play className="w-12 h-12 ml-1 fill-white" />
+                    </Button>
+                    <div className="absolute bottom-8 left-0 right-0 text-center">
+                      <p className="text-white text-xl font-black drop-shadow-lg">▶ Watch Exclusive Training #2</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src="https://player.vimeo.com/video/1134928160?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                      title="DFY Exclusive Training 2"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full border-0"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-orange-500/10 to-red-500/10">
+                <div className="flex items-center gap-2">
+                  <Crown className="w-6 h-6 text-orange-400" />
+                  <span className="text-orange-400 font-black text-sm uppercase tracking-wider">DFY Exclusive</span>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black text-white mb-3 leading-tight">
+                    How To Hijack Top Publications Traffic In Less Than 9 Minutes, And Turn Them Into $500 Paydays
+                  </h2>
+                  <p className="text-xl text-gray-300 leading-relaxed font-bold">
+                    Discover the secret method to leverage high-traffic publications and convert their audience into
+                    your commission-generating machine.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       <Card className="glass-strong border-cyan-500/30 glow-cyan overflow-hidden shadow-2xl">
         <CardContent className="p-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-            {/* Video Player */}
             <div className="relative aspect-video bg-black">
               {!isVideoPlaying ? (
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
@@ -683,72 +804,16 @@ export function DFYVaultContent() {
               )}
             </div>
 
-            {/* Video Info */}
             <div className="p-8 flex flex-col justify-center space-y-4 bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-6 h-6 text-cyan-400" />
-                <span className="text-cyan-400 font-black text-sm uppercase tracking-wider">Watch First</span>
+                <span className="text-cyan-400 font-black text-sm uppercase tracking-wider">Quick Start</span>
               </div>
               <div>
                 <h2 className="text-3xl font-black text-white mb-3">How to Use Your DFY Vault</h2>
                 <p className="text-xl text-gray-300 leading-relaxed font-bold">
                   Watch this quick tutorial to learn how to copy these proven articles and start making money today. It
                   only takes 3 minutes!
-                </p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border-cyan-500/30 shadow-xl">
-        <CardHeader>
-          <CardTitle className="text-4xl text-white flex items-center gap-3 font-black">
-            <CheckCircle2 className="w-10 h-10 text-cyan-400" />
-            How to Use These Articles (3 Simple Steps)
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="bg-cyan-500/10 rounded-xl p-8 border border-cyan-500/30">
-            <div className="flex items-start gap-6">
-              <div className="w-20 h-20 rounded-full bg-cyan-500 flex items-center justify-center flex-shrink-0 text-3xl font-black text-white shadow-lg">
-                1
-              </div>
-              <div className="flex-1">
-                <h3 className="text-3xl font-black text-white mb-4">Pick an Article You Like</h3>
-                <p className="text-xl text-gray-100 leading-relaxed font-bold">
-                  Scroll through the 50 articles below. Each one is proven to make money. Pick any article that
-                  interests you or matches a product you want to promote.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-blue-500/10 rounded-xl p-8 border border-blue-500/30">
-            <div className="flex items-start gap-6">
-              <div className="w-20 h-20 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 text-3xl font-black text-white shadow-lg">
-                2
-              </div>
-              <div className="flex-1">
-                <h3 className="text-3xl font-black text-white mb-4">Copy & Add Your Link</h3>
-                <p className="text-xl text-gray-100 leading-relaxed font-bold">
-                  Click the "Use This Article" button. We'll automatically create a page for you with the article and
-                  your affiliate link.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-emerald-500/10 rounded-xl p-8 border border-emerald-500/30">
-            <div className="flex items-start gap-6">
-              <div className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0 text-3xl font-black text-white shadow-lg">
-                3
-              </div>
-              <div className="flex-1">
-                <h3 className="text-3xl font-black text-white mb-4">Share & Get Paid</h3>
-                <p className="text-xl text-gray-100 leading-relaxed font-bold">
-                  Once your page is live, share it on Facebook, Instagram, Twitter, or send it to friends. When people
-                  read your article and click your affiliate link, you earn commissions!
                 </p>
               </div>
             </div>
