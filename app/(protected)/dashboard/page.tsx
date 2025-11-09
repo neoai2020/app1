@@ -6,8 +6,9 @@ import { MotivationalTicker } from "@/components/motivational-ticker"
 import { VideoIntroModal } from "@/components/video-intro-modal"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { LiveStatsWidget } from "@/components/live-stats-widget"
-import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown } from "lucide-react"
+import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown, Headphones } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -51,6 +52,28 @@ export default async function DashboardPage() {
           </div>
           <MotivationalTicker />
         </div>
+
+        {/* Support Desk Card */}
+        <Card className="glass-strong border-accent/50 glow-jade">
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                  <Headphones className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Need Help?</h3>
+                  <p className="text-muted-foreground">Our support team is here to assist you 24/7</p>
+                </div>
+              </div>
+              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground font-bold px-8">
+                <a href="https://p55account.zendesk.com/" target="_blank" rel="noopener noreferrer">
+                  Contact Support
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Featured Video Card and Live Stats Widget */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
