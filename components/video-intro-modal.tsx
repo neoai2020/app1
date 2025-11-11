@@ -12,7 +12,7 @@ interface VideoIntroModalProps {
 }
 
 export function VideoIntroModal({
-  videoUrl = "https://player.vimeo.com/video/1133461747?badge=0&autopause=0&player_id=0&app_id=58479",
+  videoUrl = "https://player.vimeo.com/video/1134294445?badge=0&autopause=0&player_id=0&app_id=58479",
   title = "Welcome to P55 Account!",
   description = "Watch this quick 2-minute intro to learn how to create your first high-converting affiliate page.",
 }: VideoIntroModalProps) {
