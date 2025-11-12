@@ -14,7 +14,6 @@ interface UserResult {
   id: string
   email: string
   created_at: string
-  upgrade_level: string
 }
 
 export default function AdminDashboardPage() {
@@ -64,7 +63,10 @@ export default function AdminDashboardPage() {
     try {
       const result = await resetUserPassword(searchResult.id, newPassword)
       if (result.success) {
-        setMessage({ type: "success", text: `Password successfully reset for ${searchResult.email}` })
+        setMessage({
+          type: "success",
+          text: `✓ Password successfully reset for ${searchResult.email}. User can now login with the new password.`,
+        })
         setNewPassword("")
       } else {
         setMessage({ type: "error", text: result.error || "Failed to reset password" })
@@ -188,14 +190,6 @@ export default function AdminDashboardPage() {
                   <div>
                     <p className="text-sm text-slate-400">Account Created</p>
                     <p className="font-medium">{formatDate(searchResult.created_at)}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Shield className="h-5 w-5 text-slate-400 mt-0.5" />
-                  <div>
-                    <p className="text-sm text-slate-400">Upgrade Level</p>
-                    <p className="font-medium capitalize">{searchResult.upgrade_level.replace("_", " ")}</p>
                   </div>
                 </div>
               </div>

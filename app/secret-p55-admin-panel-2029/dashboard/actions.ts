@@ -12,10 +12,9 @@ const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, proces
 
 export async function searchUserByEmail(email: string) {
   try {
-    // Search in users table
     const { data: user, error } = await supabaseAdmin
       .from("users")
-      .select("id, email, created_at, upgrade_level")
+      .select("id, email, created_at")
       .eq("email", email.toLowerCase())
       .single()
 
@@ -40,6 +39,7 @@ export async function resetUserPassword(userId: string, newPassword: string) {
       return { success: false, error: error.message }
     }
 
+    console.log("[v0] Password successfully reset for user:", userId)
     return { success: true }
   } catch (error) {
     console.error("[v0] Admin password reset error:", error)
