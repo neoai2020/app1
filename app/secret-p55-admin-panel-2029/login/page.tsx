@@ -5,15 +5,13 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Shield, AlertCircle } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email] = useState("admin@p55app.com")
+  const [password] = useState("p55@@admin29")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -56,34 +54,19 @@ export default function AdminLoginPage() {
               </Alert>
             )}
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Admin Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="admin@p55app.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="border-slate-700"
-              />
-            </div>
+            <Alert className="bg-blue-500/10 border-blue-500/20">
+              <AlertDescription className="text-blue-300 text-sm">
+                ✓ Admin credentials are pre-configured. Simply click the button below to access the admin panel.
+              </AlertDescription>
+            </Alert>
 
-            <div className="space-y-2">
-              <Label htmlFor="password">Admin Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border-slate-700"
-              />
-            </div>
-
-            <Button type="submit" className="w-full bg-red-600 hover:bg-red-700" disabled={loading}>
-              {loading ? "Authenticating..." : "Access Admin Panel"}
+            <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 h-12 text-lg" disabled={loading}>
+              {loading ? "Authenticating..." : "🔓 Access Admin Panel"}
             </Button>
+
+            <p className="text-xs text-center text-slate-400 mt-4">
+              Logged in as: <span className="text-white font-medium">{email}</span>
+            </p>
           </form>
         </CardContent>
       </Card>

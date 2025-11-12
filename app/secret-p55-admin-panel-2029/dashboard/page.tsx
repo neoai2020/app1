@@ -18,6 +18,7 @@ interface UserResult {
 
 export default function AdminDashboardPage() {
   const router = useRouter()
+  const [mounted, setMounted] = useState(false)
   const [searchEmail, setSearchEmail] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [searchResult, setSearchResult] = useState<UserResult | null>(null)
@@ -26,12 +27,18 @@ export default function AdminDashboardPage() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     // Check if admin is authenticated
     const isAuthenticated = localStorage.getItem("p55_admin_authenticated")
     if (!isAuthenticated) {
       router.push("/secret-p55-admin-panel-2029/login")
     }
-  }, [router])
+  }, [router, mounted])
 
   const handleSearch = async () => {
     if (!searchEmail) return
@@ -42,12 +49,14 @@ export default function AdminDashboardPage() {
 
     try {
       const result = await searchUserByEmail(searchEmail)
+      console.log("[v0] Search result:", result)
       if (result.success && result.user) {
         setSearchResult(result.user)
       } else {
         setMessage({ type: "error", text: result.error || "User not found" })
       }
     } catch (error) {
+      console.error("[v0] Search error:", error)
       setMessage({ type: "error", text: "Failed to search user" })
     }
 
@@ -91,6 +100,10 @@ export default function AdminDashboardPage() {
       hour: "2-digit",
       minute: "2-digit",
     })
+  }
+
+  if (!mounted) {
+    return null
   }
 
   return (
