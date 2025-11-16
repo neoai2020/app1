@@ -203,12 +203,13 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
           </div>
 
           {generating && (
-            <div className="space-y-4 py-6">
-              <div className="flex items-center justify-center gap-3 p-4 glass-strong rounded-xl border-2 border-primary/50 glow-cyan">
-                <Clock className="w-7 h-7 text-primary animate-pulse" />
+            <div className="space-y-6 py-6">
+              <div className="flex flex-col items-center justify-center gap-2 p-8 glass-strong rounded-2xl border-4 border-primary/70 glow-cyan bg-gradient-to-br from-primary/10 to-accent/10">
+                <Clock className="w-12 h-12 text-primary animate-pulse mb-2" />
                 <div className="text-center">
-                  <p className="text-3xl font-bold text-primary">{timeRemaining}s</p>
-                  <p className="text-sm text-muted-foreground">Estimated time remaining</p>
+                  <p className="text-5xl font-black text-primary mb-1">{timeRemaining}s</p>
+                  <p className="text-lg font-bold text-foreground">Expected wait: 10-15 seconds</p>
+                  <p className="text-sm text-muted-foreground mt-1">Creating your professional article...</p>
                 </div>
               </div>
               

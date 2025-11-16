@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { notFound } from "next/navigation"
+import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
 interface PageProps {
@@ -14,17 +14,41 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const { data: page, error } = await supabase
     .from("pages")
-    .select(`
-      *,
-      niches (name),
-      offers (title)
-    `)
+    .select("*")
     .eq("id", pageId)
     .eq("status", "active")
     .single()
 
   if (error || !page) {
+    console.error("[v0] Article page not found:", pageId, error)
     notFound()
+  }
+
+  let niche = null
+  let offer = null
+
+  if (page.niche_id) {
+    const { data: nicheData } = await supabase
+      .from("niches")
+      .select("name")
+      .eq("id", page.niche_id)
+      .single()
+    niche = nicheData
+  }
+
+  if (page.offer_id) {
+    const { data: offerData } = await supabase
+      .from("offers")
+      .select("title")
+      .eq("id", page.offer_id)
+      .single()
+    offer = offerData
+  }
+
+  const pageWithRelations = {
+    ...page,
+    niches: niche,
+    offers: offer,
   }
 
   // Increment view count
@@ -33,7 +57,7 @@ export default async function ArticlePage({ params }: PageProps) {
     .update({ views: (page.views || 0) + 1 })
     .eq("id", page.id)
 
-  return <ArticleContent page={page} />
+  return <ArticleContent page={pageWithRelations} />
 }
 
 export async function generateMetadata({ params }: PageProps) {
