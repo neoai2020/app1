@@ -246,6 +246,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="cta-button-mid"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -260,14 +261,6 @@ export default async function ArticlePage({ params }: PageProps) {
                   transition: 'all 0.3s ease',
                   boxShadow: '0 12px 40px rgba(139, 92, 246, 0.4)',
                   border: 'none'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 16px 50px rgba(139, 92, 246, 0.5)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(139, 92, 246, 0.4)';
                 }}
               >
                 Discover More
@@ -347,6 +340,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="cta-button-bottom"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -362,14 +356,6 @@ export default async function ArticlePage({ params }: PageProps) {
                   boxShadow: '0 16px 60px rgba(59, 130, 246, 0.5)',
                   border: 'none',
                   letterSpacing: '0.02em'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                  e.currentTarget.style.boxShadow = '0 20px 70px rgba(59, 130, 246, 0.6)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 16px 60px rgba(59, 130, 246, 0.5)';
                 }}
               >
                 Get Started Now
@@ -405,6 +391,17 @@ export default async function ArticlePage({ params }: PageProps) {
           
           * {
             box-sizing: border-box;
+          }
+          
+          /* Added CSS hover effects for CTA buttons to replace inline event handlers */
+          .cta-button-mid:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 16px 50px rgba(139, 92, 246, 0.5) !important;
+          }
+          
+          .cta-button-bottom:hover {
+            transform: translateY(-3px) scale(1.02) !important;
+            box-shadow: 0 20px 70px rgba(59, 130, 246, 0.6) !important;
           }
           
           article h2 {
