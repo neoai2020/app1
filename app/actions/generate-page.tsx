@@ -305,7 +305,9 @@ CRITICAL REQUIREMENTS:
 Write the complete HTML article now:`
 
       const content = await generateWithRapidAPI(prompt)
-      return content.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '').trim()
+      const codeBlockPattern = new RegExp('\`\`\`html\\s*', 'gi')
+      const codeEndPattern = new RegExp('\`\`\`\\s*', 'g')
+      return content.replace(codeBlockPattern, '').replace(codeEndPattern, '').trim()
     })()
 
     const timeoutPromise = new Promise<string>((_, reject) => {
