@@ -1,4 +1,4 @@
-import { createAnonymousClient } from "@/lib/supabase/anonymous"
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
@@ -11,9 +11,7 @@ interface PageProps {
 export default async function ArticlePage({ params }: PageProps) {
   const { slug: pageId } = await params
   
-  const supabase = createAnonymousClient()
-
-  console.log("[v0] Fetching article:", pageId)
+  const supabase = await createClient()
 
   const { data: page, error } = await supabase
     .from("pages")
@@ -21,17 +19,9 @@ export default async function ArticlePage({ params }: PageProps) {
     .eq("id", pageId)
     .single()
 
-  if (error) {
-    console.error("[v0] Article fetch error:", error.message, error.details, error.hint)
+  if (error || !page) {
     notFound()
   }
-
-  if (!page) {
-    console.error("[v0] Article page not found:", pageId)
-    notFound()
-  }
-
-  console.log("[v0] Article found:", page.id, page.title)
 
   let niche = null
   let offer = null
@@ -71,7 +61,7 @@ export default async function ArticlePage({ params }: PageProps) {
 export async function generateMetadata({ params }: PageProps) {
   const { slug: pageId } = await params
   
-  const supabase = createAnonymousClient()
+  const supabase = await createClient()
 
   const { data: page } = await supabase
     .from("pages")
@@ -94,7 +84,6 @@ export async function generateMetadata({ params }: PageProps) {
       .single()
     
     if (niche?.name) {
-      // Use the same hero title logic for consistency
       const heroTitles: Record<string, string> = {
         "Weight Loss": "The Ultimate Weight Loss Breakthrough",
         "Make Money Online": "How to Build Real Online Income",
@@ -110,8 +99,8 @@ export async function generateMetadata({ params }: PageProps) {
   }
 
   const description = page.content
-    .replace(/<[^>]*>/g, "") // Strip HTML tags
-    .replace(/\s+/g, " ") // Normalize whitespace
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
     .trim()
     .substring(0, 155) + "..."
 
