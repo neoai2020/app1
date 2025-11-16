@@ -65,82 +65,144 @@ export default async function ArticlePage({ params }: PageProps) {
       <body style={{ 
         margin: 0, 
         padding: 0, 
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-        lineHeight: '1.6',
-        color: '#e5e7eb',
-        background: '#0f172a'
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        lineHeight: '1.7',
+        color: '#1f2937',
+        background: '#ffffff'
       }}>
+        {/* Hero Section */}
         <div style={{
-          background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-          padding: '80px 20px',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '100px 24px 80px',
           textAlign: 'center',
-          borderBottom: '2px solid #1e40af'
+          position: 'relative',
+          overflow: 'hidden'
         }}>
-          <h1 style={{
-            fontSize: '3rem',
-            fontWeight: 800,
-            color: '#60a5fa',
-            marginBottom: '20px',
-            lineHeight: '1.2',
-            margin: '0 0 20px 0'
-          }}>{nicheTitle}</h1>
           <div style={{
-            display: 'flex',
-            gap: '20px',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#94a3b8',
-            fontSize: '0.95rem'
+            maxWidth: '900px',
+            margin: '0 auto',
+            position: 'relative',
+            zIndex: 1
           }}>
-            <span>📖 Expert Reviewed</span>
-            <span>•</span>
-            <span>Updated {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+            <h1 style={{
+              fontSize: '3.5rem',
+              fontWeight: 900,
+              color: '#ffffff',
+              marginBottom: '24px',
+              lineHeight: '1.1',
+              margin: '0 0 24px 0',
+              textShadow: '0 2px 20px rgba(0,0,0,0.2)',
+              letterSpacing: '-0.02em'
+            }}>{nicheTitle}</h1>
+            <div style={{
+              display: 'inline-flex',
+              gap: '20px',
+              alignItems: 'center',
+              color: 'rgba(255,255,255,0.95)',
+              fontSize: '1rem',
+              background: 'rgba(255,255,255,0.15)',
+              padding: '12px 28px',
+              borderRadius: '50px',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <span style={{ fontWeight: 600 }}>✓ Expert Reviewed</span>
+              <span style={{ opacity: 0.7 }}>•</span>
+              <span>Updated {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+            </div>
           </div>
         </div>
+
+        {/* Main Content */}
         <div style={{
           maxWidth: '800px',
           margin: '0 auto',
-          padding: '60px 20px'
+          padding: '80px 32px',
+          background: '#ffffff'
         }}>
-          <div dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '16px',
+            padding: '0'
+          }}>
+            <div dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
+          </div>
         </div>
+
         <style dangerouslySetInnerHTML={{ __html: `
-          body > div > div h2 {
-            font-size: 2rem !important;
-            color: #60a5fa !important;
-            margin: 40px 0 20px !important;
-            font-weight: 700 !important;
+          body > div:last-of-type > div > div h2 {
+            font-size: 2.25rem !important;
+            color: #111827 !important;
+            margin: 56px 0 24px !important;
+            font-weight: 800 !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.02em !important;
           }
-          body > div > div p {
-            margin-bottom: 20px !important;
-            font-size: 1.1rem !important;
-            line-height: 1.8 !important;
-            color: #cbd5e1 !important;
+          
+          body > div:last-of-type > div > div h2:first-child {
+            margin-top: 0 !important;
           }
-          body > div > div a {
-            color: #3b82f6 !important;
+          
+          body > div:last-of-type > div > div p {
+            margin-bottom: 24px !important;
+            font-size: 1.125rem !important;
+            line-height: 1.9 !important;
+            color: #374151 !important;
+            font-weight: 400 !important;
+          }
+          
+          body > div:last-of-type > div > div a {
+            color: #667eea !important;
             text-decoration: none !important;
             font-weight: 600 !important;
-            border-bottom: 2px solid #3b82f6 !important;
+            border-bottom: 2px solid #667eea !important;
             padding-bottom: 2px !important;
-            transition: all 0.2s !important;
+            transition: all 0.3s ease !important;
+            display: inline !important;
           }
-          body > div > div a:hover {
-            color: #60a5fa !important;
-            border-color: #60a5fa !important;
+          
+          body > div:last-of-type > div > div a:hover {
+            color: #764ba2 !important;
+            border-color: #764ba2 !important;
+            background: rgba(102, 126, 234, 0.05) !important;
+            padding-left: 4px !important;
+            padding-right: 4px !important;
           }
-          body > div > div ul, body > div > div ol {
-            margin: 20px 0 20px 30px !important;
-            color: #cbd5e1 !important;
+          
+          body > div:last-of-type > div > div ul, 
+          body > div:last-of-type > div > div ol {
+            margin: 28px 0 28px 24px !important;
+            color: #374151 !important;
+            font-size: 1.125rem !important;
           }
-          body > div > div li {
-            margin-bottom: 12px !important;
-            line-height: 1.8 !important;
+          
+          body > div:last-of-type > div > div li {
+            margin-bottom: 16px !important;
+            line-height: 1.9 !important;
+            padding-left: 8px !important;
           }
+          
+          body > div:last-of-type > div > div strong {
+            color: #111827 !important;
+            font-weight: 700 !important;
+          }
+          
           @media (max-width: 768px) {
-            h1 { font-size: 2rem !important; }
-            h2 { font-size: 1.5rem !important; }
-            p { font-size: 1rem !important; }
+            body > div:first-of-type {
+              padding: 60px 20px 50px !important;
+            }
+            body > div:first-of-type h1 {
+              font-size: 2.25rem !important;
+            }
+            body > div:last-of-type {
+              padding: 48px 20px !important;
+            }
+            body > div:last-of-type > div > div h2 {
+              font-size: 1.75rem !important;
+              margin: 40px 0 20px !important;
+            }
+            body > div:last-of-type > div > div p {
+              font-size: 1rem !important;
+            }
           }
         `}} />
       </body>
