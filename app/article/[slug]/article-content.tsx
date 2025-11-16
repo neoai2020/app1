@@ -199,22 +199,75 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           color: white;
         }
 
-        /* Make affiliate links look like clean "click here" CTAs */
-        .article-content a.affiliate-link,
+        /* Inline keyword hyperlinks - subtle but clear */
+        .article-content a.inline-link {
+          color: #06b6d4;
+          text-decoration: none;
+          font-weight: 600;
+          transition: all 0.2s ease;
+          border-bottom: 1px solid rgba(6, 182, 212, 0.4);
+          padding-bottom: 1px;
+        }
+
+        .article-content a.inline-link:hover {
+          color: #22d3ee;
+          border-bottom-color: rgba(34, 211, 238, 0.6);
+        }
+
+        /* CTA links - more prominent */
+        .article-content a.affiliate-link {
+          color: #8b5cf6;
+          text-decoration: none;
+          font-weight: 700;
+          transition: all 0.2s ease;
+          border-bottom: 2px solid rgba(139, 92, 246, 0.5);
+          padding-bottom: 2px;
+        }
+
+        .article-content a.affiliate-link:hover {
+          color: #a78bfa;
+          border-bottom-color: rgba(167, 139, 250, 0.7);
+          transform: translateY(-1px);
+        }
+
+        /* Added mid-article CTA styling */
+        .article-content .mid-article-cta {
+          margin: 3rem 0;
+          padding: 2.5rem;
+          background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+          border: 2px solid rgba(6, 182, 212, 0.3);
+          border-radius: 1rem;
+          text-align: center;
+        }
+
+        .article-content .mid-article-cta h3 {
+          margin-top: 0;
+          margin-bottom: 1rem;
+          font-size: 1.75rem;
+          background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .article-content .mid-article-cta p {
+          font-size: 1.125rem;
+          margin-bottom: 0;
+        }
+
+        /* Fallback for any other links */
         .article-content a {
           color: #06b6d4;
           text-decoration: none;
           font-weight: 600;
           transition: all 0.2s ease;
-          border-bottom: 2px solid rgba(6, 182, 212, 0.3);
-          padding-bottom: 2px;
+          border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+          padding-bottom: 1px;
         }
 
-        .article-content a.affiliate-link:hover,
         .article-content a:hover {
           color: #8b5cf6;
           border-bottom-color: rgba(139, 92, 246, 0.5);
-          transform: translateY(-1px);
         }
 
         .article-content ul,
@@ -250,6 +303,14 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           .article-content p,
           .article-content li {
             font-size: 1rem;
+          }
+
+          .article-content .mid-article-cta {
+            padding: 1.5rem;
+          }
+
+          .article-content .mid-article-cta h3 {
+            font-size: 1.5rem;
           }
         }
 
