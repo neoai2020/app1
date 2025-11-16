@@ -305,149 +305,142 @@ CRITICAL REQUIREMENTS:
 Write the complete HTML article now:`
 
       const content = await generateWithRapidAPI(prompt)
-      const codeBlockPattern = new RegExp('\`\`\`html\\s*', 'gi')
-      const codeEndPattern = new RegExp('\`\`\`\\s*', 'g')
-      return content.replace(codeBlockPattern, '').replace(codeEndPattern, '').trim()
-    })()
+      // Remove \`\`\`html and \`\`\` markdown code fences
+      articleContent = content
+        .replace(/\`\`\`html\s*/gi, '')
+        .replace(/\`\`\`\s*/g, '')
+        .trim()
 
-    const timeoutPromise = new Promise<string>((_, reject) => {
-      setTimeout(() => reject(new Error("AI generation timeout after 20 seconds")), 20000)
-    })
+      const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
+      title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
 
-    articleContent = await Promise.race([aiPromise, timeoutPromise])
-    
-    articleContent = articleContent.replace(/\[LINK\]/g, normalizedAffiliateLink)
+      console.log("[v0] AI generation successful")
 
-    const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
-    title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
-
-    console.log("[v0] AI generation successful")
-
-  } catch (aiError) {
-    console.log("[v0] AI generation timed out or failed, using database fallback immediately")
-    
-    const randomArticle = await getRandomExistingArticle(supabase, nicheId)
-    
-    if (randomArticle) {
-      console.log("[v0] Using random article from database")
-      articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
-      title = randomArticle.title
-    } else {
-      console.log("[v0] No database articles available, using template")
-      articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
-      title = `Discover Your Path to Success in ${niche.name}`
-    }
-  }
-
-  if (!articleContent || articleContent.length < 500) {
-    console.log("[v0] Content too short, using database fallback")
-    const randomArticle = await getRandomExistingArticle(supabase, nicheId)
-    
-    if (randomArticle) {
-      articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
-      title = randomArticle.title
-    } else {
-      articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
-      title = `Discover Your Path to Success in ${niche.name}`
-    }
-  }
-
-  console.log("[v0] Content ready, inserting into database")
-
-  let insertData: any = {
-    user_id: user.id,
-    niche_id: nicheId,
-    offer_id: null,
-    title,
-    content: articleContent,
-    affiliate_link: normalizedAffiliateLink,
-    status: "active",
-  }
-
-  let newPage
-  let insertError
-
-  try {
-    const result = await supabase
-      .from("pages")
-      .insert(insertData)
-      .select()
-      .single()
-    
-    newPage = result.data
-    insertError = result.error
-  } catch (err) {
-    insertError = err
-  }
-
-  if (insertError && insertError.message?.includes("offer_id")) {
-    try {
-      insertData.offer_id = SYSTEM_OFFER_ID
+    } catch (aiError) {
+      console.log("[v0] AI generation timed out or failed, using database fallback immediately")
       
-      const retryResult = await supabase
+      const randomArticle = await getRandomExistingArticle(supabase, nicheId)
+      
+      if (randomArticle) {
+        console.log("[v0] Using random article from database")
+        articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
+        title = randomArticle.title
+      } else {
+        console.log("[v0] No database articles available, using template")
+        articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
+        title = `Discover Your Path to Success in ${niche.name}`
+      }
+    }
+
+    if (!articleContent || articleContent.length < 500) {
+      console.log("[v0] Content too short, using database fallback")
+      const randomArticle = await getRandomExistingArticle(supabase, nicheId)
+      
+      if (randomArticle) {
+        articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
+        title = randomArticle.title
+      } else {
+        articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
+        title = `Discover Your Path to Success in ${niche.name}`
+      }
+    }
+
+    console.log("[v0] Content ready, inserting into database")
+
+    let insertData: any = {
+      user_id: user.id,
+      niche_id: nicheId,
+      offer_id: null,
+      title,
+      content: articleContent,
+      affiliate_link: normalizedAffiliateLink,
+      status: "active",
+    }
+
+    let newPage
+    let insertError
+
+    try {
+      const result = await supabase
         .from("pages")
         .insert(insertData)
         .select()
         .single()
       
-      newPage = retryResult.data
-      insertError = retryResult.error
+      newPage = result.data
+      insertError = result.error
     } catch (err) {
       insertError = err
     }
-  }
 
-  if (insertError) {
-    try {
-      const minimalData = {
-        user_id: user.id,
-        offer_id: SYSTEM_OFFER_ID,
-        title,
-        content: articleContent,
-        affiliate_link: normalizedAffiliateLink,
-        status: "active",
+    if (insertError && insertError.message?.includes("offer_id")) {
+      try {
+        insertData.offer_id = SYSTEM_OFFER_ID
+        
+        const retryResult = await supabase
+          .from("pages")
+          .insert(insertData)
+          .select()
+          .single()
+        
+        newPage = retryResult.data
+        insertError = retryResult.error
+      } catch (err) {
+        insertError = err
       }
-      
-      const finalResult = await supabase
-        .from("pages")
-        .insert(minimalData)
-        .select()
-        .single()
-      
-      newPage = finalResult.data
-      insertError = finalResult.error
-    } catch (err) {
-      insertError = err
     }
-  }
 
-  if (insertError || !newPage) {
-    console.error("[v0] All database insertion attempts failed:", insertError)
+    if (insertError) {
+      try {
+        const minimalData = {
+          user_id: user.id,
+          offer_id: SYSTEM_OFFER_ID,
+          title,
+          content: articleContent,
+          affiliate_link: normalizedAffiliateLink,
+          status: "active",
+        }
+        
+        const finalResult = await supabase
+          .from("pages")
+          .insert(minimalData)
+          .select()
+          .single()
+        
+        newPage = finalResult.data
+        insertError = finalResult.error
+      } catch (err) {
+        insertError = err
+      }
+    }
+
+    if (insertError || !newPage) {
+      console.error("[v0] All database insertion attempts failed:", insertError)
+      
+      return {
+        success: true,
+        message: "Your page is being processed and will appear shortly",
+        pageId: "pending",
+        publicUrl: "/dashboard",
+      }
+    }
+
+    revalidatePath("/pages")
+    revalidatePath("/dashboard")
+
+    return {
+      success: true,
+      pageId: newPage.id,
+      publicUrl: `/article/${newPage.id}`,
+    }
+  } catch (error) {
+    console.error("[v0] Critical error in generatePageAction:", error)
     
     return {
       success: true,
-      message: "Your page is being processed and will appear shortly",
-      pageId: "pending",
+      message: "Your page is being created and will be ready soon",
+      pageId: "processing",
       publicUrl: "/dashboard",
     }
   }
-
-  revalidatePath("/pages")
-  revalidatePath("/dashboard")
-
-  return {
-    success: true,
-    pageId: newPage.id,
-    publicUrl: `/article/${newPage.id}`,
-  }
-} catch (error) {
-  console.error("[v0] Critical error in generatePageAction:", error)
-  
-  return {
-    success: true,
-    message: "Your page is being created and will be ready soon",
-    pageId: "processing",
-    publicUrl: "/dashboard",
-  }
-}
 }
