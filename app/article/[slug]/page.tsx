@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient } from "@supabase/supabase-js"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
@@ -10,7 +10,16 @@ interface PageProps {
 
 async function getArticle(pageId: string) {
   try {
-    const supabase = await createClient()
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false
+        }
+      }
+    )
     
     const { data: page, error } = await supabase
       .from("pages")
