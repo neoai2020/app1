@@ -1,4 +1,3 @@
-import { createClient } from "@/lib/supabase/server"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
@@ -8,52 +7,62 @@ interface PageProps {
   }>
 }
 
+async function getArticle(pageId: string) {
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+
+    const response = await fetch(
+      `${supabaseUrl}/rest/v1/pages?id=eq.${pageId}&select=*,niches(name)`,
+      {
+        headers: {
+          apikey: supabaseServiceKey,
+          Authorization: `Bearer ${supabaseServiceKey}`,
+        },
+        cache: "no-store",
+      }
+    )
+
+    const data = await response.json()
+
+    if (!data || data.length === 0) {
+      return null
+    }
+
+    // Increment views without blocking
+    fetch(`${supabaseUrl}/rest/v1/pages?id=eq.${pageId}`, {
+      method: "PATCH",
+      headers: {
+        apikey: supabaseServiceKey,
+        Authorization: `Bearer ${supabaseServiceKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({ views: (data[0].views || 0) + 1 }),
+    }).catch(() => {})
+
+    return data[0]
+  } catch (error) {
+    console.error("[v0] Error fetching article:", error)
+    return null
+  }
+}
+
 export default async function ArticlePage({ params }: PageProps) {
   const { slug: pageId } = await params
-  
-  const supabase = await createClient()
 
-  // Fetch page without RLS restrictions by not checking auth
-  const { data: page, error } = await supabase
-    .from("pages")
-    .select(`
-      *,
-      niches (
-        name
-      )
-    `)
-    .eq("id", pageId)
-    .single()
+  const page = await getArticle(pageId)
 
-  if (error || !page) {
+  if (!page) {
     notFound()
   }
-
-  // Increment views without awaiting
-  supabase
-    .from("pages")
-    .update({ views: (page.views || 0) + 1 })
-    .eq("id", page.id)
-    .then(() => {})
 
   return <ArticleContent page={page} />
 }
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug: pageId } = await params
-  const supabase = await createClient()
-
-  const { data: page } = await supabase
-    .from("pages")
-    .select(`
-      title,
-      content,
-      niches (
-        name
-      )
-    `)
-    .eq("id", pageId)
-    .single()
+  const page = await getArticle(pageId)
 
   if (!page) {
     return {
@@ -67,13 +76,15 @@ export async function generateMetadata({ params }: PageProps) {
     "Health & Fitness": "Transform Your Health Starting Today",
     "Tech & Gadgets": "The Latest Tech That Changes Everything",
     "Beauty & Skincare": "The Beauty Secrets That Actually Work",
-    "Relationships": "Build the Relationship You Deserve",
-    "Pets": "Everything Your Pet Needs to Thrive",
+    Relationships: "Build the Relationship You Deserve",
+    Pets: "Everything Your Pet Needs to Thrive",
     "Home & Garden": "Transform Your Home Into Paradise",
   }
 
   const nicheName = page.niches?.name
-  const nicheTitle = nicheName ? heroTitles[nicheName] || page.title : page.title || "Life-Changing Insights"
+  const nicheTitle = nicheName
+    ? heroTitles[nicheName] || page.title
+    : page.title || "Life-Changing Insights"
 
   const description = page.content
     ? page.content
