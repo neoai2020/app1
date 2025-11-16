@@ -173,6 +173,7 @@ Write the complete HTML article now:`
 
     console.log("[v0] Generated article length:", articleContent.length)
 
+    // Remove \`\`\`html and \`\`\` markers that AI might add
     articleContent = articleContent.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '')
     articleContent = articleContent.trim()
 
