@@ -338,8 +338,6 @@ Write the complete HTML article now:`
 
       const content = await generateWithRapidAPI(prompt)
       articleContent = content
-        .split('\`\`\`html').join('')
-        .split('\`\`\`').join('')
         .trim()
         .replace(/\[LINK\]/g, normalizedAffiliateLink) // Replace all [LINK] placeholders with actual affiliate link
 
