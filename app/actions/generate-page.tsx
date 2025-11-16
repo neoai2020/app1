@@ -173,6 +173,9 @@ Write the complete HTML article now:`
 
     console.log("[v0] Generated article length:", articleContent.length)
 
+    articleContent = articleContent.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '')
+    articleContent = articleContent.trim()
+
     if (articleContent.length < 4000) {
       console.log("[v0] Article too short, generating part 2...")
       const part2Prompt = `Continue the previous HTML article about ${niche.name}. Add 1,000 more words with proper HTML formatting:
@@ -183,7 +186,8 @@ Write the complete HTML article now:`
 Write naturally as a continuation with proper HTML tags:`
 
       const part2 = await generateWithRapidAPI(part2Prompt)
-      articleContent += "\n\n" + part2
+      const cleanedPart2 = part2.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '').trim()
+      articleContent += "\n\n" + cleanedPart2
       console.log("[v0] Final article length:", articleContent.length)
     }
 
