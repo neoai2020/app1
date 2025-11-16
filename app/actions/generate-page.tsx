@@ -54,135 +54,95 @@ function replaceAffiliateLinks(content: string, newAffiliateLink: string): strin
 }
 
 function getFallbackArticle(nicheName: string, affiliateLink: string): string {
-  return `<h1>The Complete Guide to Success in ${nicheName}</h1>
+  return `<h1>Discover Your Path to Success in ${nicheName}</h1>
 
-<p>If you've been searching for real, proven strategies in the ${nicheName} space, you're not alone. Thousands of people just like you are looking for <a href="${affiliateLink}" class="inline-link">the breakthrough solution</a> that actually delivers results.</p>
+<h2>The Problem You're Facing</h2>
 
-<p>But here's the problem: most of the information out there is either outdated, incomplete, or just doesn't work for real people in real situations. That's why we've created this comprehensive guide to help you navigate <a href="${affiliateLink}" class="inline-link">the proven path to success</a>.</p>
+<p>If you're here, you're likely searching for a real solution in the ${nicheName} space. The good news? You're in the right place.</p>
 
-<h2>The Challenge Most People Face</h2>
+<p>Many people struggle to find <a href="${affiliateLink}" class="inline-link">the right approach</a> that actually delivers results.</p>
 
-<p>First paragraph describing the problem in detail (4-5 sentences). This is what makes <a href="${affiliateLink}" class="inline-link">the right system</a> so crucial.</p>
+<p>The challenge is that most solutions out there promise everything but deliver nothing. They're complicated, expensive, or simply don't work for real people in real situations.</p>
 
-<p>Second paragraph amplifying pain points (4 sentences).</p>
+<p>That's about to change. What you're about to discover is <a href="${affiliateLink}" class="inline-link">a proven system</a> that's helping thousands of people just like you achieve remarkable results.</p>
 
-<p>Third paragraph showing understanding (3-4 sentences). That's exactly why <a href="${affiliateLink}" class="inline-link">this approach</a> was developed.</p>
+<h2>Why Most Solutions Fall Short</h2>
 
-<p>Fourth paragraph bridging to solution (3 sentences).</p>
+<p>Let's be honest - you've probably tried other methods before. Maybe you invested time and money into programs that didn't deliver. It's frustrating, and it's not your fault.</p>
 
-<h2>Why Traditional Methods Don't Work Anymore</h2>
+<p>The problem is that most approaches are either too complicated, too expensive, or simply outdated. They were created by people who don't understand what you're actually going through.</p>
 
-<p>Opening paragraph on outdated methods (4 sentences).</p>
-
-<p>Explaining the three main problems (4-5 sentences). Without <a href="${affiliateLink}" class="inline-link">the proper framework</a>, most people struggle unnecessarily.</p>
-
-<p>Impact of using wrong approaches (4 sentences).</p>
-
-<p>Transition to better solution (3 sentences). This is where <a href="${affiliateLink}" class="inline-link">the breakthrough method</a> makes all the difference.</p>
-
-<h3>The Three Fatal Flaws</h3>
-
-<p>First flaw explanation (3-4 sentences).</p>
-
-<p>Second flaw detailed (3-4 sentences).</p>
-
-<p>Third flaw and its consequences (4 sentences). Fortunately, <a href="${affiliateLink}" class="inline-link">this proven system</a> eliminates all three issues.</p>
+<p>But <a href="${affiliateLink}" class="inline-link">this innovative solution</a> is different. It's designed specifically for people who want real results without the usual hassles.</p>
 
 <div class="mid-article-cta">
-  <h3>Ready to Try Something That Actually Works?</h3>
-  <p>Stop wasting time on methods that don't deliver. <a href="${affiliateLink}" class="affiliate-link">Click here to discover the proven system</a> that's helping thousands achieve breakthrough results.</p>
+  <h3>Ready to Transform Your Results?</h3>
+  <p>Don't spend another day struggling with methods that don't work. <a href="${affiliateLink}" class="affiliate-link">Click here to get started now</a> and join thousands who are already succeeding.</p>
 </div>
 
-<h2>The Solution You've Been Searching For</h2>
+<h2>The Solution That Changes Everything</h2>
 
-<p>Introduction to the solution (4-5 sentences). This is why <a href="${affiliateLink}" class="inline-link">the comprehensive approach</a> works so well.</p>
+<p>What makes this different? It's simple: <a href="${affiliateLink}" class="inline-link">this proven method</a> was created by real experts who understand your exact situation and challenges.</p>
 
-<p>What makes it different (4 sentences).</p>
+<p>Instead of complicated theories or expensive equipment, you get a straightforward system that works. No gimmicks, no false promises - just real results that you can see and measure.</p>
 
-<p>Key features overview (4-5 sentences). Users consistently report that <a href="${affiliateLink}" class="inline-link">this exact system</a> exceeded their expectations.</p>
+<h3>How It Works</h3>
 
-<p>How it addresses the problems mentioned earlier (3-4 sentences).</p>
+<p>The approach is refreshingly simple. You follow a step-by-step process that's been refined through thousands of success stories.</p>
 
-<h3>How the System Works</h3>
+<p>Each step builds on the last, creating momentum and real progress.</p>
 
-<p>Step-by-step process explanation (5 sentences). Everything you need is included in <a href="${affiliateLink}" class="inline-link">this complete package</a>.</p>
+<p>You don't need special skills or experience. <a href="${affiliateLink}" class="inline-link">The complete system</a> is designed to work for beginners and experienced people alike.</p>
 
-<p>Implementation details (4 sentences).</p>
+<h3>What Makes It Different</h3>
 
-<p>Timeline and expectations (3-4 sentences).</p>
+<p>Unlike other solutions, this focuses on sustainable, long-term results.</p>
 
-<h3>What Makes This Different</h3>
+<p>You're not looking for quick fixes - you want <a href="${affiliateLink}" class="inline-link">lasting transformation</a>, and that's exactly what this delivers.</p>
 
-<p>Unique selling points (4-5 sentences). Unlike anything else available, <a href="${affiliateLink}" class="inline-link">this revolutionary approach</a> is designed for real results.</p>
+<h2>The Benefits You'll Experience</h2>
 
-<p>Comparison to alternatives (4 sentences).</p>
+<p>When you start using <a href="${affiliateLink}" class="inline-link">this breakthrough approach</a>, you'll notice changes quickly. Most people report seeing significant improvements within the first few weeks.</p>
 
-<p>Long-term sustainability (3-4 sentences).</p>
+<p>You'll save time because everything is streamlined and efficient. No more wasting hours on methods that don't work.</p>
 
-<h2>The Incredible Benefits You'll Experience</h2>
+<p>You'll save money by avoiding expensive mistakes and ineffective solutions. This is <a href="${affiliateLink}" class="inline-link">the last system</a> you'll need.</p>
 
-<p>Overview of benefits (4 sentences).</p>
+<p>Most importantly, you'll gain confidence knowing you're using a proven method backed by thousands of success stories.</p>
 
-<p>Time savings benefit (4-5 sentences). This efficiency is what makes <a href="${affiliateLink}" class="inline-link">the system</a> perfect for busy people.</p>
+<h2>Real Results from Real People</h2>
 
-<p>Cost savings benefit (4 sentences).</p>
+<p>The proof is in the results. Thousands of people have used <a href="${affiliateLink}" class="inline-link">this exact system</a> to achieve their goals and transform their results.</p>
 
-<p>Results and outcomes (4-5 sentences).</p>
+<p>They started exactly where you are now - uncertain, frustrated, and looking for something that actually works.</p>
 
-<h3>Real Results You Can Measure</h3>
-
-<p>Specific outcomes users achieve (5 sentences). When you implement <a href="${affiliateLink}" class="inline-link">these proven strategies</a>, the results speak for themselves.</p>
-
-<p>Confidence and mindset improvements (4 sentences).</p>
-
-<p>Long-term value creation (3-4 sentences).</p>
-
-<h2>Success Stories from Real People</h2>
-
-<p>Social proof introduction (3-4 sentences). Thousands have transformed their results with <a href="${affiliateLink}" class="inline-link">this exact method</a>.</p>
-
-<p>Example success stories (4-5 sentences).</p>
-
-<p>Common themes in success stories (4 sentences).</p>
-
-<p>What makes these results achievable for anyone (3-4 sentences). You can <a href="${affiliateLink}" class="affiliate-link">join them today</a>.</p>
+<p>What they found exceeded their expectations.</p>
 
 <h2>Is This Right for You?</h2>
 
-<p>Addressing the question directly (4 sentences). If you're committed to results, <a href="${affiliateLink}" class="inline-link">this proven approach</a> is perfect for you.</p>
+<p>You might be wondering if this is right for your situation. Here's the truth: if you're serious about getting real results, then yes, <a href="${affiliateLink}" class="inline-link">this proven approach</a> is perfect for you.</p>
 
-<p>Who this works for (4-5 sentences).</p>
+<p>It doesn't matter if you're a complete beginner or if you've tried other methods before. The system is designed to work for anyone committed to success.</p>
 
-<p>Who will benefit most (4 sentences).</p>
+<p>The question isn't whether it will work - the question is whether you're ready to take action and <a href="${affiliateLink}" class="affiliate-link">get started today</a>.</p>
 
-<h3>Common Questions and Concerns</h3>
+<h2>How to Get Started Today</h2>
 
-<p>Question 1: "How long to see results?" (3-4 sentences).</p>
+<p>Getting started is simple. In just a few minutes, you can have complete access to everything you need to begin your transformation.</p>
 
-<p>Question 2: "What if it doesn't work?" (4 sentences). That's why <a href="${affiliateLink}" class="inline-link">the comprehensive system</a> includes guarantees and support.</p>
+<p>Don't let another day go by wishing for change. Take action now and <a href="${affiliateLink}" class="affiliate-link">click here to get instant access</a> to the complete system.</p>
 
-<p>Question 3: "Do I need experience?" (3-4 sentences).</p>
+<p>You have nothing to lose and everything to gain. Join the thousands of people who have already discovered <a href="${affiliateLink}" class="inline-link">this life-changing opportunity</a> and are now enjoying the results they always wanted.</p>
 
-<h2>Your Path Forward Starts Today</h2>
-
-<p>Call to action introduction (4 sentences).</p>
-
-<p>Creating urgency (4-5 sentences). Don't wait another day to <a href="${affiliateLink}" class="affiliate-link">get started with this proven system</a>.</p>
-
-<p>Simple next steps (4 sentences). You can have instant access to <a href="${affiliateLink}" class="inline-link">everything you need</a> in just minutes.</p>
-
-<p>Final motivational push (4-5 sentences). Take the first step now and <a href="${affiliateLink}" class="affiliate-link">click here to begin your transformation</a>.</p>
-
-<p>Closing statement reinforcing the opportunity (3-4 sentences). Your success story with <a href="${affiliateLink}" class="inline-link">this life-changing system</a> starts today.</p>`
+<p>Your journey to success starts right now. <a href="${affiliateLink}" class="affiliate-link">Click here to begin</a> and see for yourself why so many people are raving about these incredible results.</p>`
 }
 
 async function generateWithRapidAPI(prompt: string): Promise<string> {
   let lastError: Error | null = null
   
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 25000) // Increased timeout
+      const timeoutId = setTimeout(() => controller.abort(), 15000)
       
       const response = await fetch("https://chatgpt-42.p.rapidapi.com/gpt4", {
         method: "POST",
@@ -212,7 +172,7 @@ async function generateWithRapidAPI(prompt: string): Promise<string> {
       const data = await response.json()
       const result = data.result || data.message || data.content || ""
       
-      if (result && result.length > 500) {
+      if (result && result.length > 100) {
         return result
       }
       
@@ -221,13 +181,13 @@ async function generateWithRapidAPI(prompt: string): Promise<string> {
       lastError = error instanceof Error ? error : new Error("Unknown error")
       console.error(`[v0] AI generation attempt ${attempt} failed:`, lastError.message)
       
-      if (attempt < 3) {
-        await new Promise(resolve => setTimeout(resolve, 1000))
+      if (attempt < 2) {
+        await new Promise(resolve => setTimeout(resolve, 500))
       }
     }
   }
   
-  throw lastError || new Error("AI generation failed after 3 attempts")
+  throw lastError || new Error("AI generation failed after 2 attempts")
 }
 
 function normalizeAffiliateLink(link: string): string {
@@ -296,176 +256,98 @@ export default async function generatePageAction(nicheId: string, affiliateLink:
     let title = ""
 
     try {
-      const prompt = `Write a comprehensive, in-depth affiliate marketing article of AT LEAST 2,500 words in the ${niche.name} niche.
+      const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words in the ${niche.name} niche.
 
-YOUR ARTICLE MUST BE PROPERLY FORMATTED AS COMPLETE HTML:
+FORMAT THE ARTICLE AS HTML with proper structure:
+- Use <h1> for the main headline
+- Use <h2> for major section headings
+- Use <h3> for subsection headings
+- Use <p> for paragraphs
+- Use <strong> for emphasis
+- IMPORTANT: Include 10-12 inline hyperlinks distributed naturally throughout the article (every 2-3 paragraphs)
+- Make relevant keywords and phrases into hyperlinks to [LINK]
+- Use contextual anchor text like "this proven method", "the solution", "learn the exact strategy", "discover how", etc.
+- Format inline links as: <a href="[LINK]" class="inline-link">keyword phrase</a>
+- Also include explicit CTAs with phrases like "click here", "learn more", "get started"
+- Format CTA links as: <a href="[LINK]" class="affiliate-link">click here</a>
+- NEVER show raw URLs or long links in the text
 
-REQUIRED STRUCTURE:
-- Start with <h1> main headline
-- Use <h2> for 5-6 major sections
-- Use <h3> for subsections (2-3 per <h2> section)
-- Write 3-5 paragraphs between each heading
-- Each paragraph should be 3-5 sentences (wrapped in <p> tags)
-- Total minimum: 15-20 paragraphs of substantive content
+<h2>The Problem You're Facing</h2>
+<p>Opening hook that grabs attention (300+ words)</p>
+<p>Start with a relatable problem or story. Many people struggle with this issue, but <a href="[LINK]" class="inline-link">there's a proven solution</a> that has helped thousands.</p>
+<p>Build empathy and connection</p>
+<p>Mention how <a href="[LINK]" class="inline-link">this specific approach</a> addresses the root cause.</p>
 
-HYPERLINK REQUIREMENTS (CRITICAL):
-- Include 12-15 inline hyperlinks distributed naturally throughout
-- Links should appear every 2-3 paragraphs
-- Use contextual anchor text like:
-  * "this proven method"
-  * "the breakthrough system"
-  * "this powerful approach"
-  * "the exact strategy"
-  * "these proven techniques"
-  * "this comprehensive guide"
-  * "the complete solution"
-- Format ALL inline links as: <a href="[LINK]" class="inline-link">anchor text</a>
-- Include 3-4 strong CTA links with phrases:
-  * "click here to get started"
-  * "learn more about this system"
-  * "discover the proven approach"
-  * "get instant access now"
-- Format CTA links as: <a href="[LINK]" class="affiliate-link">CTA phrase</a>
-- NEVER show raw URLs like "https://www.google.com"
-- ALWAYS use natural, contextual anchor text
-
-ARTICLE OUTLINE (MINIMUM 2,500 WORDS):
-
-<h1>The Complete Guide to [Topic] in ${niche.name}</h1>
-
-<p>Opening paragraph with hook (3-4 sentences). Start by addressing the reader's pain point and mention how <a href="[LINK]" class="inline-link">this proven solution</a> has helped thousands.</p>
-
-<p>Second paragraph building intrigue (3-4 sentences). Many people struggle with this exact issue, but there's <a href="[LINK]" class="inline-link">a better way forward</a>.</p>
-
-<p>Third paragraph establishing credibility (3-4 sentences).</p>
-
-<h2>The Challenge Most People Face</h2>
-
-<p>First paragraph describing the problem in detail (4-5 sentences). This is what makes <a href="[LINK]" class="inline-link">the right system</a> so crucial.</p>
-
-<p>Second paragraph amplifying pain points (4 sentences).</p>
-
-<p>Third paragraph showing understanding (3-4 sentences). That's exactly why <a href="[LINK]" class="inline-link">this approach</a> was developed.</p>
-
-<p>Fourth paragraph bridging to solution (3 sentences).</p>
-
-<h2>Why Traditional Methods Don't Work Anymore</h2>
-
-<p>Opening paragraph on outdated methods (4 sentences).</p>
-
-<p>Explaining the three main problems (4-5 sentences). Without <a href="[LINK]" class="inline-link">the proper framework</a>, most people struggle unnecessarily.</p>
-
-<p>Impact of using wrong approaches (4 sentences).</p>
-
-<p>Transition to better solution (3 sentences). This is where <a href="[LINK]" class="inline-link">the breakthrough method</a> makes all the difference.</p>
-
-<h3>The Three Fatal Flaws</h3>
-
-<p>First flaw explanation (3-4 sentences).</p>
-
-<p>Second flaw detailed (3-4 sentences).</p>
-
-<p>Third flaw and its consequences (4 sentences). Fortunately, <a href="[LINK]" class="inline-link">this proven system</a> eliminates all three issues.</p>
+<h2>Why Traditional Solutions Don't Work</h2>
+<p>Deep dive into the pain points (400+ words)</p>
+<p>Make the reader feel understood</p>
+<p>Amplify the cost of not solving the problem. That's why <a href="[LINK]" class="inline-link">the right system</a> makes all the difference.</p>
 
 <div class="mid-article-cta">
-  <h3>Ready to Try Something That Actually Works?</h3>
-  <p>Stop wasting time on methods that don't deliver. <a href="${affiliateLink}" class="affiliate-link">Click here to discover the proven system</a> that's helping thousands achieve breakthrough results.</p>
+  <h3>Ready to See Real Results?</h3>
+  <p>Don't wait another day struggling with outdated methods. <a href="[LINK]" class="affiliate-link">Click here to get started now</a> and join thousands who are already succeeding.</p>
 </div>
 
-<h2>The Solution You've Been Searching For</h2>
+<h2>Introducing the Solution You've Been Looking For</h2>
+<p>Explain what it is and how it works (500+ words). This is where <a href="[LINK]" class="inline-link">the breakthrough method</a> comes in.</p>
+<p>Focus on the transformation it provides</p>
+<p>Share specific features that deliver results. Users report that <a href="[LINK]" class="inline-link">this exact strategy</a> changed everything for them.</p>
 
-<p>Introduction to the solution (4-5 sentences). This is why <a href="[LINK]" class="inline-link">the comprehensive approach</a> works so well.</p>
+<h3>How It Works</h3>
+<p>Step-by-step explanation with <a href="[LINK]" class="inline-link">proven techniques</a></p>
 
-<p>What makes it different (4 sentences).</p>
+<h3>What Makes It Different</h3>
+<p>Unique selling points. Unlike anything else, <a href="[LINK]" class="inline-link">this system</a> is designed for real results.</p>
 
-<p>Key features overview (4-5 sentences). Users consistently report that <a href="[LINK]" class="inline-link">this exact system</a> exceeded their expectations.</p>
+<h2>The Benefits You'll Experience</h2>
+<p>List 5-7 key benefits with explanations (400+ words)</p>
+<p>Include specific outcomes users can expect when they <a href="[LINK]" class="inline-link">implement this approach</a></p>
+<p>Add benefits like faster results, easier implementation, and lasting transformation</p>
 
-<p>How it addresses the problems mentioned earlier (3-4 sentences).</p>
-
-<h3>How the System Works</h3>
-
-<p>Step-by-step process explanation (5 sentences). Everything you need is included in <a href="[LINK]" class="inline-link">this complete package</a>.</p>
-
-<p>Implementation details (4 sentences).</p>
-
-<p>Timeline and expectations (3-4 sentences).</p>
-
-<h3>What Makes This Different</h3>
-
-<p>Unique selling points (4-5 sentences). Unlike anything else available, <a href="[LINK]" class="inline-link">this revolutionary approach</a> is designed for real results.</p>
-
-<p>Comparison to alternatives (4 sentences).</p>
-
-<p>Long-term sustainability (3-4 sentences).</p>
-
-<h2>The Incredible Benefits You'll Experience</h2>
-
-<p>Overview of benefits (4 sentences).</p>
-
-<p>Time savings benefit (4-5 sentences). This efficiency is what makes <a href="[LINK]" class="inline-link">the system</a> perfect for busy people.</p>
-
-<p>Cost savings benefit (4 sentences).</p>
-
-<p>Results and outcomes (4-5 sentences).</p>
-
-<h3>Real Results You Can Measure</h3>
-
-<p>Specific outcomes users achieve (5 sentences). When you implement <a href="[LINK]" class="inline-link">these proven strategies</a>, the results speak for themselves.</p>
-
-<p>Confidence and mindset improvements (4 sentences).</p>
-
-<p>Long-term value creation (3-4 sentences).</p>
-
-<h2>Success Stories from Real People</h2>
-
-<p>Social proof introduction (3-4 sentences). Thousands have transformed their results with <a href="[LINK]" class="inline-link">this exact method</a>.</p>
-
-<p>Example success stories (4-5 sentences).</p>
-
-<p>Common themes in success stories (4 sentences).</p>
-
-<p>What makes these results achievable for anyone (3-4 sentences). You can <a href="${affiliateLink}" class="affiliate-link">join them today</a>.</p>
+<h2>Real Results from Real People</h2>
+<p>Social proof section (200+ words)</p>
+<p>Mention success stories of people who used <a href="[LINK]" class="inline-link">this exact method</a></p>
+<p>Include statistics if relevant</p>
 
 <h2>Is This Right for You?</h2>
+<p>Addressing objections (300+ words)</p>
+<p>"Is this right for me?" - If you're serious about results, <a href="[LINK]" class="inline-link">this system</a> is perfect for you.</p>
+<p>"How long does it take?"</p>
+<p>"What if it doesn't work?" - That's why <a href="[LINK]" class="affiliate-link">the proven framework</a> includes guarantees.</p>
 
-<p>Addressing the question directly (4 sentences). If you're committed to results, <a href="[LINK]" class="inline-link">this proven approach</a> is perfect for you.</p>
+<h2>How to Get Started Today</h2>
+<p>Strong call-to-action (200+ words)</p>
+<p>Create urgency (limited time, bonuses, etc.)</p>
+<p>Clear next steps: If you're ready to transform your results, <a href="[LINK]" class="affiliate-link">click here to get started</a> with instant access.</p>
+<p>Use natural language: "You can <a href="[LINK]" class="affiliate-link">learn more here</a>" or "Ready to begin? <a href="[LINK]" class="affiliate-link">Get instant access</a>"</p>
+<p>Reinforce the transformation with <a href="[LINK]" class="inline-link">this life-changing opportunity</a></p>
 
-<p>Who this works for (4-5 sentences).</p>
+CRITICAL REQUIREMENTS:
+- Include 10-12 inline hyperlinks (use class="inline-link") distributed naturally every 2-3 paragraphs
+- Use keyword phrases as anchor text: "this proven method", "the breakthrough system", "the exact strategy", "this powerful approach"
+- Also include 3-4 explicit CTA links (use class="affiliate-link") with "click here", "learn more", "get started"
+- Add the mid-article CTA section in the middle of the content
+- Write naturally and conversationally
+- Use short paragraphs (2-3 sentences max)
+- Include subheadings every 200-300 words
+- NEVER show raw URLs - always use contextual link text
+- DO NOT mention "affiliate link" or "commission"
+- Write complete HTML with proper tags
 
-<p>Who will benefit most (4 sentences).</p>
-
-<h3>Common Questions and Concerns</h3>
-
-<p>Question 1: "How long to see results?" (3-4 sentences).</p>
-
-<p>Question 2: "What if it doesn't work?" (4 sentences). That's why <a href="[LINK]" class="inline-link">the comprehensive system</a> includes guarantees and support.</p>
-
-<p>Question 3: "Do I need experience?" (3-4 sentences).</p>
-
-<h2>Your Path Forward Starts Today</h2>
-
-<p>Call to action introduction (4 sentences).</p>
-
-<p>Creating urgency (4-5 sentences). Don't wait another day to <a href="[LINK]" class="affiliate-link">get started with this proven system</a>.</p>
-
-<p>Simple next steps (4 sentences). You can have instant access to <a href="[LINK]" class="inline-link">everything you need</a> in just minutes.</p>
-
-<p>Final motivational push (4-5 sentences). Take the first step now and <a href="[LINK]" class="affiliate-link">click here to begin your transformation</a>.</p>
-
-<p>Closing statement reinforcing the opportunity (3-4 sentences). Your success story with <a href="[LINK]" class="inline-link">this life-changing system</a> starts today.</p>`
+Write the complete HTML article now:`
 
       const content = await generateWithRapidAPI(prompt)
       articleContent = content
         .trim()
-        .replace(/\[LINK\]/g, normalizedAffiliateLink)
+        .replace(/\[LINK\]/g, normalizedAffiliateLink) // Replace all [LINK] placeholders with actual affiliate link
 
       const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
       title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
 
-      console.log("[v0] AI generation successful, content length:", articleContent.length)
+      console.log("[v0] AI generation successful")
 
     } catch (aiError) {
-      console.log("[v0] AI generation failed, using improved fallback")
+      console.log("[v0] AI generation timed out or failed, using database fallback immediately")
       
       const randomArticle = await getRandomExistingArticle(supabase, nicheId)
       
@@ -474,14 +356,14 @@ ARTICLE OUTLINE (MINIMUM 2,500 WORDS):
         articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
         title = randomArticle.title
       } else {
-        console.log("[v0] Using comprehensive fallback template")
+        console.log("[v0] No database articles available, using template")
         articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
-        title = `The Complete Guide to Success in ${niche.name}`
+        title = `Discover Your Path to Success in ${niche.name}`
       }
     }
 
-    if (!articleContent || articleContent.length < 800) {
-      console.log("[v0] Content too short, using fallback")
+    if (!articleContent || articleContent.length < 500) {
+      console.log("[v0] Content too short, using database fallback")
       const randomArticle = await getRandomExistingArticle(supabase, nicheId)
       
       if (randomArticle) {
@@ -489,11 +371,9 @@ ARTICLE OUTLINE (MINIMUM 2,500 WORDS):
         title = randomArticle.title
       } else {
         articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
-        title = `The Complete Guide to Success in ${niche.name}`
+        title = `Discover Your Path to Success in ${niche.name}`
       }
     }
-
-    console.log("[v0] Final content length:", articleContent.length, "characters")
 
     console.log("[v0] Content ready, inserting into database")
 
