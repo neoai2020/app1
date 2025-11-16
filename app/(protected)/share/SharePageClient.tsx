@@ -1,19 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Mail,
-  MessageCircle,
-  Copy,
-  QrCode,
-  Code,
-  TrendingUp,
-  Sparkles,
-  Share2,
-} from "lucide-react"
+import { Facebook, Twitter, Linkedin, Mail, MessageCircle, Copy, QrCode, Code, TrendingUp, Sparkles, Share2 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -39,7 +27,7 @@ export default function SharePageClient() {
 
       const { data } = await supabase
         .from("pages")
-        .select("*")
+        .select("id, title, created_at, views, status, user_id")
         .eq("user_id", user.id)
         .eq("status", "active")
         .order("created_at", { ascending: false })
@@ -121,7 +109,7 @@ export default function SharePageClient() {
 
                       <div className="flex items-center gap-2 p-3 glass rounded-xl">
                         <Input
-                          value={`https://p55.pages/${page.slug}`}
+                          value={`https://p55.pages/${page.id}`}
                           readOnly
                           className="flex-1 bg-transparent border-0 text-white"
                         />
@@ -130,7 +118,7 @@ export default function SharePageClient() {
                           variant="outline"
                           className="glass hover:glass-strong bg-transparent"
                           onClick={() => {
-                            navigator.clipboard.writeText(`https://p55.pages/${page.slug}`)
+                            navigator.clipboard.writeText(`https://p55.pages/${page.id}`)
                           }}
                         >
                           <Copy className="w-4 h-4" />
@@ -142,7 +130,7 @@ export default function SharePageClient() {
                           className="h-14 glass hover:glass-strong hover:border-[#1877f2] hover:text-[#1877f2] transition-all"
                           onClick={() => {
                             window.open(
-                              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://p55.pages/${page.slug}`)}`,
+                              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://p55.pages/${page.id}`)}`,
                               "_blank",
                             )
                           }}
@@ -155,7 +143,7 @@ export default function SharePageClient() {
                           className="h-14 glass hover:glass-strong hover:border-[#1da1f2] hover:text-[#1da1f2] transition-all"
                           onClick={() => {
                             window.open(
-                              `https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://p55.pages/${page.slug}`)}&text=${encodeURIComponent(page.title)}`,
+                              `https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://p55.pages/${page.id}`)}&text=${encodeURIComponent(page.title)}`,
                               "_blank",
                             )
                           }}
@@ -168,7 +156,7 @@ export default function SharePageClient() {
                           className="h-14 glass hover:glass-strong hover:border-[#0077b5] hover:text-[#0077b5] transition-all"
                           onClick={() => {
                             window.open(
-                              `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://p55.pages/${page.slug}`)}`,
+                              `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://p55.pages/${page.id}`)}`,
                               "_blank",
                             )
                           }}
@@ -181,7 +169,7 @@ export default function SharePageClient() {
                           className="h-14 glass hover:glass-strong hover:border-[#25d366] hover:text-[#25d366] transition-all"
                           onClick={() => {
                             window.open(
-                              `https://wa.me/?text=${encodeURIComponent(`${page.title} - https://p55.pages/${page.slug}`)}`,
+                              `https://wa.me/?text=${encodeURIComponent(`${page.title} - https://p55.pages/${page.id}`)}`,
                               "_blank",
                             )
                           }}
@@ -193,7 +181,7 @@ export default function SharePageClient() {
                         <Button
                           className="h-14 glass hover:glass-strong hover:border-primary hover:text-primary transition-all"
                           onClick={() => {
-                            window.location.href = `mailto:?subject=${encodeURIComponent(page.title)}&body=${encodeURIComponent(`Check this out: https://p55.pages/${page.slug}`)}`
+                            window.location.href = `mailto:?subject=${encodeURIComponent(page.title)}&body=${encodeURIComponent(`Check this out: https://p55.pages/${page.id}`)}`
                           }}
                         >
                           <Mail className="w-5 h-5 mr-2" />
@@ -235,7 +223,7 @@ export default function SharePageClient() {
                         <label className="text-sm font-medium text-muted-foreground">iFrame Embed Code</label>
                         <div className="relative">
                           <Textarea
-                            value={`<iframe src="https://p55.pages/${page.slug}" width="100%" height="600" frameborder="0"></iframe>`}
+                            value={`<iframe src="https://p55.pages/${page.id}" width="100%" height="600" frameborder="0"></iframe>`}
                             readOnly
                             className="font-mono text-sm glass"
                             rows={3}
@@ -245,7 +233,7 @@ export default function SharePageClient() {
                             className="absolute top-2 right-2"
                             onClick={() => {
                               navigator.clipboard.writeText(
-                                `<iframe src="https://p55.pages/${page.slug}" width="100%" height="600" frameborder="0"></iframe>`,
+                                `<iframe src="https://p55.pages/${page.id}" width="100%" height="600" frameborder="0"></iframe>`,
                               )
                             }}
                           >
@@ -258,12 +246,12 @@ export default function SharePageClient() {
                       <div className="space-y-3">
                         <label className="text-sm font-medium text-muted-foreground">Direct Link</label>
                         <div className="relative">
-                          <Input value={`https://p55.pages/${page.slug}`} readOnly className="font-mono glass" />
+                          <Input value={`https://p55.pages/${page.id}`} readOnly className="font-mono glass" />
                           <Button
                             size="sm"
                             className="absolute top-1/2 -translate-y-1/2 right-2"
                             onClick={() => {
-                              navigator.clipboard.writeText(`https://p55.pages/${page.slug}`)
+                              navigator.clipboard.writeText(`https://p55.pages/${page.id}`)
                             }}
                           >
                             <Copy className="w-4 h-4" />
@@ -298,7 +286,7 @@ export default function SharePageClient() {
                         <h3 className="text-xl font-bold text-white">{page.title}</h3>
                         <div className="w-64 h-64 mx-auto glass-strong rounded-2xl flex items-center justify-center">
                           <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(`https://p55.pages/${page.slug}`)}`}
+                            src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(`https://p55.pages/${page.id}`)}`}
                             alt={`QR Code for ${page.title}`}
                             className="w-60 h-60"
                           />
@@ -307,8 +295,8 @@ export default function SharePageClient() {
                           className="w-full h-14 text-lg"
                           onClick={() => {
                             const link = document.createElement("a")
-                            link.href = `https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=${encodeURIComponent(`https://p55.pages/${page.slug}`)}`
-                            link.download = `qr-${page.slug}.png`
+                            link.href = `https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=${encodeURIComponent(`https://p55.pages/${page.id}`)}`
+                            link.download = `qr-${page.id}.png`
                             link.click()
                           }}
                         >
