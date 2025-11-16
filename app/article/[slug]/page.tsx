@@ -1,17 +1,6 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  }
-)
 
 interface PageProps {
   params: Promise<{
@@ -20,118 +9,92 @@ interface PageProps {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  try {
-    const { slug: pageId } = await params
-    
-    const { data: page, error } = await supabase
-      .from("pages")
-      .select("*")
-      .eq("id", pageId)
-      .single()
+  const { slug: pageId } = await params
+  
+  const supabase = await createClient()
 
-    if (error || !page) {
-      console.log("[v0] Article not found:", pageId, error)
-      notFound()
-    }
+  // Fetch page without RLS restrictions by not checking auth
+  const { data: page, error } = await supabase
+    .from("pages")
+    .select(`
+      *,
+      niches (
+        name
+      )
+    `)
+    .eq("id", pageId)
+    .single()
 
-    // Fetch niche if exists
-    let niche = null
-    if (page.niche_id) {
-      const { data: nicheData } = await supabase
-        .from("niches")
-        .select("name")
-        .eq("id", page.niche_id)
-        .single()
-      niche = nicheData
-    }
-
-    const pageWithRelations = {
-      ...page,
-      niches: niche,
-      offers: null,
-    }
-
-    supabase
-      .from("pages")
-      .update({ views: (page.views || 0) + 1 })
-      .eq("id", page.id)
-      .then(() => {})
-      .catch(() => {})
-
-    return <ArticleContent page={pageWithRelations} />
-  } catch (error) {
-    console.error("[v0] Error loading article:", error)
+  if (error || !page) {
     notFound()
   }
+
+  // Increment views without awaiting
+  supabase
+    .from("pages")
+    .update({ views: (page.views || 0) + 1 })
+    .eq("id", page.id)
+    .then(() => {})
+
+  return <ArticleContent page={page} />
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  try {
-    const { slug: pageId } = await params
-    
-    const { data: page } = await supabase
-      .from("pages")
-      .select("title, content, niche_id")
-      .eq("id", pageId)
-      .single()
+  const { slug: pageId } = await params
+  const supabase = await createClient()
 
-    if (!page) {
-      return {
-        title: "Article Not Found",
-      }
-    }
+  const { data: page } = await supabase
+    .from("pages")
+    .select(`
+      title,
+      content,
+      niches (
+        name
+      )
+    `)
+    .eq("id", pageId)
+    .single()
 
-    let nicheTitle = page.title || "Life-Changing Insights"
-    
-    if (page.niche_id) {
-      const { data: niche } = await supabase
-        .from("niches")
-        .select("name")
-        .eq("id", page.niche_id)
-        .single()
-      
-      if (niche?.name) {
-        const heroTitles: Record<string, string> = {
-          "Weight Loss": "The Ultimate Weight Loss Breakthrough",
-          "Make Money Online": "How to Build Real Online Income",
-          "Health & Fitness": "Transform Your Health Starting Today",
-          "Tech & Gadgets": "The Latest Tech That Changes Everything",
-          "Beauty & Skincare": "The Beauty Secrets That Actually Work",
-          "Relationships": "Build the Relationship You Deserve",
-          "Pets": "Everything Your Pet Needs to Thrive",
-          "Home & Garden": "Transform Your Home Into Paradise",
-        }
-        nicheTitle = heroTitles[niche.name] || page.title
-      }
-    }
-
-    const description = page.content
-      ? page.content
-          .replace(/<[^>]*>/g, "")
-          .replace(/\s+/g, " ")
-          .trim()
-          .substring(0, 155) + "..."
-      : "Discover life-changing insights and strategies."
-
+  if (!page) {
     return {
+      title: "Article Not Found",
+    }
+  }
+
+  const heroTitles: Record<string, string> = {
+    "Weight Loss": "The Ultimate Weight Loss Breakthrough",
+    "Make Money Online": "How to Build Real Online Income",
+    "Health & Fitness": "Transform Your Health Starting Today",
+    "Tech & Gadgets": "The Latest Tech That Changes Everything",
+    "Beauty & Skincare": "The Beauty Secrets That Actually Work",
+    "Relationships": "Build the Relationship You Deserve",
+    "Pets": "Everything Your Pet Needs to Thrive",
+    "Home & Garden": "Transform Your Home Into Paradise",
+  }
+
+  const nicheName = page.niches?.name
+  const nicheTitle = nicheName ? heroTitles[nicheName] || page.title : page.title || "Life-Changing Insights"
+
+  const description = page.content
+    ? page.content
+        .replace(/<[^>]*>/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .substring(0, 155) + "..."
+    : "Discover life-changing insights and strategies."
+
+  return {
+    title: nicheTitle,
+    description,
+    openGraph: {
       title: nicheTitle,
       description,
-      openGraph: {
-        title: nicheTitle,
-        description,
-        type: "article",
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: nicheTitle,
-        description,
-      },
-    }
-  } catch (error) {
-    console.error("[v0] Error generating metadata:", error)
-    return {
-      title: "Article",
-      description: "Read this article",
-    }
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: nicheTitle,
+      description,
+    },
   }
 }
