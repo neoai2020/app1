@@ -20,19 +20,23 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
   const [progress, setProgress] = useState(0)
   const [currentMessage, setCurrentMessage] = useState("")
   const [success, setSuccess] = useState(false)
-  const [timeRemaining, setTimeRemaining] = useState(15)
+  const [timeRemaining, setTimeRemaining] = useState(30)
   const router = useRouter()
 
   const messages = [
-    "Analyzing your niche...",
-    "Researching top-performing content...",
-    "Writing compelling headline...",
-    "Crafting engaging introduction...",
+    "Generating high-converting article...",
+    "Optimizing for maximum sales...",
+    "Researching top-performing content strategies...",
+    "Writing compelling headline that converts...",
+    "Crafting persuasive opening hook...",
     "Building trust with social proof...",
-    "Creating persuasive call-to-action...",
-    "Optimizing for conversions...",
+    "Creating urgent call-to-action...",
+    "Adding psychological triggers...",
+    "Inserting strategic affiliate links...",
+    "Optimizing for mobile conversions...",
     "Adding compliance disclaimers...",
-    "Finalizing your page...",
+    "Polishing for maximum impact...",
+    "Finalizing your money-making page...",
   ]
 
   useEffect(() => {
@@ -52,13 +56,12 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
 
     setGenerating(true)
     setProgress(0)
-    setTimeRemaining(15)
+    setTimeRemaining(30)
 
-    // Simulate progress with messages
     let messageIndex = 0
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
-        const newProgress = prev + 11
+        const newProgress = prev + 7.5
         if (newProgress >= 100) {
           clearInterval(progressInterval)
           return 100
@@ -70,7 +73,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
         setCurrentMessage(messages[messageIndex])
         messageIndex++
       }
-    }, 800)
+    }, 1000)
 
     try {
       const result = await generatePageAction(nicheId, affiliateLink)
@@ -84,7 +87,6 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
 
       setSuccess(true)
 
-      // Redirect after celebration
       setTimeout(() => {
         router.push("/pages")
       }, 3000)
@@ -95,7 +97,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
       alert(errorMessage)
       setGenerating(false)
       setProgress(0)
-      setTimeRemaining(15)
+      setTimeRemaining(30)
     }
   }
 
@@ -208,7 +210,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
                 <Clock className="w-12 h-12 text-primary animate-pulse mb-2" />
                 <div className="text-center">
                   <p className="text-5xl font-black text-primary mb-1">{timeRemaining}s</p>
-                  <p className="text-lg font-bold text-foreground">Expected wait: 10-15 seconds</p>
+                  <p className="text-lg font-bold text-foreground">Expected wait: ~30 seconds</p>
                   <p className="text-sm text-muted-foreground mt-1">Creating your professional article...</p>
                 </div>
               </div>

@@ -16,7 +16,6 @@ export default async function ArticlePage({ params }: PageProps) {
     .from("pages")
     .select("*")
     .eq("id", pageId)
-    .eq("status", "active")
     .single()
 
   if (error || !page) {
