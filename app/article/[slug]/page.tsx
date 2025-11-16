@@ -65,82 +65,91 @@ export default async function ArticlePage({ params }: PageProps) {
       <body style={{ 
         margin: 0, 
         padding: 0, 
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-        lineHeight: '1.7',
-        color: '#0f172a',
-        background: '#f8fafc'
+        fontFamily: 'Georgia, "Times New Roman", serif',
+        lineHeight: '1.8',
+        color: '#1a202c',
+        background: 'linear-gradient(180deg, #f7fafc 0%, #ffffff 100%)'
       }}>
         {/* Hero Section */}
         <div style={{
-          background: 'linear-gradient(to bottom right, #0f172a 0%, #1e293b 50%, #334155 100%)',
-          padding: '120px 24px 100px',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '100px 24px 80px',
           textAlign: 'center',
           position: 'relative',
-          overflow: 'hidden',
-          borderBottom: '1px solid rgba(255,255,255,0.1)'
+          overflow: 'hidden'
         }}>
           <div style={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%)',
-            pointerEvents: 'none'
+            top: '-50%',
+            right: '-10%',
+            width: '600px',
+            height: '600px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+            borderRadius: '50%'
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '-30%',
+            left: '-5%',
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%)',
+            borderRadius: '50%'
           }} />
           
           <div style={{
-            maxWidth: '900px',
+            maxWidth: '800px',
             margin: '0 auto',
             position: 'relative',
             zIndex: 1
           }}>
             <div style={{
               display: 'inline-block',
-              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+              background: 'rgba(255, 255, 255, 0.25)',
+              backdropFilter: 'blur(10px)',
               color: '#ffffff',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              letterSpacing: '0.05em',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              padding: '8px 20px',
+              padding: '10px 24px',
               borderRadius: '50px',
               marginBottom: '32px',
-              boxShadow: '0 4px 14px 0 rgba(59, 130, 246, 0.4)'
+              border: '1px solid rgba(255,255,255,0.3)',
+              boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)'
             }}>
-              {nicheName || 'Premium Content'}
+              {nicheName || 'Expert Insights'}
             </div>
             
             <h1 style={{
-              fontSize: '4rem',
-              fontWeight: 900,
+              fontSize: '3.5rem',
+              fontWeight: 700,
               color: '#ffffff',
-              marginBottom: '28px',
-              lineHeight: '1.1',
-              margin: '0 0 28px 0',
-              letterSpacing: '-0.03em',
-              textShadow: '0 4px 24px rgba(0,0,0,0.3)'
+              marginBottom: '24px',
+              lineHeight: '1.15',
+              margin: '0 0 24px 0',
+              letterSpacing: '-0.02em',
+              textShadow: '0 4px 20px rgba(0,0,0,0.15)',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
             }}>{nicheTitle}</h1>
             
-            <p style={{
-              fontSize: '1.25rem',
-              color: 'rgba(255,255,255,0.85)',
-              marginBottom: '40px',
-              fontWeight: 400,
-              lineHeight: '1.6',
-              maxWidth: '700px',
-              margin: '0 auto 40px'
-            }}>
-              Discover proven strategies and expert insights that deliver real results
-            </p>
+            <div style={{
+              width: '80px',
+              height: '4px',
+              background: 'rgba(255,255,255,0.5)',
+              margin: '0 auto 32px',
+              borderRadius: '2px'
+            }} />
             
             <div style={{
-              display: 'inline-flex',
-              gap: '28px',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '32px',
               alignItems: 'center',
-              color: 'rgba(255,255,255,0.75)',
-              fontSize: '0.9rem',
-              padding: '0'
+              color: 'rgba(255,255,255,0.9)',
+              fontSize: '0.95rem',
+              flexWrap: 'wrap',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
             }}>
               <span style={{ 
                 display: 'flex', 
@@ -148,145 +157,169 @@ export default async function ArticlePage({ params }: PageProps) {
                 gap: '8px',
                 fontWeight: 500
               }}>
-                <span style={{ fontSize: '1.1rem' }}>✓</span> Expert Verified
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ display: 'inline-block' }}>
+                  <path d="M13.5 4L6 11.5L2.5 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Expert Reviewed
               </span>
-              <span style={{ opacity: 0.4 }}>•</span>
-              <span style={{ fontWeight: 500 }}>Updated {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
-              <span style={{ opacity: 0.4 }}>•</span>
-              <span style={{ fontWeight: 500 }}>5 min read</span>
+              <span style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px',
+                fontWeight: 500
+              }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ display: 'inline-block' }}>
+                  <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M8 4.5V8L10.5 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                Updated {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
         <div style={{
-          maxWidth: '820px',
-          margin: '-40px auto 0',
-          padding: '0 32px 120px',
+          maxWidth: '750px',
+          margin: '-60px auto 0',
+          padding: '0 24px 100px',
           position: 'relative',
           zIndex: 2
         }}>
-          <div style={{
+          <article style={{
             background: '#ffffff',
-            borderRadius: '20px',
-            padding: '72px 80px',
-            boxShadow: '0 20px 60px -10px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.06)',
-            border: '1px solid rgba(0, 0, 0, 0.04)'
+            borderRadius: '16px',
+            padding: '64px 72px',
+            boxShadow: '0 20px 80px -20px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.05)',
+            border: '1px solid rgba(0, 0, 0, 0.06)'
           }}>
             <div dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
-          </div>
+          </article>
         </div>
 
         <style dangerouslySetInnerHTML={{ __html: `
-          body > div:nth-of-type(2) > div > div h2 {
-            font-size: 2rem !important;
-            color: #0f172a !important;
-            margin: 64px 0 28px !important;
-            font-weight: 800 !important;
+          article h2 {
+            font-size: 2.125rem !important;
+            color: #1a202c !important;
+            margin: 56px 0 24px !important;
+            font-weight: 700 !important;
             line-height: 1.3 !important;
-            letter-spacing: -0.02em !important;
-            position: relative !important;
-            padding-bottom: 16px !important;
+            letter-spacing: -0.015em !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
           }
           
-          body > div:nth-of-type(2) > div > div h2:first-child {
+          article h2:first-child {
             margin-top: 0 !important;
           }
           
-          body > div:nth-of-type(2) > div > div h2::after {
-            content: '' !important;
-            position: absolute !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 60px !important;
-            height: 4px !important;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
-            border-radius: 2px !important;
+          article h3 {
+            font-size: 1.625rem !important;
+            color: #2d3748 !important;
+            margin: 40px 0 20px !important;
+            font-weight: 600 !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
           }
           
-          body > div:nth-of-type(2) > div > div p {
-            margin-bottom: 28px !important;
+          article p {
+            margin-bottom: 24px !important;
             font-size: 1.125rem !important;
             line-height: 1.9 !important;
-            color: #475569 !important;
+            color: #4a5568 !important;
             font-weight: 400 !important;
           }
           
-          body > div:nth-of-type(2) > div > div a {
-            color: #3b82f6 !important;
+          article p:first-of-type {
+            font-size: 1.25rem !important;
+            color: #2d3748 !important;
+            font-weight: 500 !important;
+            line-height: 1.8 !important;
+          }
+          
+          article a {
+            color: #667eea !important;
             text-decoration: none !important;
             font-weight: 600 !important;
-            border-bottom: 2px solid #3b82f6 !important;
-            padding-bottom: 2px !important;
-            transition: all 0.2s ease !important;
+            border-bottom: 2px solid #667eea !important;
+            padding-bottom: 1px !important;
+            transition: all 0.3s ease !important;
             display: inline !important;
           }
           
-          body > div:nth-of-type(2) > div > div a:hover {
-            color: #1d4ed8 !important;
-            border-color: #1d4ed8 !important;
-            background: linear-gradient(to bottom, transparent 50%, rgba(59, 130, 246, 0.08) 50%) !important;
-            padding-left: 4px !important;
-            padding-right: 4px !important;
+          article a:hover {
+            color: #764ba2 !important;
+            border-color: #764ba2 !important;
+            background: linear-gradient(to bottom, transparent 60%, rgba(102, 126, 234, 0.1) 60%) !important;
           }
           
-          body > div:nth-of-type(2) > div > div ul, 
-          body > div:nth-of-type(2) > div > div ol {
+          article ul, 
+          article ol {
             margin: 32px 0 32px 0 !important;
-            padding-left: 28px !important;
-            color: #475569 !important;
+            padding-left: 32px !important;
+            color: #4a5568 !important;
             font-size: 1.125rem !important;
           }
           
-          body > div:nth-of-type(2) > div > div li {
-            margin-bottom: 18px !important;
+          article li {
+            margin-bottom: 16px !important;
             line-height: 1.9 !important;
-            padding-left: 12px !important;
+            padding-left: 8px !important;
           }
           
-          body > div:nth-of-type(2) > div > div li::marker {
-            color: #3b82f6 !important;
+          article li::marker {
+            color: #667eea !important;
             font-weight: 700 !important;
           }
           
-          body > div:nth-of-type(2) > div > div strong {
-            color: #0f172a !important;
+          article strong {
+            color: #1a202c !important;
             font-weight: 700 !important;
           }
           
-          body > div:nth-of-type(2) > div > div em {
-            color: #64748b !important;
+          article em {
+            color: #718096 !important;
             font-style: italic !important;
+          }
+          
+          article blockquote {
+            border-left: 4px solid #667eea !important;
+            padding-left: 24px !important;
+            margin: 32px 0 !important;
+            color: #2d3748 !important;
+            font-style: italic !important;
+            font-size: 1.2rem !important;
           }
           
           @media (max-width: 768px) {
             body > div:first-of-type {
-              padding: 80px 20px 70px !important;
+              padding: 80px 20px 60px !important;
             }
             body > div:first-of-type h1 {
-              font-size: 2.5rem !important;
-            }
-            body > div:first-of-type p {
-              font-size: 1.125rem !important;
+              font-size: 2.25rem !important;
             }
             body > div:nth-of-type(2) {
-              padding: 0 20px 80px !important;
-              margin-top: -30px !important;
+              padding: 0 16px 60px !important;
+              margin-top: -40px !important;
             }
-            body > div:nth-of-type(2) > div {
-              padding: 48px 32px !important;
-              border-radius: 16px !important;
+            article {
+              padding: 40px 28px !important;
+              border-radius: 12px !important;
             }
-            body > div:nth-of-type(2) > div > div h2 {
-              font-size: 1.625rem !important;
-              margin: 48px 0 20px !important;
+            article h2 {
+              font-size: 1.75rem !important;
+              margin: 40px 0 20px !important;
             }
-            body > div:nth-of-type(2) > div > div p {
+            article h3 {
+              font-size: 1.375rem !important;
+            }
+            article p {
               font-size: 1.0625rem !important;
             }
-            body > div:nth-of-type(2) > div > div ul,
-            body > div:nth-of-type(2) > div > div ol {
+            article p:first-of-type {
+              font-size: 1.125rem !important;
+            }
+            article ul,
+            article ol {
               font-size: 1.0625rem !important;
+              padding-left: 24px !important;
             }
           }
         `}} />
