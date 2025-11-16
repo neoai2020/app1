@@ -61,91 +61,88 @@ export default async function ArticlePage({ params }: PageProps) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{nicheTitle}</title>
-        <style>{`
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #e5e7eb;
-            background: #0f172a;
-          }
-          .hero {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 2px solid #1e40af;
-          }
-          .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #60a5fa;
-            margin-bottom: 20px;
-            line-height: 1.2;
-          }
-          .meta {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            color: #94a3b8;
-            font-size: 0.95rem;
-          }
-          .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-          }
-          .content h2 {
-            font-size: 2rem;
-            color: #60a5fa;
-            margin: 40px 0 20px;
-            font-weight: 700;
-          }
-          .content p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #cbd5e1;
-          }
-          .content a {
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 600;
-            border-bottom: 2px solid #3b82f6;
-            padding-bottom: 2px;
-            transition: all 0.2s;
-          }
-          .content a:hover {
-            color: #60a5fa;
-            border-color: #60a5fa;
-          }
-          .content ul, .content ol {
-            margin: 20px 0 20px 30px;
-            color: #cbd5e1;
-          }
-          .content li {
-            margin-bottom: 12px;
-            line-height: 1.8;
-          }
-          @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .content h2 { font-size: 1.5rem; }
-            .content p { font-size: 1rem; }
-          }
-        `}</style>
       </head>
-      <body>
-        <div className="hero">
-          <h1>{nicheTitle}</h1>
-          <div className="meta">
+      <body style={{ 
+        margin: 0, 
+        padding: 0, 
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        lineHeight: '1.6',
+        color: '#e5e7eb',
+        background: '#0f172a'
+      }}>
+        <div style={{
+          background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+          padding: '80px 20px',
+          textAlign: 'center',
+          borderBottom: '2px solid #1e40af'
+        }}>
+          <h1 style={{
+            fontSize: '3rem',
+            fontWeight: 800,
+            color: '#60a5fa',
+            marginBottom: '20px',
+            lineHeight: '1.2',
+            margin: '0 0 20px 0'
+          }}>{nicheTitle}</h1>
+          <div style={{
+            display: 'flex',
+            gap: '20px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: '#94a3b8',
+            fontSize: '0.95rem'
+          }}>
             <span>📖 Expert Reviewed</span>
             <span>•</span>
             <span>Updated {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
           </div>
         </div>
-        <div className="container">
-          <div className="content" dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
+        <div style={{
+          maxWidth: '800px',
+          margin: '0 auto',
+          padding: '60px 20px'
+        }}>
+          <div dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
         </div>
+        <style dangerouslySetInnerHTML={{ __html: `
+          body > div > div h2 {
+            font-size: 2rem !important;
+            color: #60a5fa !important;
+            margin: 40px 0 20px !important;
+            font-weight: 700 !important;
+          }
+          body > div > div p {
+            margin-bottom: 20px !important;
+            font-size: 1.1rem !important;
+            line-height: 1.8 !important;
+            color: #cbd5e1 !important;
+          }
+          body > div > div a {
+            color: #3b82f6 !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            border-bottom: 2px solid #3b82f6 !important;
+            padding-bottom: 2px !important;
+            transition: all 0.2s !important;
+          }
+          body > div > div a:hover {
+            color: #60a5fa !important;
+            border-color: #60a5fa !important;
+          }
+          body > div > div ul, body > div > div ol {
+            margin: 20px 0 20px 30px !important;
+            color: #cbd5e1 !important;
+          }
+          body > div > div li {
+            margin-bottom: 12px !important;
+            line-height: 1.8 !important;
+          }
+          @media (max-width: 768px) {
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.5rem !important; }
+            p { font-size: 1rem !important; }
+          }
+        `}} />
       </body>
     </html>
   )
