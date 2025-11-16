@@ -63,7 +63,11 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug: pageId } = await params
   const supabase = await createClient()
 
-  const { data: page } = await supabase.from("pages").select("title, content").eq("id", pageId).single()
+  const { data: page } = await supabase
+    .from("pages")
+    .select("title, content, niche_id")
+    .eq("id", pageId)
+    .single()
 
   if (!page) {
     return {
@@ -71,10 +75,48 @@ export async function generateMetadata({ params }: PageProps) {
     }
   }
 
-  const description = page.content.substring(0, 160) + "..."
+  let nicheTitle = page.title
+  if (page.niche_id) {
+    const { data: niche } = await supabase
+      .from("niches")
+      .select("name")
+      .eq("id", page.niche_id)
+      .single()
+    
+    if (niche?.name) {
+      // Use the same hero title logic for consistency
+      const heroTitles: Record<string, string> = {
+        "Weight Loss": "The Ultimate Weight Loss Breakthrough",
+        "Make Money Online": "How to Build Real Online Income",
+        "Health & Fitness": "Transform Your Health Starting Today",
+        "Tech & Gadgets": "The Latest Tech That Changes Everything",
+        "Beauty & Skincare": "The Beauty Secrets That Actually Work",
+        "Relationships": "Build the Relationship You Deserve",
+        "Pets": "Everything Your Pet Needs to Thrive",
+        "Home & Garden": "Transform Your Home Into Paradise",
+      }
+      nicheTitle = heroTitles[niche.name] || page.title
+    }
+  }
+
+  const description = page.content
+    .replace(/<[^>]*>/g, "") // Strip HTML tags
+    .replace(/\s+/g, " ") // Normalize whitespace
+    .trim()
+    .substring(0, 155) + "..."
 
   return {
-    title: page.title,
+    title: nicheTitle,
     description,
+    openGraph: {
+      title: nicheTitle,
+      description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: nicheTitle,
+      description,
+    },
   }
 }

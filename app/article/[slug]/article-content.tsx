@@ -18,16 +18,16 @@ interface ArticleContentProps {
 
 function generateHeroTitle(niche: string): string {
   const titles: Record<string, string> = {
-    "Weight Loss": "Transform Your Body & Life",
-    "Make Money Online": "Your Path to Financial Freedom",
-    "Health & Fitness": "Unlock Your Best Self",
-    "Tech & Gadgets": "Cutting-Edge Tech Insights",
-    "Beauty & Skincare": "Radiant Beauty Secrets",
-    "Relationships": "Build Stronger Connections",
-    "Pets": "Happy, Healthy Pets",
-    "Home & Garden": "Create Your Dream Space",
+    "Weight Loss": "The Ultimate Weight Loss Breakthrough",
+    "Make Money Online": "How to Build Real Online Income",
+    "Health & Fitness": "Transform Your Health Starting Today",
+    "Tech & Gadgets": "The Latest Tech That Changes Everything",
+    "Beauty & Skincare": "The Beauty Secrets That Actually Work",
+    "Relationships": "Build the Relationship You Deserve",
+    "Pets": "Everything Your Pet Needs to Thrive",
+    "Home & Garden": "Transform Your Home Into Paradise",
   }
-  return titles[niche] || "Discover Something Amazing"
+  return titles[niche] || "Life-Changing Insights You Need"
 }
 
 export default function ArticleContent({ page }: ArticleContentProps) {
@@ -61,7 +61,7 @@ export default function ArticleContent({ page }: ArticleContentProps) {
     }
   }, [page.id, page.affiliate_link])
 
-  const heroTitle = page.niches?.name ? generateHeroTitle(page.niches.name) : "Discover Something Amazing"
+  const heroTitle = page.niches?.name ? generateHeroTitle(page.niches.name) : "Life-Changing Insights You Need"
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
