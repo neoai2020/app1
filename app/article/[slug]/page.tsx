@@ -1,3 +1,4 @@
+import { createClient } from "@/lib/supabase/server"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
@@ -9,39 +10,33 @@ interface PageProps {
 
 async function getArticle(pageId: string) {
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+    const supabase = await createClient()
+    
+    const { data: page, error } = await supabase
+      .from("pages")
+      .select(`
+        *,
+        niches (
+          name
+        )
+      `)
+      .eq("id", pageId)
+      .single()
 
-    const response = await fetch(
-      `${supabaseUrl}/rest/v1/pages?id=eq.${pageId}&select=*,niches(name)`,
-      {
-        headers: {
-          apikey: supabaseServiceKey,
-          Authorization: `Bearer ${supabaseServiceKey}`,
-        },
-        cache: "no-store",
-      }
-    )
-
-    const data = await response.json()
-
-    if (!data || data.length === 0) {
+    if (error || !page) {
+      console.log("[v0] Page not found:", pageId, error)
       return null
     }
 
-    // Increment views without blocking
-    fetch(`${supabaseUrl}/rest/v1/pages?id=eq.${pageId}`, {
-      method: "PATCH",
-      headers: {
-        apikey: supabaseServiceKey,
-        Authorization: `Bearer ${supabaseServiceKey}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
-      body: JSON.stringify({ views: (data[0].views || 0) + 1 }),
-    }).catch(() => {})
+    // Increment views asynchronously
+    supabase
+      .from("pages")
+      .update({ views: (page.views || 0) + 1 })
+      .eq("id", pageId)
+      .then(() => {})
+      .catch(() => {})
 
-    return data[0]
+    return page
   } catch (error) {
     console.error("[v0] Error fetching article:", error)
     return null

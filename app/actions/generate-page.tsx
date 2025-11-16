@@ -305,10 +305,9 @@ CRITICAL REQUIREMENTS:
 Write the complete HTML article now:`
 
       const content = await generateWithRapidAPI(prompt)
-      // Remove \`\`\`html and \`\`\` markdown code fences
       articleContent = content
-        .replace(/\`\`\`html\s*/gi, '')
-        .replace(/\`\`\`\s*/g, '')
+        .split('\`\`\`html').join('')
+        .split('\`\`\`').join('')
         .trim()
 
       const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
