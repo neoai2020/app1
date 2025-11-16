@@ -6,7 +6,6 @@ interface PageProps {
 
 async function getArticle(pageId: string) {
   try {
-    // Direct fetch to Supabase REST API with service role key
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/pages?id=eq.${pageId}&select=*,niches(name)`,
       {
@@ -62,6 +61,116 @@ export default async function ArticlePage({ params }: PageProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{nicheTitle}</title>
         <meta name="description" content="Discover expert insights and proven strategies" />
+        <style>{`
+          @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+          }
+          
+          * { box-sizing: border-box; }
+          
+          .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 50px rgba(139, 92, 246, 0.5);
+          }
+          
+          .cta-btn-bottom:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 70px rgba(59, 130, 246, 0.6);
+          }
+          
+          article h2 {
+            font-size: 2.25rem; color: #ffffff; margin: 56px 0 24px;
+            font-weight: 700; line-height: 1.25; letter-spacing: -0.025em;
+            position: relative; padding-bottom: 16px;
+          }
+          
+          article h2:first-child { margin-top: 0; }
+          
+          article h2::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 80px; height: 4px;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 2px; box-shadow: 0 2px 12px rgba(139, 92, 246, 0.4);
+          }
+          
+          article h3 {
+            font-size: 1.75rem; color: rgba(255,255,255,0.95);
+            margin: 44px 0 20px; font-weight: 600;
+            line-height: 1.3; letter-spacing: -0.015em;
+          }
+          
+          article p {
+            margin-bottom: 24px; font-size: 1.125rem;
+            line-height: 1.85; color: rgba(255,255,255,0.85); font-weight: 400;
+          }
+          
+          article p:first-of-type {
+            font-size: 1.25rem; color: rgba(255,255,255,0.95);
+            font-weight: 500; line-height: 1.75; margin-bottom: 28px;
+          }
+          
+          article a {
+            color: #60a5fa; text-decoration: none; font-weight: 600;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+            transition: all 0.2s ease; padding-bottom: 2px;
+          }
+          
+          article a:hover {
+            color: #93c5fd;
+            border-bottom-color: rgba(147, 197, 253, 0.5);
+          }
+          
+          article ul, article ol {
+            margin: 28px 0; padding-left: 0; list-style: none;
+          }
+          
+          article li {
+            margin-bottom: 18px; font-size: 1.125rem;
+            line-height: 1.85; color: rgba(255,255,255,0.85);
+            padding-left: 40px; position: relative;
+          }
+          
+          article li::before {
+            content: ''; position: absolute; left: 0; top: 9px;
+            width: 22px; height: 22px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 50%; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+          }
+          
+          article li::after {
+            content: '✓'; position: absolute; left: 6px; top: 9px;
+            color: #ffffff; font-size: 12px; font-weight: 700;
+          }
+          
+          article strong { color: #ffffff; font-weight: 700; }
+          article em { color: rgba(255,255,255,0.7); font-style: italic; }
+          
+          article blockquote {
+            border-left: 4px solid #6366f1;
+            background: rgba(99, 102, 241, 0.08);
+            padding: 24px 28px; margin: 36px 0;
+            border-radius: 0 12px 12px 0;
+            color: rgba(255,255,255,0.9);
+            font-style: italic; font-size: 1.1875rem; font-weight: 500;
+          }
+          
+          @media (max-width: 768px) {
+            .hero { padding: 60px 20px !important; }
+            .hero h1 { font-size: 2.5rem !important; }
+            .hero p { font-size: 1.0625rem !important; }
+            .content-wrap { padding: 0 16px 60px !important; margin-top: -40px !important; }
+            article { padding: 40px 28px !important; border-radius: 20px !important; }
+            article h2 { font-size: 1.75rem !important; margin: 44px 0 18px !important; }
+            article h3 { font-size: 1.5rem !important; margin: 32px 0 14px !important; }
+            article p, article li { font-size: 1.0625rem !important; }
+            article p:first-of-type { font-size: 1.125rem !important; }
+            .mid-cta { padding: 28px !important; margin: 40px 0 !important; }
+            .mid-cta h3 { font-size: 1.5rem !important; }
+            .bottom-cta { padding: 40px 28px !important; margin-top: 32px !important; }
+            .bottom-cta h2 { font-size: 1.875rem !important; }
+          }
+        `}</style>
       </head>
       <body style={{ 
         margin: 0, 
@@ -70,14 +179,13 @@ export default async function ArticlePage({ params }: PageProps) {
         background: '#0a0a0f',
         color: '#ffffff'
       }}>
-        {/* Hero Section - Dark premium gradient hero */}
-        <div style={{
+        {/* Hero Section */}
+        <div className="hero" style={{
           background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)',
           padding: '100px 24px 80px',
           position: 'relative',
           overflow: 'hidden'
         }}>
-          {/* Decorative animated elements */}
           <div style={{
             position: 'absolute',
             top: '5%',
@@ -105,7 +213,6 @@ export default async function ArticlePage({ params }: PageProps) {
             position: 'relative',
             zIndex: 1
           }}>
-            {/* Category badge */}
             <div style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -129,7 +236,6 @@ export default async function ArticlePage({ params }: PageProps) {
               {nicheName || 'Featured Article'}
             </div>
             
-            {/* Title with gradient */}
             <h1 style={{
               fontSize: '4rem',
               fontWeight: 900,
@@ -142,7 +248,6 @@ export default async function ArticlePage({ params }: PageProps) {
               letterSpacing: '-0.04em'
             }}>{nicheTitle}</h1>
             
-            {/* Subtitle */}
             <p style={{
               fontSize: '1.3rem',
               color: 'rgba(255,255,255,0.8)',
@@ -154,7 +259,6 @@ export default async function ArticlePage({ params }: PageProps) {
               Discover proven strategies and expert insights that deliver real results
             </p>
             
-            {/* Meta info */}
             <div style={{
               display: 'flex',
               gap: '28px',
@@ -182,14 +286,13 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
         </div>
 
-        <div style={{
+        <div className="content-wrap" style={{
           maxWidth: '850px',
           margin: '-60px auto 0',
           padding: '0 24px 100px',
           position: 'relative',
           zIndex: 2
         }}>
-          {/* Article Card - Dark themed with glassmorphism */}
           <article style={{
             background: 'rgba(15, 23, 42, 0.8)',
             backdropFilter: 'blur(20px)',
@@ -201,8 +304,8 @@ export default async function ArticlePage({ params }: PageProps) {
           }}>
             <div dangerouslySetInnerHTML={{ __html: page.content || '<p>Content not available</p>' }} />
 
-            {/* Mid-Article CTA - First strategic CTA */}
-            <div style={{
+            {/* Mid-Article CTA */}
+            <div className="mid-cta" style={{
               margin: '56px 0',
               padding: '40px',
               background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%)',
@@ -246,7 +349,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cta-button-mid"
+                className="cta-btn"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -271,8 +374,8 @@ export default async function ArticlePage({ params }: PageProps) {
             </div>
           </article>
 
-          {/* Bottom CTA - Second strategic CTA with urgency */}
-          <div style={{
+          {/* Bottom CTA */}
+          <div className="bottom-cta" style={{
             marginTop: '48px',
             padding: '56px 48px',
             background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
@@ -283,7 +386,6 @@ export default async function ArticlePage({ params }: PageProps) {
             border: '1px solid rgba(139, 92, 246, 0.2)',
             boxShadow: '0 30px 100px rgba(0, 0, 0, 0.4)'
           }}>
-            {/* Glow effect */}
             <div style={{
               position: 'absolute',
               top: '-50%',
@@ -340,7 +442,7 @@ export default async function ArticlePage({ params }: PageProps) {
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cta-button-bottom"
+                className="cta-btn-bottom"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -375,212 +477,6 @@ export default async function ArticlePage({ params }: PageProps) {
             </div>
           </div>
         </div>
-
-        {/* Styles - Dark theme typography and formatting */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes pulse {
-            0%, 100% {
-              opacity: 0.6;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.05);
-            }
-          }
-          
-          * {
-            box-sizing: border-box;
-          }
-          
-          /* Added CSS hover effects for CTA buttons to replace inline event handlers */
-          .cta-button-mid:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 16px 50px rgba(139, 92, 246, 0.5) !important;
-          }
-          
-          .cta-button-bottom:hover {
-            transform: translateY(-3px) scale(1.02) !important;
-            box-shadow: 0 20px 70px rgba(59, 130, 246, 0.6) !important;
-          }
-          
-          article h2 {
-            font-size: 2.25rem !important;
-            color: #ffffff !important;
-            margin: 56px 0 24px !important;
-            font-weight: 700 !important;
-            line-height: 1.25 !important;
-            letter-spacing: -0.025em !important;
-            position: relative !important;
-            padding-bottom: 16px !important;
-          }
-          
-          article h2:first-child {
-            margin-top: 0 !important;
-          }
-          
-          article h2::after {
-            content: '' !important;
-            position: absolute !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            width: 80px !important;
-            height: 4px !important;
-            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%) !important;
-            border-radius: 2px !important;
-            box-shadow: 0 2px 12px rgba(139, 92, 246, 0.4) !important;
-          }
-          
-          article h3 {
-            font-size: 1.75rem !important;
-            color: rgba(255,255,255,0.95) !important;
-            margin: 44px 0 20px !important;
-            font-weight: 600 !important;
-            line-height: 1.3 !important;
-            letter-spacing: -0.015em !important;
-          }
-          
-          article p {
-            margin-bottom: 24px !important;
-            font-size: 1.125rem !important;
-            line-height: 1.85 !important;
-            color: rgba(255,255,255,0.85) !important;
-            font-weight: 400 !important;
-          }
-          
-          article p:first-of-type {
-            font-size: 1.25rem !important;
-            color: rgba(255,255,255,0.95) !important;
-            font-weight: 500 !important;
-            line-height: 1.75 !important;
-            margin-bottom: 28px !important;
-          }
-          
-          article a {
-            color: #60a5fa !important;
-            text-decoration: none !important;
-            font-weight: 600 !important;
-            border-bottom: 2px solid rgba(96, 165, 250, 0.3) !important;
-            transition: all 0.2s ease !important;
-            padding-bottom: 2px !important;
-          }
-          
-          article a:hover {
-            color: #93c5fd !important;
-            border-bottom-color: rgba(147, 197, 253, 0.5) !important;
-          }
-          
-          article ul, 
-          article ol {
-            margin: 28px 0 !important;
-            padding-left: 0 !important;
-            list-style: none !important;
-          }
-          
-          article li {
-            margin-bottom: 18px !important;
-            font-size: 1.125rem !important;
-            line-height: 1.85 !important;
-            color: rgba(255,255,255,0.85) !important;
-            padding-left: 40px !important;
-            position: relative !important;
-          }
-          
-          article li::before {
-            content: '' !important;
-            position: absolute !important;
-            left: 0 !important;
-            top: 9px !important;
-            width: 22px !important;
-            height: 22px !important;
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
-            border-radius: 50% !important;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
-          }
-          
-          article li::after {
-            content: '✓' !important;
-            position: absolute !important;
-            left: 6px !important;
-            top: 9px !important;
-            color: #ffffff !important;
-            font-size: 12px !important;
-            font-weight: 700 !important;
-          }
-          
-          article strong {
-            color: #ffffff !important;
-            font-weight: 700 !important;
-          }
-          
-          article em {
-            color: rgba(255,255,255,0.7) !important;
-            font-style: italic !important;
-          }
-          
-          article blockquote {
-            border-left: 4px solid #6366f1 !important;
-            background: rgba(99, 102, 241, 0.08) !important;
-            padding: 24px 28px !important;
-            margin: 36px 0 !important;
-            border-radius: 0 12px 12px 0 !important;
-            color: rgba(255,255,255,0.9) !important;
-            font-style: italic !important;
-            font-size: 1.1875rem !important;
-            font-weight: 500 !important;
-          }
-          
-          @media (max-width: 768px) {
-            body > div:first-of-type {
-              padding: 60px 20px 60px !important;
-            }
-            body > div:first-of-type h1 {
-              font-size: 2.5rem !important;
-            }
-            body > div:first-of-type p {
-              font-size: 1.0625rem !important;
-            }
-            body > div:nth-of-type(2) {
-              padding: 0 16px 60px !important;
-              margin-top: -40px !important;
-            }
-            article {
-              padding: 40px 28px !important;
-              border-radius: 20px !important;
-            }
-            article h2 {
-              font-size: 1.75rem !important;
-              margin: 44px 0 18px !important;
-            }
-            article h3 {
-              font-size: 1.5rem !important;
-              margin: 32px 0 14px !important;
-            }
-            article p,
-            article li {
-              font-size: 1.0625rem !important;
-            }
-            article p:first-of-type {
-              font-size: 1.125rem !important;
-            }
-            /* Mid-Article CTA mobile */
-            body > div:nth-of-type(2) > article > div:nth-of-type(2) {
-              padding: 28px !important;
-              margin: 40px 0 !important;
-            }
-            body > div:nth-of-type(2) > article > div:nth-of-type(2) h3 {
-              font-size: 1.5rem !important;
-            }
-            /* Bottom CTA mobile */
-            body > div:nth-of-type(2) > div {
-              padding: 40px 28px !important;
-              margin-top: 32px !important;
-            }
-            body > div:nth-of-type(2) > div h2 {
-              font-size: 1.875rem !important;
-            }
-          }
-        `}} />
       </body>
     </html>
   )
