@@ -1,12 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Loader2, ArrowLeft, Sparkles, CheckCircle2 } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Loader2, ArrowLeft, Sparkles, CheckCircle2, Clock } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import generatePageAction from "@/app/actions/generate-page"
 
 interface PageGeneratorProps {
@@ -20,6 +20,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
   const [progress, setProgress] = useState(0)
   const [currentMessage, setCurrentMessage] = useState("")
   const [success, setSuccess] = useState(false)
+  const [timeRemaining, setTimeRemaining] = useState(15)
   const router = useRouter()
 
   const messages = [
@@ -34,6 +35,15 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
     "Finalizing your page...",
   ]
 
+  useEffect(() => {
+    if (generating && timeRemaining > 0) {
+      const timer = setTimeout(() => {
+        setTimeRemaining((prev) => Math.max(0, prev - 1))
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [generating, timeRemaining])
+
   const handleGenerate = async () => {
     if (!affiliateLink.trim()) {
       alert("Please enter your affiliate link")
@@ -42,6 +52,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
 
     setGenerating(true)
     setProgress(0)
+    setTimeRemaining(15)
 
     // Simulate progress with messages
     let messageIndex = 0
@@ -84,6 +95,7 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
       alert(errorMessage)
       setGenerating(false)
       setProgress(0)
+      setTimeRemaining(15)
     }
   }
 
@@ -192,6 +204,14 @@ export function PageGenerator({ nicheId, onBack }: PageGeneratorProps) {
 
           {generating && (
             <div className="space-y-4 py-6">
+              <div className="flex items-center justify-center gap-3 p-4 glass-strong rounded-xl border-2 border-primary/50 glow-cyan">
+                <Clock className="w-7 h-7 text-primary animate-pulse" />
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-primary">{timeRemaining}s</p>
+                  <p className="text-sm text-muted-foreground">Estimated time remaining</p>
+                </div>
+              </div>
+              
               <div className="flex items-center gap-3">
                 <Loader2 className="w-6 h-6 animate-spin text-primary" />
                 <p className="text-lg font-semibold text-primary">{currentMessage}</p>

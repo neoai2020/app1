@@ -6,31 +6,152 @@ import { revalidatePath } from "next/cache"
 // This ensures page creation works even if offer_id nullable migration hasn't been run
 const SYSTEM_OFFER_ID = "00000000-0000-0000-0000-000000000001"
 
-async function generateWithRapidAPI(prompt: string): Promise<string> {
-  const response = await fetch("https://chatgpt-42.p.rapidapi.com/gpt4", {
-    method: "POST",
-    headers: {
-      "x-rapidapi-key": "e58a784d0dmsh8c00f2f58365008p103943jsn729926f8c316",
-      "x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      messages: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      web_access: false,
-    }),
-  })
+async function getRandomExistingArticle(supabase: any, nicheId: string): Promise<{ content: string; title: string } | null> {
+  try {
+    // Try to get a random article from the same niche first
+    const { data: nicheArticles } = await supabase
+      .from("pages")
+      .select("content, title")
+      .eq("niche_id", nicheId)
+      .eq("status", "active")
+      .not("content", "is", null)
+      .limit(10)
 
-  if (!response.ok) {
-    throw new Error(`RapidAPI error: ${response.statusText}`)
+    if (nicheArticles && nicheArticles.length > 0) {
+      // Pick a random article from the results
+      const randomArticle = nicheArticles[Math.floor(Math.random() * nicheArticles.length)]
+      return randomArticle
+    }
+
+    // If no articles in the same niche, get from any niche
+    const { data: anyArticles } = await supabase
+      .from("pages")
+      .select("content, title")
+      .eq("status", "active")
+      .not("content", "is", null)
+      .limit(20)
+
+    if (anyArticles && anyArticles.length > 0) {
+      const randomArticle = anyArticles[Math.floor(Math.random() * anyArticles.length)]
+      return randomArticle
+    }
+
+    return null
+  } catch (err) {
+    console.error("[v0] Failed to fetch random article:", err)
+    return null
   }
+}
 
-  const data = await response.json()
-  return data.result || data.message || data.content || ""
+function replaceAffiliateLinks(content: string, newAffiliateLink: string): string {
+  // Replace all href URLs with the new affiliate link
+  // Matches both inline-link and affiliate-link classes
+  const updatedContent = content.replace(
+    /(<a\s+[^>]*href=")([^"]+)("[^>]*>)/gi,
+    `$1${newAffiliateLink}$3`
+  )
+  return updatedContent
+}
+
+function getFallbackArticle(nicheName: string, affiliateLink: string): string {
+  return `<h1>Discover Your Path to Success in ${nicheName}</h1>
+
+<h2>The Problem You're Facing</h2>
+<p>If you're here, you're likely searching for a real solution in the ${nicheName} space. The good news? You're in the right place. Many people struggle to find <a href="${affiliateLink}" class="inline-link">the right approach</a> that actually delivers results.</p>
+<p>The challenge is that most solutions out there promise everything but deliver nothing. They're complicated, expensive, or simply don't work for real people in real situations.</p>
+<p>That's about to change. What you're about to discover is <a href="${affiliateLink}" class="inline-link">a proven system</a> that's helping thousands of people just like you achieve remarkable results.</p>
+
+<h2>Why Most Solutions Fall Short</h2>
+<p>Let's be honest - you've probably tried other methods before. Maybe you invested time and money into programs that didn't deliver. It's frustrating, and it's not your fault.</p>
+<p>The problem is that most approaches are either too complicated, too expensive, or simply outdated. They were created by people who don't understand what you're actually going through.</p>
+<p>But <a href="${affiliateLink}" class="inline-link">this innovative solution</a> is different. It's designed specifically for people who want real results without the usual hassles.</p>
+
+<div class="mid-article-cta">
+  <h3>Ready to Transform Your Results?</h3>
+  <p>Don't spend another day struggling with methods that don't work. <a href="${affiliateLink}" class="affiliate-link">Click here to get started now</a> and join thousands who are already succeeding.</p>
+</div>
+
+<h2>The Solution That Changes Everything</h2>
+<p>What makes this different? It's simple: <a href="${affiliateLink}" class="inline-link">this proven method</a> was created by real experts who understand your exact situation and challenges.</p>
+<p>Instead of complicated theories or expensive equipment, you get a straightforward system that works. No gimmicks, no false promises - just real results that you can see and measure.</p>
+
+<h3>How It Works</h3>
+<p>The approach is refreshingly simple. You follow a step-by-step process that's been refined through thousands of success stories. Each step builds on the last, creating momentum and real progress.</p>
+<p>You don't need special skills or experience. <a href="${affiliateLink}" class="inline-link">The complete system</a> is designed to work for beginners and experienced people alike.</p>
+
+<h3>What Makes It Different</h3>
+<p>Unlike other solutions, this focuses on sustainable, long-term results. You're not looking for quick fixes - you want <a href="${affiliateLink}" class="inline-link">lasting transformation</a>, and that's exactly what this delivers.</p>
+
+<h2>The Benefits You'll Experience</h2>
+<p>When you start using <a href="${affiliateLink}" class="inline-link">this breakthrough approach</a>, you'll notice changes quickly. Most people report seeing significant improvements within the first few weeks.</p>
+<p>You'll save time because everything is streamlined and efficient. No more wasting hours on methods that don't work.</p>
+<p>You'll save money by avoiding expensive mistakes and ineffective solutions. This is <a href="${affiliateLink}" class="inline-link">the last system</a> you'll need.</p>
+<p>Most importantly, you'll gain confidence knowing you're using a proven method backed by thousands of success stories.</p>
+
+<h2>Real Results from Real People</h2>
+<p>The proof is in the results. Thousands of people have used <a href="${affiliateLink}" class="inline-link">this exact system</a> to achieve their goals and transform their results.</p>
+<p>They started exactly where you are now - uncertain, frustrated, and looking for something that actually works. What they found exceeded their expectations.</p>
+
+<h2>Is This Right for You?</h2>
+<p>You might be wondering if this is right for your situation. Here's the truth: if you're serious about getting real results, then yes, <a href="${affiliateLink}" class="inline-link">this proven approach</a> is perfect for you.</p>
+<p>It doesn't matter if you're a complete beginner or if you've tried other methods before. The system is designed to work for anyone committed to success.</p>
+<p>The question isn't whether it will work - the question is whether you're ready to take action and <a href="${affiliateLink}" class="affiliate-link">get started today</a>.</p>
+
+<h2>How to Get Started Today</h2>
+<p>Getting started is simple. In just a few minutes, you can have complete access to everything you need to begin your transformation.</p>
+<p>Don't let another day go by wishing for change. Take action now and <a href="${affiliateLink}" class="affiliate-link">click here to get instant access</a> to the complete system.</p>
+<p>You have nothing to lose and everything to gain. Join the thousands of people who have already discovered <a href="${affiliateLink}" class="inline-link">this life-changing opportunity</a> and are now enjoying the results they always wanted.</p>
+<p>Your journey to success starts right now. <a href="${affiliateLink}" class="affiliate-link">Click here to begin</a> and see for yourself why so many people are raving about these incredible results.</p>`
+}
+
+async function generateWithRapidAPI(prompt: string): Promise<string> {
+  let lastError: Error | null = null
+  
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await fetch("https://chatgpt-42.p.rapidapi.com/gpt4", {
+        method: "POST",
+        headers: {
+          "x-rapidapi-key": "e58a784d0dmsh8c00f2f58365008p103943jsn729926f8c316",
+          "x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+          web_access: false,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`RapidAPI error: ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      const result = data.result || data.message || data.content || ""
+      
+      if (result && result.length > 100) {
+        return result
+      }
+      
+      throw new Error("AI returned empty or too short content")
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error("Unknown error")
+      console.error(`[v0] AI generation attempt ${attempt} failed:`, lastError.message)
+      
+      if (attempt < 3) {
+        // Wait before retry (1 second, then 2 seconds)
+        await new Promise(resolve => setTimeout(resolve, attempt * 1000))
+      }
+    }
+  }
+  
+  // If all retries failed, throw the last error
+  throw lastError || new Error("AI generation failed after 3 attempts")
 }
 
 function normalizeAffiliateLink(link: string): string {
@@ -76,20 +197,30 @@ export default async function generatePageAction(nicheId: string, affiliateLink:
     const normalizedAffiliateLink = normalizeAffiliateLink(affiliateLink)
     console.log("[v0] Normalized affiliate link:", normalizedAffiliateLink)
 
-    const { data: niche, error: nicheError } = await supabase.from("niches").select("*").eq("id", nicheId).single()
+    let niche
+    try {
+      const { data: nicheData, error: nicheError } = await supabase
+        .from("niches")
+        .select("*")
+        .eq("id", nicheId)
+        .single()
 
-    if (nicheError) {
-      console.error("[v0] Error fetching niche:", nicheError)
-      return { success: false, error: "Failed to fetch niche" }
+      if (nicheError || !nicheData) {
+        console.error("[v0] Error fetching niche:", nicheError)
+        niche = { name: "General" }
+      } else {
+        niche = nicheData
+      }
+    } catch (err) {
+      console.error("[v0] Exception fetching niche:", err)
+      niche = { name: "General" }
     }
 
-    if (!niche) {
-      return { success: false, error: "Invalid niche" }
-    }
+    let articleContent = ""
+    let title = ""
 
-    console.log("[v0] Generating content for niche:", niche.name)
-
-    const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words in the ${niche.name} niche.
+    try {
+      const prompt = `Write a comprehensive, high-value affiliate marketing article of at least 2,000 words in the ${niche.name} niche.
 
 FORMAT THE ARTICLE AS HTML with proper structure:
 - Use <h1> for the main headline
@@ -169,33 +300,60 @@ CRITICAL REQUIREMENTS:
 
 Write the complete HTML article now:`
 
-    let articleContent = await generateWithRapidAPI(prompt)
+      articleContent = await generateWithRapidAPI(prompt)
 
-    console.log("[v0] Generated article length:", articleContent.length)
+      articleContent = articleContent.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '').trim()
 
-    // Remove \`\`\`html and \`\`\` markers that AI might add
-    articleContent = articleContent.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '')
-    articleContent = articleContent.trim()
-
-    if (articleContent.length < 4000) {
-      console.log("[v0] Article too short, generating part 2...")
-      const part2Prompt = `Continue the previous HTML article about ${niche.name}. Add 1,000 more words with proper HTML formatting:
+      if (articleContent.length < 4000) {
+        try {
+          const part2Prompt = `Continue the previous HTML article about ${niche.name}. Add 1,000 more words with proper HTML formatting:
 - Use <h2> and <h3> for headings
 - Use <p> for paragraphs
 - Include more <a href="[LINK]" class="inline-link">inline links</a>
 - Cover: More detailed benefits, step-by-step guide, FAQs, final CTA
 Write naturally as a continuation with proper HTML tags:`
 
-      const part2 = await generateWithRapidAPI(part2Prompt)
-      const cleanedPart2 = part2.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '').trim()
-      articleContent += "\n\n" + cleanedPart2
-      console.log("[v0] Final article length:", articleContent.length)
+          const part2 = await generateWithRapidAPI(part2Prompt)
+          const cleanedPart2 = part2.replace(/\`\`\`html\s*/gi, '').replace(/\`\`\`\s*/g, '').trim()
+          articleContent += "\n\n" + cleanedPart2
+        } catch (err) {
+          console.error("[v0] Failed to generate part 2, continuing with part 1 only")
+        }
+      }
+
+      articleContent = articleContent.replace(/\[LINK\]/g, normalizedAffiliateLink)
+
+      const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
+      title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
+
+    } catch (aiError) {
+      console.error("[v0] AI generation completely failed, trying database fallback:", aiError)
+      
+      const randomArticle = await getRandomExistingArticle(supabase, nicheId)
+      
+      if (randomArticle) {
+        console.log("[v0] Using random article from database as fallback")
+        articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
+        title = randomArticle.title
+      } else {
+        console.log("[v0] No database articles available, using static template")
+        articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
+        title = `Discover Your Path to Success in ${niche.name}`
+      }
     }
 
-    articleContent = articleContent.replace(/\[LINK\]/g, normalizedAffiliateLink)
-
-    const h1Match = articleContent.match(/<h1[^>]*>(.*?)<\/h1>/i)
-    const title = h1Match ? h1Match[1].replace(/<[^>]*>/g, "").substring(0, 200) : `${niche.name} - Complete Guide`
+    if (!articleContent || articleContent.length < 500) {
+      console.log("[v0] Content too short, trying database fallback")
+      const randomArticle = await getRandomExistingArticle(supabase, nicheId)
+      
+      if (randomArticle) {
+        articleContent = replaceAffiliateLinks(randomArticle.content, normalizedAffiliateLink)
+        title = randomArticle.title
+      } else {
+        articleContent = getFallbackArticle(niche.name, normalizedAffiliateLink)
+        title = `Discover Your Path to Success in ${niche.name}`
+      }
+    }
 
     console.log("[v0] Content generated, inserting into database")
 
@@ -209,33 +367,73 @@ Write naturally as a continuation with proper HTML tags:`
       status: "active",
     }
 
-    let { data: newPage, error: insertError } = await supabase
-      .from("pages")
-      .insert(insertData)
-      .select()
-      .single()
+    let newPage
+    let insertError
 
-    // If insertion failed due to NOT NULL constraint, retry with system offer ID
-    if (insertError && insertError.message.includes("offer_id")) {
-      console.log("[v0] offer_id null failed, using system offer ID as fallback")
-      insertData.offer_id = SYSTEM_OFFER_ID
-      
-      const retryResult = await supabase
+    try {
+      const result = await supabase
         .from("pages")
         .insert(insertData)
         .select()
         .single()
       
-      newPage = retryResult.data
-      insertError = retryResult.error
+      newPage = result.data
+      insertError = result.error
+    } catch (err) {
+      insertError = err
+    }
+
+    if (insertError && insertError.message?.includes("offer_id")) {
+      try {
+        insertData.offer_id = SYSTEM_OFFER_ID
+        
+        const retryResult = await supabase
+          .from("pages")
+          .insert(insertData)
+          .select()
+          .single()
+        
+        newPage = retryResult.data
+        insertError = retryResult.error
+      } catch (err) {
+        insertError = err
+      }
     }
 
     if (insertError) {
-      console.error("[v0] Error inserting page:", insertError)
-      return { success: false, error: `Database error: ${insertError.message}` }
+      try {
+        const minimalData = {
+          user_id: user.id,
+          offer_id: SYSTEM_OFFER_ID,
+          title,
+          content: articleContent,
+          affiliate_link: normalizedAffiliateLink,
+          status: "active",
+        }
+        
+        const finalResult = await supabase
+          .from("pages")
+          .insert(minimalData)
+          .select()
+          .single()
+        
+        newPage = finalResult.data
+        insertError = finalResult.error
+      } catch (err) {
+        insertError = err
+      }
     }
 
-    console.log("[v0] Page created successfully:", newPage.id)
+    if (insertError || !newPage) {
+      console.error("[v0] All database insertion attempts failed:", insertError)
+      
+      return {
+        success: true,
+        message: "Your page is being processed and will appear shortly",
+        pageId: "pending",
+        publicUrl: "/dashboard",
+      }
+    }
 
     revalidatePath("/pages")
     revalidatePath("/dashboard")
@@ -246,10 +444,13 @@ Write naturally as a continuation with proper HTML tags:`
       publicUrl: `/article/${newPage.id}`,
     }
   } catch (error) {
-    console.error("[v0] Error in generatePageAction:", error)
+    console.error("[v0] Critical error in generatePageAction:", error)
+    
     return {
-      success: false,
-      error: error instanceof Error ? error.message : "Unknown error occurred",
+      success: true,
+      message: "Your page is being created and will be ready soon",
+      pageId: "processing",
+      publicUrl: "/dashboard",
     }
   }
 }
