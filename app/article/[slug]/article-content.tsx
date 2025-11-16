@@ -1,7 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useRef } from "react"
+import { Sparkles, TrendingUp, Award } from 'lucide-react'
 
 interface ArticleContentProps {
   page: {
@@ -14,6 +14,20 @@ interface ArticleContentProps {
     niches?: { name: string }
     offers?: { title: string }
   }
+}
+
+function generateHeroTitle(niche: string): string {
+  const titles: Record<string, string> = {
+    "Weight Loss": "Transform Your Body & Life",
+    "Make Money Online": "Your Path to Financial Freedom",
+    "Health & Fitness": "Unlock Your Best Self",
+    "Tech & Gadgets": "Cutting-Edge Tech Insights",
+    "Beauty & Skincare": "Radiant Beauty Secrets",
+    "Relationships": "Build Stronger Connections",
+    "Pets": "Happy, Healthy Pets",
+    "Home & Garden": "Create Your Dream Space",
+  }
+  return titles[niche] || "Discover Something Amazing"
 }
 
 export default function ArticleContent({ page }: ArticleContentProps) {
@@ -47,58 +61,97 @@ export default function ArticleContent({ page }: ArticleContentProps) {
     }
   }, [page.id, page.affiliate_link])
 
-  return (
-    <div className="min-h-screen bg-[#0A0E12]">
-      {/* Header */}
-      <header className="border-b border-white/10 bg-[#131820]/50 backdrop-blur-xl sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-6">
-          <Link href="/" className="text-2xl font-bold text-[#00F0FF]">
-            P55 Account
-          </Link>
-        </div>
-      </header>
+  const heroTitle = page.niches?.name ? generateHeroTitle(page.niches.name) : "Discover Something Amazing"
 
-      {/* Article Content */}
-      <main className="container mx-auto px-4 py-12 max-w-4xl">
-        <article className="bg-[#131820]/50 backdrop-blur-xl rounded-3xl border border-white/10 p-8 md:p-12">
-          {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-white/60 mb-8 pb-8 border-b border-white/10">
-            <span className="px-3 py-1 rounded-full bg-[#00F0FF]/10 text-[#00F0FF]">{page.niches?.name}</span>
-            <span>
-              {new Date(page.created_at).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
-            <span>{page.views || 0} views</span>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      {/* Hero Section - New personalized hero instead of P55 header */}
+      <div className="relative overflow-hidden">
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 animate-pulse" />
+        
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+
+        <div className="relative container mx-auto px-4 py-16 md:py-24">
+          {/* Hero Title */}
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <Sparkles className="w-6 h-6 text-cyan-400 animate-pulse" />
+              <span className="text-cyan-400 font-semibold tracking-wider uppercase text-sm">
+                {page.niches?.name}
+              </span>
+              <Sparkles className="w-6 h-6 text-cyan-400 animate-pulse" />
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight bg-gradient-to-r from-white via-cyan-100 to-purple-100 bg-clip-text text-transparent">
+              {heroTitle}
+            </h1>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-white/60 text-sm">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4 text-green-400" />
+                <span>{page.views || 0}+ readers</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="w-4 h-4 text-yellow-400" />
+                <span>Expert Reviewed</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>Updated {new Date(page.created_at).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Article Content - New clean, magazine-style layout */}
+      <main className="container mx-auto px-4 pb-20 max-w-4xl">
+        <article className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+          {/* Content */}
+          <div className="p-8 md:p-16">
+            <div 
+              ref={contentRef} 
+              className="article-content prose prose-invert prose-lg max-w-none" 
+              dangerouslySetInnerHTML={{ __html: page.content }} 
+            />
           </div>
 
-          <div ref={contentRef} className="article-content" dangerouslySetInnerHTML={{ __html: page.content }} />
-
-          {/* Footer CTA */}
-          <div className="mt-12 pt-8 border-t border-white/10">
-            <div className="bg-gradient-to-r from-[#00F0FF]/10 to-[#7A5CFF]/10 rounded-2xl p-8 text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
-              <p className="text-white/80 mb-6">Don't miss out on this opportunity to transform your results</p>
+          {/* Footer CTA - More compelling and clean design */}
+          <div className="border-t border-white/10 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 p-8 md:p-12">
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-cyan-400 to-purple-600 mb-6">
+                <Sparkles className="w-8 h-8 text-white" />
+              </div>
+              
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to Take Action?
+              </h3>
+              
+              <p className="text-xl text-white/80 mb-8 leading-relaxed">
+                Join thousands who have already transformed their lives. Your journey starts here.
+              </p>
+              
               <a
                 href={page.affiliate_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-8 py-4 bg-gradient-to-r from-[#00F0FF] to-[#7A5CFF] text-white font-bold rounded-full hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] transition-all duration-300"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white text-lg font-bold rounded-full hover:shadow-[0_0_40px_rgba(0,240,255,0.6)] hover:scale-105 transition-all duration-300 group"
               >
-                Click Here to Learn More →
+                Get Started Now
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </a>
+              
+              <p className="text-sm text-white/50 mt-6">
+                100% Risk-Free • Instant Access • No Hidden Fees
+              </p>
             </div>
           </div>
         </article>
-
-        {/* Powered by P55 */}
-        <div className="text-center mt-8 text-white/40 text-sm">
-          <Link href="/" className="hover:text-[#00F0FF] transition-colors">
-            Powered by P55 Account
-          </Link>
-        </div>
       </main>
 
       <style jsx global>{`
@@ -108,6 +161,10 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           color: white;
           line-height: 1.2;
           margin-bottom: 2rem;
+          background: linear-gradient(135deg, #ffffff 0%, #60efff 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .article-content h2 {
@@ -118,7 +175,7 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           margin-top: 3rem;
           margin-bottom: 1.5rem;
           padding-bottom: 0.75rem;
-          border-bottom: 2px solid rgba(0, 240, 255, 0.2);
+          border-bottom: 2px solid rgba(6, 182, 212, 0.3);
         }
 
         .article-content h3 {
@@ -132,8 +189,8 @@ export default function ArticleContent({ page }: ArticleContentProps) {
 
         .article-content p {
           font-size: 1.125rem;
-          line-height: 1.8;
-          color: rgba(255, 255, 255, 0.85);
+          line-height: 1.9;
+          color: rgba(255, 255, 255, 0.9);
           margin-bottom: 1.5rem;
         }
 
@@ -142,34 +199,39 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           color: white;
         }
 
+        /* Make affiliate links look like clean "click here" CTAs */
         .article-content a.affiliate-link,
         .article-content a {
-          color: #00F0FF;
-          text-decoration: underline;
-          text-decoration-color: rgba(0, 240, 255, 0.3);
-          text-underline-offset: 3px;
-          font-weight: 500;
+          color: #06b6d4;
+          text-decoration: none;
+          font-weight: 600;
           transition: all 0.2s ease;
+          border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+          padding-bottom: 2px;
         }
 
         .article-content a.affiliate-link:hover,
         .article-content a:hover {
-          color: #7A5CFF;
-          text-decoration-color: rgba(122, 92, 255, 0.5);
-          text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+          color: #8b5cf6;
+          border-bottom-color: rgba(139, 92, 246, 0.5);
+          transform: translateY(-1px);
         }
 
         .article-content ul,
         .article-content ol {
           margin-left: 2rem;
           margin-bottom: 1.5rem;
-          color: rgba(255, 255, 255, 0.85);
+          color: rgba(255, 255, 255, 0.9);
         }
 
         .article-content li {
           font-size: 1.125rem;
-          line-height: 1.8;
+          line-height: 1.9;
           margin-bottom: 0.75rem;
+        }
+
+        .article-content li::marker {
+          color: #06b6d4;
         }
 
         @media (max-width: 768px) {
@@ -189,6 +251,19 @@ export default function ArticleContent({ page }: ArticleContentProps) {
           .article-content li {
             font-size: 1rem;
           }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 0.5;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+
+        .delay-1000 {
+          animation-delay: 1000ms;
         }
       `}</style>
     </div>

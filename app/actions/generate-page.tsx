@@ -3,6 +3,9 @@
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 
+// This ensures page creation works even if offer_id nullable migration hasn't been run
+const SYSTEM_OFFER_ID = "00000000-0000-0000-0000-000000000001"
+
 async function generateWithRapidAPI(prompt: string): Promise<string> {
   const response = await fetch("https://chatgpt-42.p.rapidapi.com/gpt4", {
     method: "POST",
@@ -94,22 +97,10 @@ FORMAT THE ARTICLE AS HTML with proper structure:
 - Use <h3> for subsection headings
 - Use <p> for paragraphs
 - Use <strong> for emphasis
-- Use <a href="[LINK]" class="affiliate-link">text</a> for inline affiliate links (use [LINK] as placeholder)
+- For affiliate links, use contextual phrases like "click here", "learn more", "get started", "discover how", etc.
+- Format links as: <a href="[LINK]" class="affiliate-link">click here</a>
+- NEVER show raw URLs or long links in the text
 - Include 8-10 inline affiliate links throughout the article naturally
-
-ARTICLE REQUIREMENTS:
-- Minimum 2,000 words (this is critical - do not write less)
-- Write in a conversational, engaging tone that builds trust
-- Include personal anecdotes and relatable stories
-- Focus on benefits and transformation, not just features
-- Address common objections and concerns
-- Use persuasive copywriting techniques
-- Include social proof and credibility markers
-- Create urgency without being pushy
-- Write about a popular product or solution in the ${niche.name} niche
-
-STRUCTURE WITH HTML TAGS:
-<h1>Compelling headline that promises a specific benefit in ${niche.name}</h1>
 
 <h2>The Problem You're Facing</h2>
 <p>Opening hook that grabs attention (300+ words)</p>
@@ -153,7 +144,8 @@ STRUCTURE WITH HTML TAGS:
 <h2>How to Get Started Today</h2>
 <p>Strong call-to-action (200+ words)</p>
 <p>Create urgency (limited time, bonuses, etc.)</p>
-<p>Clear next steps with <a href="[LINK]" class="affiliate-link">action links</a></p>
+<p>Clear next steps with phrases like "If you're ready to transform your results, <a href="[LINK]" class="affiliate-link">click here to get started</a>"</p>
+<p>Use natural language: "You can <a href="[LINK]" class="affiliate-link">learn more here</a>" or "Ready to begin? <a href="[LINK]" class="affiliate-link">Get instant access</a>"</p>
 <p>Reinforce the transformation</p>
 
 IMPORTANT:
@@ -161,7 +153,8 @@ IMPORTANT:
 - Use short paragraphs (2-3 sentences max)
 - Include subheadings every 200-300 words
 - Use transition phrases to maintain flow
-- Include 8-10 inline affiliate links throughout (use [LINK] as placeholder)
+- Include 8-10 inline affiliate links throughout using phrases like "click here", "learn more", "get started"
+- NEVER show raw URLs - always use contextual link text
 - DO NOT mention "affiliate link" or "commission"
 - Write complete HTML with proper tags
 
@@ -192,19 +185,36 @@ Write naturally as a continuation with proper HTML tags:`
 
     console.log("[v0] Content generated, inserting into database")
 
-    const { data: newPage, error: insertError } = await supabase
+    let insertData: any = {
+      user_id: user.id,
+      niche_id: nicheId,
+      offer_id: null,
+      title,
+      content: articleContent,
+      affiliate_link: normalizedAffiliateLink,
+      status: "active",
+    }
+
+    let { data: newPage, error: insertError } = await supabase
       .from("pages")
-      .insert({
-        user_id: user.id,
-        niche_id: nicheId,
-        offer_id: null,
-        title,
-        content: articleContent,
-        affiliate_link: normalizedAffiliateLink,
-        status: "active",
-      })
+      .insert(insertData)
       .select()
       .single()
+
+    // If insertion failed due to NOT NULL constraint, retry with system offer ID
+    if (insertError && insertError.message.includes("offer_id")) {
+      console.log("[v0] offer_id null failed, using system offer ID as fallback")
+      insertData.offer_id = SYSTEM_OFFER_ID
+      
+      const retryResult = await supabase
+        .from("pages")
+        .insert(insertData)
+        .select()
+        .single()
+      
+      newPage = retryResult.data
+      insertError = retryResult.error
+    }
 
     if (insertError) {
       console.error("[v0] Error inserting page:", insertError)

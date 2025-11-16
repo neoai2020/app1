@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation'
 import { createClient } from "@/lib/supabase/server"
 import { StatCard } from "@/components/stat-card"
 import { QuickActionCard } from "@/components/quick-action-card"
@@ -6,7 +6,7 @@ import { MotivationalTicker } from "@/components/motivational-ticker"
 import { VideoIntroModal } from "@/components/video-intro-modal"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { LiveStatsWidget } from "@/components/live-stats-widget"
-import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown, Headphones } from "lucide-react"
+import { FileText, Eye, MousePointerClick, DollarSign, Zap, GraduationCap, Crown, Headphones } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
@@ -108,36 +108,6 @@ export default async function DashboardPage() {
             />
           </div>
         </div>
-
-        {/* Progress Tracker */}
-        <Card className="glass-strong border-border/50 glow-violet">
-          <CardHeader>
-            <CardTitle className="text-3xl font-bold text-foreground">Your P55 Progress</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-lg font-semibold text-foreground">Pages Created</span>
-                <span className="text-lg font-bold text-primary">
-                  {totalPages} / 10 <span className="text-sm text-muted-foreground">(Free Tier)</span>
-                </span>
-              </div>
-              <div className="w-full h-4 rounded-full bg-muted overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-primary to-secondary glow-cyan transition-all duration-500"
-                  style={{ width: `${Math.min((totalPages / 10) * 100, 100)}%` }}
-                />
-              </div>
-            </div>
-            {totalPages >= 10 && (
-              <div className="p-4 rounded-xl bg-accent/10 border border-accent/30">
-                <p className="text-base text-accent font-semibold">
-                  You've reached your free tier limit! Upgrade your P55 Account to create unlimited pages.
-                </p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
         {/* Support Desk Card */}
         <Card className="glass-strong border-accent/50 glow-jade">
