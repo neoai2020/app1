@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { createAnonymousClient } from "@/lib/supabase/anonymous"
 import { notFound } from 'next/navigation'
 import ArticleContent from "./article-content"
 
@@ -10,7 +10,10 @@ interface PageProps {
 
 export default async function ArticlePage({ params }: PageProps) {
   const { slug: pageId } = await params
-  const supabase = await createClient()
+  
+  const supabase = createAnonymousClient()
+
+  console.log("[v0] Fetching article:", pageId)
 
   const { data: page, error } = await supabase
     .from("pages")
@@ -18,10 +21,17 @@ export default async function ArticlePage({ params }: PageProps) {
     .eq("id", pageId)
     .single()
 
-  if (error || !page) {
-    console.error("[v0] Article page not found:", pageId, error)
+  if (error) {
+    console.error("[v0] Article fetch error:", error.message, error.details, error.hint)
     notFound()
   }
+
+  if (!page) {
+    console.error("[v0] Article page not found:", pageId)
+    notFound()
+  }
+
+  console.log("[v0] Article found:", page.id, page.title)
 
   let niche = null
   let offer = null
@@ -50,7 +60,6 @@ export default async function ArticlePage({ params }: PageProps) {
     offers: offer,
   }
 
-  // Increment view count
   await supabase
     .from("pages")
     .update({ views: (page.views || 0) + 1 })
@@ -61,7 +70,8 @@ export default async function ArticlePage({ params }: PageProps) {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug: pageId } = await params
-  const supabase = await createClient()
+  
+  const supabase = createAnonymousClient()
 
   const { data: page } = await supabase
     .from("pages")
