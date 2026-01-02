@@ -1,4 +1,4 @@
--- P55 Account Database Schema
+-- Robinhood Database Schema
 -- Create all tables with proper relationships and RLS policies
 
 -- Users table (extends auth.users with profile data)

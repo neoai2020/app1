@@ -2,9 +2,22 @@ import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 
 export async function createClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  if (!url || !anonKey) {
+    throw new Error(
+      [
+        "Your project's Supabase URL and Anon Key are required.",
+        "Set these environment variables in `.env.local`:",
+        "- NEXT_PUBLIC_SUPABASE_URL",
+        "- NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      ].join("\n"),
+    )
+  }
+
   const cookieStore = await cookies()
 
-  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
+  return createServerClient(url, anonKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll()

@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     const { pageId } = await request.json()
     const supabase = await createClient()
 
-    // Increment click count
+    // Increment copy/usage count (kept as "clicks" in existing schema)
     const { data: page } = await supabase.from("pages").select("clicks").eq("id", pageId).single()
 
     if (page) {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error("[v0] Track click error:", error)
+    console.error("[robinhood] Track usage error:", error)
     return NextResponse.json({ success: false }, { status: 500 })
   }
 }

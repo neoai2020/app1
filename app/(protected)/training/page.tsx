@@ -17,35 +17,35 @@ export default async function TrainingPage() {
     {
       step: 1,
       title: "Step 1: Getting Started",
-      description: "Learn the basics of your P55 Account and how to navigate the system",
+      description: "Learn the basics of Robinhood and how to navigate the system",
       videoId: "1134298307",
       duration: "8 min",
     },
     {
       step: 2,
-      title: "Step 2: Creating Your First Page",
-      description: "Follow along as we create your first profit page together",
+      title: "Step 2: Your First Comment Pack",
+      description: "Follow along as we generate a comment pack and post it safely",
       videoId: "1134298418",
       duration: "12 min",
     },
     {
       step: 3,
-      title: "Step 3: How To Generate 2,459 Clicks A Day For Free",
-      description: "Discover the exact method to generate thousands of free clicks daily",
+      title: "Step 3: How to Find Better Shorts Faster",
+      description: "A simple method to spot good Shorts without overthinking",
       videoId: "1134943080",
       duration: "18 min",
     },
     {
       step: 4,
-      title: "Step 4: How To Generate Extra Clicks Instantly, in Less Than 20 Seconds",
-      description: "Quick technique to boost your traffic instantly with minimal effort",
+      title: "Step 4: What to Comment (so people reply)",
+      description: "Quick patterns that invite replies without sounding spammy",
       videoId: "1134944459",
       duration: "10 min",
     },
     {
       step: 5,
-      title: "EXCLUSIVE BONUS - How To Make Your First $100 TODAY!",
-      description: "Special bonus training showing you how to get your first commission fast",
+      title: "BONUS: The 5-comment daily routine",
+      description: "A tiny daily routine for consistency (no hype, just actions)",
       videoId: "1134298475",
       duration: "15 min",
     },
@@ -54,9 +54,9 @@ export default async function TrainingPage() {
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div>
-        <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-2">P55 Training Center</h1>
+        <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-2">Robinhood Training Center</h1>
         <p className="text-xl text-muted-foreground">
-          Follow these 5 simple steps to master the P55 system and start making money
+          Follow these 5 simple steps to comment safely and build engagement over time
         </p>
       </div>
 

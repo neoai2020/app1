@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import Link from "next/link"
 
-export default function BonusTrainingPage() {
+export default function ScaleRobinhoodPage() {
   useEffect(() => {
     // Load the video player script
     const script = document.createElement("script")
@@ -33,10 +33,13 @@ export default function BonusTrainingPage() {
       <div className="max-w-4xl mx-auto">
         {/* Headline Section */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Watch The Bonus Training That Took Me To Earning{" "}
-            <span className="text-emerald-500">$1,000-5,000 Per Day</span>...
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Scale Your Robinhood To{" "}
+            <span className="bg-gradient-to-r from-[#10b981] to-[#06b6d4] text-transparent bg-clip-text font-black">$1,000+ Per Day</span>
           </h1>
+          <p className="text-xl text-[#7dd3fc] font-bold">
+            Watch this exclusive training to multiply your results
+          </p>
         </div>
 
         {/* Video Section */}

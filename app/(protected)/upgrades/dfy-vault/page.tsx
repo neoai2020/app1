@@ -1,16 +1,11 @@
-import { redirect } from "next/navigation"
-import { createClient } from "@/lib/supabase/server"
-import { DFYVaultContent } from "./dfy-vault-content"
+import { Metadata } from "next"
+import DFYVaultClient from "./DFYVaultClient"
 
-export default async function DFYVaultPage() {
-  const supabase = await createClient()
+export const metadata: Metadata = {
+  title: "Robinhood DFY | Pre-Loaded Opportunities",
+  description: "200+ viral videos with ready-to-use comments",
+}
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-  if (!user) {
-    redirect("/auth/login")
-  }
-
-  return <DFYVaultContent userId={user.id} />
+export default function DFYVaultPage() {
+  return <DFYVaultClient />
 }

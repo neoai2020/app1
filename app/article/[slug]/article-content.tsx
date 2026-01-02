@@ -65,7 +65,7 @@ export default function ArticleContent({ page }: ArticleContentProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      {/* Hero Section - New personalized hero instead of P55 header */}
+      {/* Hero Section - New personalized hero */}
       <div className="relative overflow-hidden">
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 animate-pulse" />

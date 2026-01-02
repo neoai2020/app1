@@ -1,24 +1,19 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Space_Grotesk, Inter } from "next/font/google"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  display: "swap",
-})
-
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata: Metadata = {
-  title: "P55 Account - Generate Affiliate Pages in Minutes",
-  description: "Zero-friction platform to create compliant affiliate marketing pages with AI",
+  title: "Robinhood - AI-Powered YouTube Engagement Tool",
+  description: "Advanced AI system that finds trending YouTube Shorts and generates high-quality engagement comments for maximum reach.",
   generator: "v0.app",
 }
 
@@ -28,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         {children}
         <Analytics />

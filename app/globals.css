@@ -4,34 +4,34 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Alien Console Premium Colors */
-  --background: #0a0e12;
-  --foreground: #ffffff;
-  --card: #131820;
-  --card-foreground: #ffffff;
-  --popover: #131820;
-  --popover-foreground: #ffffff;
-  --primary: #00f0ff;
-  --primary-foreground: #0a0e12;
-  --secondary: #7a5cff;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1f2e;
-  --muted-foreground: #9fffe8;
-  --accent: #1ce5a1;
-  --accent-foreground: #0a0e12;
-  --destructive: #ff4757;
-  --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.08);
-  --ring: #00f0ff;
-  --radius: 1rem;
+  /* Robinhood - Cyberpunk Blue/Pink Theme */
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --popover: #0f172a;
+  --popover-foreground: #f8fafc;
+  --primary: #0ea5e9;
+  --primary-foreground: #f8fafc;
+  --secondary: #ec4899;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #7dd3fc;
+  --accent: #06b6d4;
+  --accent-foreground: #020617;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: rgba(14, 165, 233, 0.2);
+  --input: rgba(14, 165, 233, 0.1);
+  --ring: #0ea5e9;
+  --radius: 1.25rem;
 
   /* Custom tokens */
-  --neon-cyan: #00f0ff;
-  --violet: #7a5cff;
-  --jade: #1ce5a1;
-  --mint: #9fffe8;
-  --amber: #ffc857;
+  --electric-blue: #0ea5e9;
+  --hot-pink: #ec4899;
+  --cyan: #06b6d4;
+  --sky-light: #7dd3fc;
+  --orange-accent: #fb923c;
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -40,14 +40,14 @@
   --chart-5: oklch(0.769 0.188 70.08);
 
   /* Fixed sidebar colors to be light text on dark background */
-  --sidebar: #0a0e12;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #00f0ff;
-  --sidebar-primary-foreground: #0a0e12;
-  --sidebar-accent: rgba(0, 240, 255, 0.1);
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #00f0ff;
+  --sidebar: #020617;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #f8fafc;
+  --sidebar-accent: rgba(14, 165, 233, 0.15);
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: rgba(14, 165, 233, 0.2);
+  --sidebar-ring: #0ea5e9;
 }
 
 .dark {
@@ -77,56 +77,56 @@
   --chart-5: oklch(0.645 0.246 16.439);
 
   /* Fixed dark mode sidebar colors */
-  --sidebar: #0a0e12;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #00f0ff;
-  --sidebar-primary-foreground: #0a0e12;
-  --sidebar-accent: rgba(0, 240, 255, 0.1);
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #00f0ff;
+  --sidebar: #020617;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #f8fafc;
+  --sidebar-accent: rgba(14, 165, 233, 0.15);
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: rgba(14, 165, 233, 0.2);
+  --sidebar-ring: #0ea5e9;
 }
 
 /* Fixed @theme inline to use literal values instead of var() references */
 @theme inline {
-  --font-sans: "Space Grotesk", "Inter", "Geist", "Geist Fallback";
+  --font-sans: "Plus Jakarta Sans", "Inter", "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --color-background: #0a0e12;
-  --color-foreground: #ffffff;
-  --color-card: #131820;
-  --color-card-foreground: #ffffff;
-  --color-popover: #131820;
-  --color-popover-foreground: #ffffff;
-  --color-primary: #00f0ff;
-  --color-primary-foreground: #0a0e12;
-  --color-secondary: #7a5cff;
-  --color-secondary-foreground: #ffffff;
-  --color-muted: #1a1f2e;
-  --color-muted-foreground: #9fffe8;
-  --color-accent: #1ce5a1;
-  --color-accent-foreground: #0a0e12;
-  --color-destructive: #ff4757;
-  --color-destructive-foreground: #ffffff;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-input: rgba(255, 255, 255, 0.08);
-  --color-ring: #00f0ff;
-  --color-chart-1: oklch(0.646 0.222 41.116);
-  --color-chart-2: oklch(0.6 0.118 184.704);
-  --color-chart-3: oklch(0.398 0.07 227.392);
-  --color-chart-4: oklch(0.828 0.189 84.429);
-  --color-chart-5: oklch(0.769 0.188 70.08);
-  --radius-sm: calc(1rem - 4px);
-  --radius-md: calc(1rem - 2px);
-  --radius-lg: 1rem;
-  --radius-xl: calc(1rem + 4px);
-  --color-sidebar: #0a0e12;
-  --color-sidebar-foreground: #ffffff;
-  --color-sidebar-primary: #00f0ff;
-  --color-sidebar-primary-foreground: #0a0e12;
-  --color-sidebar-accent: rgba(0, 240, 255, 0.1);
-  --color-sidebar-accent-foreground: #ffffff;
-  --color-sidebar-border: rgba(255, 255, 255, 0.1);
-  --color-sidebar-ring: #00f0ff;
+  --color-background: #020617;
+  --color-foreground: #f8fafc;
+  --color-card: #0f172a;
+  --color-card-foreground: #f8fafc;
+  --color-popover: #0f172a;
+  --color-popover-foreground: #f8fafc;
+  --color-primary: #0ea5e9;
+  --color-primary-foreground: #f8fafc;
+  --color-secondary: #ec4899;
+  --color-secondary-foreground: #f8fafc;
+  --color-muted: #1e293b;
+  --color-muted-foreground: #7dd3fc;
+  --color-accent: #06b6d4;
+  --color-accent-foreground: #020617;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f8fafc;
+  --color-border: rgba(14, 165, 233, 0.2);
+  --color-input: rgba(14, 165, 233, 0.1);
+  --color-ring: #0ea5e9;
+  --color-chart-1: oklch(0.646 0.222 200.116);
+  --color-chart-2: oklch(0.7 0.15 330.704);
+  --color-chart-3: oklch(0.6 0.1 190.392);
+  --color-chart-4: oklch(0.75 0.12 30.429);
+  --color-chart-5: oklch(0.68 0.14 340.08);
+  --radius-sm: calc(1.25rem - 4px);
+  --radius-md: calc(1.25rem - 2px);
+  --radius-lg: 1.25rem;
+  --radius-xl: calc(1.25rem + 4px);
+  --color-sidebar: #020617;
+  --color-sidebar-foreground: #f8fafc;
+  --color-sidebar-primary: #0ea5e9;
+  --color-sidebar-primary-foreground: #f8fafc;
+  --color-sidebar-accent: rgba(14, 165, 233, 0.15);
+  --color-sidebar-accent-foreground: #f8fafc;
+  --color-sidebar-border: rgba(14, 165, 233, 0.2);
+  --color-sidebar-ring: #0ea5e9;
 }
 
 @layer base {
@@ -135,43 +135,59 @@
   }
   body {
     @apply bg-background text-foreground text-lg leading-relaxed;
-    font-family: "Inter", "Geist", sans-serif;
+    font-family: "Plus Jakarta Sans", "Inter", sans-serif;
   }
 
-  /* Glassmorphism utilities */
+  /* Neumorphic card utilities */
   .glass {
-    background: rgba(19, 24, 32, 0.6);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(14, 165, 233, 0.2);
+    box-shadow: 
+      0 8px 32px 0 rgba(14, 165, 233, 0.15),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-strong {
-    background: rgba(19, 24, 32, 0.8);
-    backdrop-filter: blur(32px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+    backdrop-filter: blur(24px);
+    border: 2px solid rgba(14, 165, 233, 0.3);
+    box-shadow: 
+      0 12px 40px 0 rgba(14, 165, 233, 0.2),
+      inset 0 2px 0 0 rgba(255, 255, 255, 0.1);
   }
 
-  /* Neon glow effects */
+  /* Premium glow effects */
+  .glow-blue {
+    box-shadow: 
+      0 0 30px rgba(14, 165, 233, 0.4), 
+      0 0 60px rgba(14, 165, 233, 0.2),
+      0 0 100px rgba(14, 165, 233, 0.1);
+  }
+
+  .glow-pink {
+    box-shadow: 
+      0 0 30px rgba(236, 72, 153, 0.4), 
+      0 0 60px rgba(236, 72, 153, 0.2),
+      0 0 100px rgba(236, 72, 153, 0.1);
+  }
+
   .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), 0 0 40px rgba(0, 240, 255, 0.1);
+    box-shadow: 
+      0 0 30px rgba(6, 182, 212, 0.4), 
+      0 0 60px rgba(6, 182, 212, 0.2),
+      0 0 100px rgba(6, 182, 212, 0.1);
   }
 
-  .glow-violet {
-    box-shadow: 0 0 20px rgba(122, 92, 255, 0.3), 0 0 40px rgba(122, 92, 255, 0.1);
-  }
-
-  .glow-jade {
-    box-shadow: 0 0 20px rgba(28, 229, 161, 0.3), 0 0 40px rgba(28, 229, 161, 0.1);
-  }
-
-  /* Headings with Space Grotesk */
+  /* Headings with Plus Jakarta Sans */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: "Space Grotesk", "Geist", sans-serif;
-    font-weight: 700;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 }

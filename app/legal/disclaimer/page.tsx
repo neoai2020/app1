@@ -68,18 +68,17 @@ export default function DisclaimerPage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-foreground">Affiliate Disclosure</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                P55 Account is designed to help you create affiliate marketing content. When you use our platform to
-                promote products, you must comply with all FTC guidelines regarding affiliate disclosures. You are
-                responsible for including proper disclaimers on all pages you create.
+                Robinhood is designed to help you find trending Shorts and generate comment packs. You are responsible
+                for complying with platform rules and applicable laws. Do not post spam, misleading claims, or links.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-bold text-foreground">Typical Results</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                The typical user of P55 Account may not earn any income. Success in affiliate marketing requires
-                consistent effort, traffic generation, and ongoing optimization. The income examples shown in our
-                marketing materials represent the top performers and are not typical results.
+                The typical user of Robinhood may not achieve any specific results. Success depends on consistency,
+                comment quality, timing, and many factors outside our control. Any examples are illustrative and not a
+                promise of outcomes.
               </p>
             </section>
 

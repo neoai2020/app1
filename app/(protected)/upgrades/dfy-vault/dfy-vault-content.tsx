@@ -12,6 +12,8 @@ import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 import { createPageFromTemplate } from "./actions"
 
+// Note: this upgrade content is still legacy "affiliate article templates" from the original app.
+// We keep the route/structure, but the Robinhood core product is comment packs for YouTube Shorts.
 const articles = [
   {
     id: 1,
@@ -631,7 +633,7 @@ export function DFYVaultContent() {
         setSelectedArticle(null)
         setAffiliateLink("")
         // Show success and redirect
-        alert("Success! Your page has been created and is now live in 'My P55 Pages'!")
+        alert("Success! Your pack has been saved and is now in 'Your Comment Packs'!")
         router.push("/pages")
       } else {
         alert("Error creating page: " + result.error)
@@ -901,7 +903,7 @@ export function DFYVaultContent() {
           <DialogHeader>
             <DialogTitle className="text-3xl font-black text-white">Enter Your Affiliate Link</DialogTitle>
             <DialogDescription className="text-xl text-gray-300 font-bold mt-4">
-              We'll automatically create a page with this article and your affiliate link. It will appear in "My P55
+              We'll automatically save this as a pack in your library. It will appear in "Your Comment Packs"
               Pages" ready to share!
             </DialogDescription>
           </DialogHeader>

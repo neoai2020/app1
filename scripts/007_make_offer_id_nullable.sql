@@ -1,9 +1,14 @@
--- Migration: Make offer_id nullable in pages table
--- This allows users to create pages without selecting a specific offer
--- since they now bring their own affiliate links from DigiStore24
-
+-- Make offer_id nullable since users can provide their own affiliate links
 ALTER TABLE public.pages 
 ALTER COLUMN offer_id DROP NOT NULL;
 
--- Add a comment to document this change
-COMMENT ON COLUMN public.pages.offer_id IS 'Optional reference to offers table. Can be NULL when users provide their own affiliate links.';
+-- Add offer_name column to store user's custom offer name
+ALTER TABLE public.pages 
+ADD COLUMN IF NOT EXISTS offer_name TEXT;
+
+-- Add video metadata columns for comment packs
+ALTER TABLE public.pages 
+ADD COLUMN IF NOT EXISTS video_id TEXT,
+ADD COLUMN IF NOT EXISTS video_title TEXT,
+ADD COLUMN IF NOT EXISTS video_url TEXT,
+ADD COLUMN IF NOT EXISTS channel_title TEXT;

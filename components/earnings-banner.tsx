@@ -24,24 +24,22 @@ export function EarningsBanner() {
 
         {/* Content */}
         <div className="flex-1 text-center md:text-left">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
-            Want To Multiply Your Earnings To $1,000 - $5,000 A Day?
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">
+            Wanna Wake Up With An Additional $1,000-$5,000 In Your Bank Account Tomorrow?
           </h2>
           <p className="text-sm md:text-base text-white/95 mb-4 leading-relaxed">
-            The P55 Account Is Great, but if you want to scale to truly life-changing income, you need to watch this
-            training which shows how to make the serious big boy big girl money. And guess what?
+            Robinhood is amazing, but if you want to know how to scale to $1,000 - $5,000 every single day... without doing any extra work...
             <br />
             <br />
-            This training is free if you're a P55 account member. So, if you want to watch the training, just tap the
-            yellow button below.
+            Then you have to watch this FREE training now (Will be taken down soon)
           </p>
           <Link
-            href="https://freedomescapexcelerator.com/2k-per-day"
+            href="https://www.jvzoo.com/c/86517/415009"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-amber-400 hover:bg-amber-500 text-black font-bold px-6 py-3 rounded-md transition-colors duration-200"
           >
-            Click Here To Learn How
+            Click Here To Watch Free Training &gt;&gt;
           </Link>
         </div>
       </div>

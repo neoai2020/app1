@@ -13,15 +13,15 @@ interface VideoIntroModalProps {
 
 export function VideoIntroModal({
   videoUrl = "https://player.vimeo.com/video/1134294445?badge=0&autopause=0&player_id=0&app_id=58479",
-  title = "Welcome to P55 Account!",
-  description = "Watch this quick 2-minute intro to learn how to create your first high-converting affiliate page.",
+  title = "Welcome to Robinhood!",
+  description = "Watch this quick intro to learn how to find trending Shorts and post better comments.",
 }: VideoIntroModalProps) {
   const [open, setOpen] = useState(false)
   const [hasWatched, setHasWatched] = useState(false)
 
   useEffect(() => {
     // Check if user has already watched the intro
-    const watched = localStorage.getItem("p55-intro-watched")
+    const watched = localStorage.getItem("robinhood-intro-watched")
     if (!watched) {
       // Show modal after a short delay for better UX
       const timer = setTimeout(() => {
@@ -35,7 +35,7 @@ export function VideoIntroModal({
 
   const handleClose = () => {
     setOpen(false)
-    localStorage.setItem("p55-intro-watched", "true")
+    localStorage.setItem("robinhood-intro-watched", "true")
     setHasWatched(true)
   }
 
@@ -81,7 +81,7 @@ export function VideoIntroModal({
           <div className="relative w-full aspect-video bg-black/50">
             <iframe
               src={videoUrl}
-              title="P55 Account Introduction"
+              title="Robinhood Introduction"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
               allowFullScreen
               className="absolute inset-0 w-full h-full border-0"

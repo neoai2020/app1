@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import SharePageClient from "./SharePageClient"
+import LinkVaultClient from "./LinkVaultClient"
 
 export const metadata: Metadata = {
-  title: "Share Tools | P55 Account",
-  description: "Share your affiliate pages across social media and track performance",
+  title: "Link Vault | Robinhood",
+  description: "Store and manage your affiliate links for maximum conversions.",
 }
 
-export default function SharePage() {
-  return <SharePageClient />
+export default function LinkVaultPage() {
+  return <LinkVaultClient />
 }

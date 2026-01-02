@@ -5,8 +5,8 @@ interface StepIndicatorProps {
 }
 
 const steps = [
-  { number: 1, title: "Choose Niche", description: "Pick your market" },
-  { number: 2, title: "Generate Page", description: "Create content" },
+  { number: 1, title: "Pick a Category", description: "Choose what you like" },
+  { number: 2, title: "Generate Comments", description: "Get your comment pack" },
 ]
 
 export function StepIndicator({ currentStep }: StepIndicatorProps) {

@@ -1,17 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Facebook, Twitter, Linkedin, Mail, MessageCircle, Copy, QrCode, Code, TrendingUp, Sparkles, Share2 } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Facebook, Twitter, Linkedin, Mail, MessageCircle, Copy, Link as LinkIcon, Flame, TrendingUp, Target } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { createClient } from "@/lib/supabase/client"
 
 export default function SharePageClient() {
   const [pages, setPages] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
   useEffect(() => {
     async function fetchPages() {
@@ -39,374 +38,221 @@ export default function SharePageClient() {
     fetchPages()
   }, [])
 
+  const copyLink = (pageId: string) => {
+    navigator.clipboard.writeText(`${window.location.origin}/article/${pageId}`)
+    setCopiedId(pageId)
+    setTimeout(() => setCopiedId(null), 2000)
+  }
+
   if (isLoading) {
     return (
-      <div className="min-h-screen p-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-xl text-muted-foreground">Loading your pages...</p>
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="w-20 h-20 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xl text-[#7dd3fc] font-bold">Loading your arsenal...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-5xl font-bold text-white text-balance">P55 Share Tools</h1>
-          <p className="text-xl text-muted-foreground text-pretty">
-            Amplify your reach. Share your affiliate pages across multiple platforms and maximize your earnings.
-          </p>
+    <div className="max-w-6xl mx-auto space-y-10">
+      {/* Header */}
+      <div className="space-y-4">
+        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#0ea5e9]/20 to-[#ec4899]/20 border-2 border-[#0ea5e9]/40">
+          <Target className="w-5 h-5 text-[#ec4899]" />
+          <span className="text-sm font-black text-white uppercase tracking-wider">Distribution Command</span>
         </div>
+        <h1 className="text-6xl font-black text-white tracking-tight">Deployment Center</h1>
+        <p className="text-2xl text-[#7dd3fc] font-bold">
+          Copy links, blast social media, and spread your comment packs everywhere 🚀
+        </p>
+      </div>
 
-        <Tabs defaultValue="social" className="space-y-6">
-          <TabsList className="glass h-16 p-2">
-            <TabsTrigger value="social" className="text-lg h-12 px-6">
-              <Share2 className="w-5 h-5 mr-2" />
-              Social Media
-            </TabsTrigger>
-            <TabsTrigger value="embed" className="text-lg h-12 px-6">
-              <Code className="w-5 h-5 mr-2" />
-              Embed Codes
-            </TabsTrigger>
-            <TabsTrigger value="qr" className="text-lg h-12 px-6">
-              <QrCode className="w-5 h-5 mr-2" />
-              QR Codes
-            </TabsTrigger>
-            <TabsTrigger value="templates" className="text-lg h-12 px-6">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Post Templates
-            </TabsTrigger>
-          </TabsList>
-
-          {/* Social Media Tab */}
-          <TabsContent value="social" className="space-y-6">
-            <Card className="glass-strong border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-2xl text-white">Quick Share</CardTitle>
-                <CardDescription className="text-lg">
-                  Share your pages instantly across all major platforms
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {pages && pages.length > 0 ? (
-                  pages.map((page) => (
-                    <div key={page.id} className="glass p-6 rounded-2xl space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="text-xl font-bold text-white">{page.title}</h3>
-                          <p className="text-muted-foreground">
-                            Created {new Date(page.created_at).toLocaleDateString()}
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <TrendingUp className="w-4 h-4 text-accent" />
-                          <span className="text-accent font-semibold">{page.views || 0} views</span>
-                        </div>
+      {!pages || pages.length === 0 ? (
+        <Card className="glass-strong border-2 border-[#0ea5e9]/40">
+          <CardContent className="p-16 text-center space-y-8">
+            <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#ec4899]/20 to-[#f97316]/20 flex items-center justify-center mx-auto border-2 border-[#ec4899]/40">
+              <LinkIcon className="w-16 h-16 text-[#ec4899]" />
+            </div>
+            <div>
+              <h2 className="text-4xl font-black text-white mb-4">No Packs to Deploy Yet</h2>
+              <p className="text-xl text-[#7dd3fc] font-semibold">
+                Generate your first comment pack, then come back here to spread it
+              </p>
+            </div>
+            <Button asChild className="h-20 px-12 text-2xl font-black bg-gradient-to-r from-[#ec4899] to-[#f97316] hover:from-[#f97316] hover:to-[#ec4899] text-white rounded-2xl shadow-2xl">
+              <a href="/create">
+                <Flame className="w-6 h-6 mr-3" />
+                Create First Pack
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="space-y-6">
+          {pages.map((page) => (
+            <Card key={page.id} className="glass-strong border-2 border-[#0ea5e9]/30 hover:border-[#ec4899]/50 transition-all duration-300">
+              <CardHeader className="border-b-2 border-[#0ea5e9]/20 pb-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="text-3xl font-black text-white mb-3">{page.title}</CardTitle>
+                    <div className="flex items-center gap-4 text-sm">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4 text-[#06b6d4]" />
+                        <span className="text-[#7dd3fc] font-bold">{page.views || 0} Opens</span>
                       </div>
-
-                      <div className="flex items-center gap-2 p-3 glass rounded-xl">
-                        <Input
-                          value={`https://p55.pages/${page.id}`}
-                          readOnly
-                          className="flex-1 bg-transparent border-0 text-white"
-                        />
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="glass hover:glass-strong bg-transparent"
-                          onClick={() => {
-                            navigator.clipboard.writeText(`https://p55.pages/${page.id}`)
-                          }}
-                        >
-                          <Copy className="w-4 h-4" />
-                        </Button>
-                      </div>
-
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                        <Button
-                          className="h-14 glass hover:glass-strong hover:border-[#1877f2] hover:text-[#1877f2] transition-all"
-                          onClick={() => {
-                            window.open(
-                              `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://p55.pages/${page.id}`)}`,
-                              "_blank",
-                            )
-                          }}
-                        >
-                          <Facebook className="w-5 h-5 mr-2" />
-                          Facebook
-                        </Button>
-
-                        <Button
-                          className="h-14 glass hover:glass-strong hover:border-[#1da1f2] hover:text-[#1da1f2] transition-all"
-                          onClick={() => {
-                            window.open(
-                              `https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://p55.pages/${page.id}`)}&text=${encodeURIComponent(page.title)}`,
-                              "_blank",
-                            )
-                          }}
-                        >
-                          <Twitter className="w-5 h-5 mr-2" />
-                          Twitter
-                        </Button>
-
-                        <Button
-                          className="h-14 glass hover:glass-strong hover:border-[#0077b5] hover:text-[#0077b5] transition-all"
-                          onClick={() => {
-                            window.open(
-                              `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://p55.pages/${page.id}`)}`,
-                              "_blank",
-                            )
-                          }}
-                        >
-                          <Linkedin className="w-5 h-5 mr-2" />
-                          LinkedIn
-                        </Button>
-
-                        <Button
-                          className="h-14 glass hover:glass-strong hover:border-[#25d366] hover:text-[#25d366] transition-all"
-                          onClick={() => {
-                            window.open(
-                              `https://wa.me/?text=${encodeURIComponent(`${page.title} - https://p55.pages/${page.id}`)}`,
-                              "_blank",
-                            )
-                          }}
-                        >
-                          <MessageCircle className="w-5 h-5 mr-2" />
-                          WhatsApp
-                        </Button>
-
-                        <Button
-                          className="h-14 glass hover:glass-strong hover:border-primary hover:text-primary transition-all"
-                          onClick={() => {
-                            window.location.href = `mailto:?subject=${encodeURIComponent(page.title)}&body=${encodeURIComponent(`Check this out: https://p55.pages/${page.id}`)}`
-                          }}
-                        >
-                          <Mail className="w-5 h-5 mr-2" />
-                          Email
-                        </Button>
-                      </div>
+                      <span className="text-[#7dd3fc]">•</span>
+                      <span className="text-[#7dd3fc] font-semibold">
+                        Created {new Date(page.created_at).toLocaleDateString()}
+                      </span>
                     </div>
-                  ))
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-xl text-muted-foreground">
-                      No active pages yet. Create your first page to start sharing!
-                    </p>
-                    <Button className="mt-4 h-14 px-8 text-lg" asChild>
-                      <a href="/create">Create Your First Page</a>
+                  </div>
+                  <div className="px-4 py-2 rounded-xl bg-[#10b981]/20 border-2 border-[#10b981]/40 text-[#10b981] text-sm font-black">
+                    ACTIVE
+                  </div>
+                </div>
+              </CardHeader>
+
+              <CardContent className="space-y-6 pt-6">
+                {/* Quick Copy Link */}
+                <div className="glass rounded-2xl p-4 border-2 border-[#0ea5e9]/30">
+                  <div className="flex items-center gap-3">
+                    <Input
+                      value={`${window.location.origin}/article/${page.id}`}
+                      readOnly
+                      className="flex-1 bg-transparent border-0 text-white font-mono text-base h-12"
+                    />
+                    <Button
+                      onClick={() => copyLink(page.id)}
+                      className={`h-12 px-6 font-black rounded-xl transition-all ${
+                        copiedId === page.id
+                          ? "bg-[#10b981] text-white"
+                          : "bg-gradient-to-r from-[#0ea5e9] to-[#06b6d4] hover:from-[#06b6d4] hover:to-[#0ea5e9] text-white"
+                      }`}
+                    >
+                      {copiedId === page.id ? (
+                        <>✓ Copied!</>
+                      ) : (
+                        <>
+                          <Copy className="w-5 h-5 mr-2" />
+                          Copy Link
+                        </>
+                      )}
                     </Button>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
+                </div>
 
-          {/* Embed Codes Tab */}
-          <TabsContent value="embed" className="space-y-6">
-            <Card className="glass-strong border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-2xl text-white">Embed Your Pages</CardTitle>
-                <CardDescription className="text-lg">
-                  Add your affiliate pages to any website with these embed codes
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {pages && pages.length > 0 ? (
-                  pages.map((page) => (
-                    <div key={page.id} className="glass p-6 rounded-2xl space-y-4">
-                      <h3 className="text-xl font-bold text-white">{page.title}</h3>
+                {/* Social Blast Buttons */}
+                <div className="space-y-4">
+                  <h4 className="text-lg font-black text-white">Social Media Blast:</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <Button
+                      className="h-16 glass-strong hover:scale-105 border-2 border-[#1877f2]/40 hover:border-[#1877f2] hover:text-[#1877f2] transition-all font-bold"
+                      onClick={() => {
+                        window.open(
+                          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`${window.location.origin}/article/${page.id}`)}`,
+                          "_blank",
+                        )
+                      }}
+                    >
+                      <Facebook className="w-5 h-5 mr-2" />
+                      Facebook
+                    </Button>
 
-                      <div className="space-y-3">
-                        <label className="text-sm font-medium text-muted-foreground">iFrame Embed Code</label>
-                        <div className="relative">
-                          <Textarea
-                            value={`<iframe src="https://p55.pages/${page.id}" width="100%" height="600" frameborder="0"></iframe>`}
-                            readOnly
-                            className="font-mono text-sm glass"
-                            rows={3}
-                          />
-                          <Button
-                            size="sm"
-                            className="absolute top-2 right-2"
-                            onClick={() => {
-                              navigator.clipboard.writeText(
-                                `<iframe src="https://p55.pages/${page.id}" width="100%" height="600" frameborder="0"></iframe>`,
-                              )
-                            }}
-                          >
-                            <Copy className="w-4 h-4 mr-2" />
-                            Copy
-                          </Button>
-                        </div>
-                      </div>
+                    <Button
+                      className="h-16 glass-strong hover:scale-105 border-2 border-[#1da1f2]/40 hover:border-[#1da1f2] hover:text-[#1da1f2] transition-all font-bold"
+                      onClick={() => {
+                        window.open(
+                          `https://twitter.com/intent/tweet?url=${encodeURIComponent(`${window.location.origin}/article/${page.id}`)}&text=${encodeURIComponent(page.title)}`,
+                          "_blank",
+                        )
+                      }}
+                    >
+                      <Twitter className="w-5 h-5 mr-2" />
+                      Twitter
+                    </Button>
 
-                      <div className="space-y-3">
-                        <label className="text-sm font-medium text-muted-foreground">Direct Link</label>
-                        <div className="relative">
-                          <Input value={`https://p55.pages/${page.id}`} readOnly className="font-mono glass" />
-                          <Button
-                            size="sm"
-                            className="absolute top-1/2 -translate-y-1/2 right-2"
-                            onClick={() => {
-                              navigator.clipboard.writeText(`https://p55.pages/${page.id}`)
-                            }}
-                          >
-                            <Copy className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-xl text-muted-foreground">No pages available for embedding yet.</p>
+                    <Button
+                      className="h-16 glass-strong hover:scale-105 border-2 border-[#0077b5]/40 hover:border-[#0077b5] hover:text-[#0077b5] transition-all font-bold"
+                      onClick={() => {
+                        window.open(
+                          `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`${window.location.origin}/article/${page.id}`)}`,
+                          "_blank",
+                        )
+                      }}
+                    >
+                      <Linkedin className="w-5 h-5 mr-2" />
+                      LinkedIn
+                    </Button>
+
+                    <Button
+                      className="h-16 glass-strong hover:scale-105 border-2 border-[#25d366]/40 hover:border-[#25d366] hover:text-[#25d366] transition-all font-bold"
+                      onClick={() => {
+                        window.open(
+                          `https://wa.me/?text=${encodeURIComponent(`${page.title} - ${window.location.origin}/article/${page.id}`)}`,
+                          "_blank",
+                        )
+                      }}
+                    >
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      WhatsApp
+                    </Button>
+
+                    <Button
+                      className="h-16 glass-strong hover:scale-105 border-2 border-[#0ea5e9]/40 hover:border-[#0ea5e9] hover:text-[#0ea5e9] transition-all font-bold"
+                      onClick={() => {
+                        window.location.href = `mailto:?subject=${encodeURIComponent(page.title)}&body=${encodeURIComponent(`Check this out: ${window.location.origin}/article/${page.id}`)}`
+                      }}
+                    >
+                      <Mail className="w-5 h-5 mr-2" />
+                      Email
+                    </Button>
                   </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* QR Codes Tab */}
-          <TabsContent value="qr" className="space-y-6">
-            <Card className="glass-strong border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-2xl text-white">QR Codes</CardTitle>
-                <CardDescription className="text-lg">
-                  Generate QR codes for offline marketing and easy mobile access
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {pages && pages.length > 0 ? (
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {pages.map((page) => (
-                      <div key={page.id} className="glass p-6 rounded-2xl space-y-4 text-center">
-                        <h3 className="text-xl font-bold text-white">{page.title}</h3>
-                        <div className="w-64 h-64 mx-auto glass-strong rounded-2xl flex items-center justify-center">
-                          <img
-                            src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(`https://p55.pages/${page.id}`)}`}
-                            alt={`QR Code for ${page.title}`}
-                            className="w-60 h-60"
-                          />
-                        </div>
-                        <Button
-                          className="w-full h-14 text-lg"
-                          onClick={() => {
-                            const link = document.createElement("a")
-                            link.href = `https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=${encodeURIComponent(`https://p55.pages/${page.id}`)}`
-                            link.download = `qr-${page.id}.png`
-                            link.click()
-                          }}
-                        >
-                          Download QR Code
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12">
-                    <p className="text-xl text-muted-foreground">No pages available for QR codes yet.</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* Post Templates Tab */}
-          <TabsContent value="templates" className="space-y-6">
-            <Card className="glass-strong border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-2xl text-white">Pre-Written Post Templates</CardTitle>
-                <CardDescription className="text-lg">
-                  Copy and customize these proven social media posts for maximum engagement
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid gap-6">
-                  {[
-                    {
-                      title: "Curiosity Hook",
-                      template:
-                        "I just discovered something that could change everything... 🤯\n\nNo hype, just results.\n\nCheck it out: [YOUR_LINK]\n\n#affiliate #recommendation",
-                    },
-                    {
-                      title: "Problem-Solution",
-                      template:
-                        "Struggling with [PROBLEM]? I was too...\n\nThen I found this solution that actually works.\n\nSee for yourself: [YOUR_LINK]\n\n#solution #helpful",
-                    },
-                    {
-                      title: "Personal Story",
-                      template:
-                        "Real talk: I was skeptical at first...\n\nBut after trying this myself, I'm genuinely impressed.\n\nHere's my honest review: [YOUR_LINK]\n\n#honest #review",
-                    },
-                    {
-                      title: "Value First",
-                      template:
-                        "Quick tip that helped me [BENEFIT]:\n\n✅ [Point 1]\n✅ [Point 2]\n✅ [Point 3]\n\nFull details here: [YOUR_LINK]\n\n#tips #value",
-                    },
-                  ].map((template, index) => (
-                    <div key={index} className="glass p-6 rounded-2xl space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-xl font-bold text-white">{template.title}</h3>
-                        <Button
-                          size="sm"
-                          onClick={() => {
-                            navigator.clipboard.writeText(template.template)
-                          }}
-                        >
-                          <Copy className="w-4 h-4 mr-2" />
-                          Copy
-                        </Button>
-                      </div>
-                      <Textarea value={template.template} readOnly className="font-mono glass min-h-32" />
-                    </div>
-                  ))}
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
+          ))}
+        </div>
+      )}
 
-        {/* Sharing Tips */}
-        <Card className="glass-strong border-accent/20">
-          <CardHeader>
-            <CardTitle className="text-2xl text-white flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-accent" />
-              P55 Pro Sharing Tips
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4 text-lg">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <h4 className="font-bold text-primary">✓ Best Times to Post</h4>
-                <p className="text-muted-foreground">
-                  Facebook: 1-3 PM weekdays | Twitter: 12-1 PM & 5-6 PM | LinkedIn: 7-8 AM & 5-6 PM
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-bold text-primary">✓ Use Hashtags Wisely</h4>
-                <p className="text-muted-foreground">
-                  2-3 relevant hashtags on Twitter, 3-5 on Instagram, 1-2 on LinkedIn for best engagement
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-bold text-primary">✓ Add Value First</h4>
-                <p className="text-muted-foreground">
-                  Share helpful tips and insights before promoting. Build trust with your audience
-                </p>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-bold text-primary">✓ Track Your Results</h4>
-                <p className="text-muted-foreground">
-                  Monitor which platforms drive the most clicks and focus your efforts there
-                </p>
-              </div>
+      {/* Pro Tips */}
+      <Card className="glass-strong border-2 border-[#fbbf24]/40">
+        <CardHeader>
+          <CardTitle className="text-3xl font-black text-white flex items-center gap-3">
+            <Flame className="w-8 h-8 text-[#fbbf24]" />
+            Distribution Pro Tips
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid md:grid-cols-2 gap-6 text-lg">
+            <div className="space-y-2">
+              <h4 className="font-black text-[#0ea5e9]">💎 Post When It's Hot</h4>
+              <p className="text-[#7dd3fc]">
+                Peak times: 1-3 PM weekdays for max engagement
+              </p>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+            <div className="space-y-2">
+              <h4 className="font-black text-[#ec4899]">💎 Mix Your Content</h4>
+              <p className="text-[#7dd3fc]">
+                Don't spam links - add value, then share
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-black text-[#06b6d4]">💎 Track What Works</h4>
+              <p className="text-[#7dd3fc]">
+                Check your Opens - double down on winners
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-black text-[#10b981]">💎 Be Consistent</h4>
+              <p className="text-[#7dd3fc]">
+                Daily shares = more eyeballs = more results
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }

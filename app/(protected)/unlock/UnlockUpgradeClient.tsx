@@ -122,7 +122,7 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
               variant="outline"
               className="w-full border-[#00F0FF]/30 text-[#00F0FF] hover:bg-[#00F0FF]/10 font-semibold py-6 rounded-xl bg-transparent"
             >
-              Access P55 Training
+              Access Training
             </Button>
           </Link>
         </div>
