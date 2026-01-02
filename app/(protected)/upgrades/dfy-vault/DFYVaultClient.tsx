@@ -18,7 +18,8 @@ import {
   DollarSign,
   Flame,
   Zap,
-  ExternalLink
+  ExternalLink,
+  Play
 } from "lucide-react"
 import { fetchDFYLibrary, type DFYVideo } from "@/app/actions/fetch-dfy-library"
 
@@ -115,36 +116,7 @@ export default function DFYVaultClient() {
     )
   }
 
-  const trainingVideos = [
-    {
-      id: 1,
-      title: "How The DFY Vault Works",
-      description: "Quick overview of the 200+ video library and comment system",
-      thumbnail: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=450&fit=crop",
-      duration: "5:23"
-    },
-    {
-      id: 2,
-      title: "Maximizing Your Results",
-      description: "Best practices for comment placement and timing",
-      thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=450&fit=crop",
-      duration: "7:45"
-    },
-    {
-      id: 3,
-      title: "Niche Selection Strategy",
-      description: "How to pick the right videos for your product",
-      thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop",
-      duration: "6:12"
-    },
-    {
-      id: 4,
-      title: "Scaling To $1k+ Per Day",
-      description: "Advanced tactics to multiply your earnings",
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop",
-      duration: "12:30"
-    }
-  ]
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
@@ -161,44 +133,56 @@ export default function DFYVaultClient() {
         </p>
       </div>
 
-      {/* Training Videos */}
-      <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ec4899]/30 to-[#f97316]/30 flex items-center justify-center border-2 border-[#ec4899]/40">
-            <Youtube className="w-6 h-6 text-[#ec4899]" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-black text-white">Training Library</h2>
-            <p className="text-[#7dd3fc] font-semibold">Watch these first to maximize your results</p>
+      {/* Training Video */}
+      <Card className="glass-strong border-2 border-[#ec4899]/40 overflow-hidden">
+        <div className="p-6 border-b-2 border-[#ec4899]/20">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ec4899]/30 to-[#f97316]/30 flex items-center justify-center border-2 border-[#ec4899]/40">
+              <Youtube className="w-6 h-6 text-[#ec4899]" />
+            </div>
+            <div>
+              <h2 className="text-3xl font-black text-white">DFY Vault Training</h2>
+              <p className="text-[#7dd3fc] font-semibold">Watch this first to maximize your results with the 200+ DFY videos</p>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {trainingVideos.map((video) => (
-            <Card key={video.id} className="glass-strong border-2 border-[#ec4899]/30 hover:border-[#ec4899]/60 transition-all overflow-hidden group cursor-pointer">
-              <div className="relative">
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-40 object-cover"
+        <div className="relative aspect-video bg-black">
+          {!isVideoPlaying ? (
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d0a1a] to-[#1a1429]">
+              <div className="absolute inset-0">
+                <iframe
+                  src="https://player.vimeo.com/video/1151044893?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                  title="DFY Training Preview"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  className="absolute inset-0 w-full h-full border-0 pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#ec4899] to-[#f97316] flex items-center justify-center">
-                    <Youtube className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-                <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs font-black px-2 py-1 rounded">
-                  {video.duration}
-                </div>
               </div>
-              <div className="p-4">
-                <h3 className="text-lg font-black text-white mb-2 line-clamp-2">{video.title}</h3>
-                <p className="text-sm text-[#7dd3fc] line-clamp-2">{video.description}</p>
+              <div className="absolute inset-0 bg-black/50" />
+              <Button
+                size="lg"
+                onClick={() => setIsVideoPlaying(true)}
+                className="relative z-10 h-28 w-28 rounded-full bg-gradient-to-br from-[#ec4899] to-[#f97316] hover:from-[#f97316] hover:to-[#ec4899] text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-white/20"
+              >
+                <Play className="w-14 h-14 ml-1 fill-white" />
+              </Button>
+              <div className="absolute bottom-8 left-0 right-0 text-center">
+                <p className="text-white text-xl font-extrabold drop-shadow-lg">▶ Click to Play Training</p>
               </div>
-            </Card>
-          ))}
+            </div>
+          ) : (
+            <div className="relative w-full h-full">
+              <iframe
+                src="https://player.vimeo.com/video/1151044893?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                title="DFY Vault Training"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full border-0"
+              />
+            </div>
+          )}
         </div>
-      </div>
+      </Card>
 
       {/* Product Selection */}
       {!productSelected ? (
