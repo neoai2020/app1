@@ -16,38 +16,17 @@ export default async function TrainingPage() {
   const trainingSteps = [
     {
       step: 1,
-      title: "Step 1: Getting Started",
-      description: "Learn the basics of Robinhood and how to navigate the system",
-      videoId: "1134298307",
-      duration: "8 min",
-    },
-    {
-      step: 2,
-      title: "Step 2: Your First Comment Pack",
-      description: "Follow along as we generate a comment pack and post it safely",
-      videoId: "1134298418",
-      duration: "12 min",
-    },
-    {
-      step: 3,
-      title: "Step 3: How to Find Better Shorts Faster",
-      description: "A simple method to spot good Shorts without overthinking",
-      videoId: "1134943080",
-      duration: "18 min",
-    },
-    {
-      step: 4,
-      title: "Step 4: What to Comment (so people reply)",
-      description: "Quick patterns that invite replies without sounding spammy",
-      videoId: "1134944459",
+      title: "Gold Rush Training",
+      description: "Learn how to use the Gold Rush Generator to find viral opportunities and generate money-making comments",
+      videoId: "1151044475",
       duration: "10 min",
     },
     {
-      step: 5,
-      title: "BONUS: The 5-comment daily routine",
-      description: "A tiny daily routine for consistency (no hype, just actions)",
-      videoId: "1134298475",
-      duration: "15 min",
+      step: 2,
+      title: "My Vault Training",
+      description: "Master the My Vault system to manage your comment packs and track your results effectively",
+      videoId: "1151044790",
+      duration: "12 min",
     },
   ]
 
@@ -67,7 +46,7 @@ export default async function TrainingPage() {
           </div>
           <div>
             <p className="text-lg font-bold text-foreground">Complete Training Program</p>
-            <p className="text-base text-muted-foreground">5 essential videos to get you started</p>
+            <p className="text-base text-muted-foreground">2 essential videos to master the system</p>
           </div>
         </div>
       </div>

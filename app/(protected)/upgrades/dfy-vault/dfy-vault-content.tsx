@@ -676,7 +676,7 @@ export function DFYVaultContent() {
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
                   <div className="absolute inset-0">
                     <iframe
-                      src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                      src="https://player.vimeo.com/video/1151044893?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
                       title="DFY Vault Preview"
                       allow="autoplay; fullscreen; picture-in-picture"
                       className="absolute inset-0 w-full h-full border-0 pointer-events-none"
@@ -697,7 +697,7 @@ export function DFYVaultContent() {
               ) : (
                 <div className="relative w-full h-full">
                   <iframe
-                    src="https://player.vimeo.com/video/1134298182?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                    src="https://player.vimeo.com/video/1151044893?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
                     title="DFY Vault Tutorial"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                     allowFullScreen

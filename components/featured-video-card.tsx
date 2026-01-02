@@ -31,7 +31,7 @@ export function FeaturedVideoCard() {
                 {/* Video thumbnail preview */}
                 <div className="absolute inset-0">
                   <iframe
-                    src="https://player.vimeo.com/video/1134294445?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                    src="https://player.vimeo.com/video/1151044408?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
                     title="Robinhood Welcome Preview"
                     allow="autoplay; fullscreen; picture-in-picture"
                     className="absolute inset-0 w-full h-full border-0 pointer-events-none"
@@ -58,7 +58,7 @@ export function FeaturedVideoCard() {
             ) : (
               <div className="relative w-full h-full">
                 <iframe
-                  src="https://player.vimeo.com/video/1134294445?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                  src="https://player.vimeo.com/video/1151044408?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
                   title="Robinhood Welcome"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   allowFullScreen

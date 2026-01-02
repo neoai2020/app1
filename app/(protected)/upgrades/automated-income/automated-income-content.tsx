@@ -2049,7 +2049,7 @@ export function AutomatedIncomeContent({ userId }: { userId: string }) {
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
                   <div className="absolute inset-0">
                     <iframe
-                      src="https://player.vimeo.com/video/1134298104?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
+                      src="https://player.vimeo.com/video/1151045210?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
                       title="Automated Income Preview"
                       allow="autoplay; fullscreen; picture-in-picture"
                       className="absolute inset-0 w-full h-full border-0 pointer-events-none"
@@ -2070,7 +2070,7 @@ export function AutomatedIncomeContent({ userId }: { userId: string }) {
               ) : (
                 <div className="relative w-full h-full">
                   <iframe
-                    src="https://player.vimeo.com/video/1134298104?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
+                    src="https://player.vimeo.com/video/1151045210?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&controls=1"
                     title="Automated Income Tutorial"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                     allowFullScreen
