@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from "@/lib/supabase/server"
 import { QuickActionCard } from "@/components/quick-action-card"
-import { VideoIntroModal } from "@/components/video-intro-modal"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { CommunityProgress } from "@/components/community-progress"
 import { EarningsShowcase } from "@/components/earnings-showcase"
@@ -36,10 +35,7 @@ export default async function DashboardPage() {
     }
 
     return (
-      <>
-        <VideoIntroModal />
-
-        <div className="space-y-8 max-w-7xl mx-auto">
+      <div className="space-y-8 max-w-7xl mx-auto">
           {/* Compact Welcome */}
           <div className="glass-strong rounded-2xl p-5 border-2 border-[#0ea5e9]/30">
             <h1 className="text-3xl font-extrabold text-white mb-1">
@@ -110,7 +106,6 @@ export default async function DashboardPage() {
             </CardContent>
           </Card>
         </div>
-      </>
     )
   } catch (error) {
     console.error("[robinhood] Dashboard error:", error)
