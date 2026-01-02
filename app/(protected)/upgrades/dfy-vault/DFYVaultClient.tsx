@@ -42,6 +42,9 @@ export default function DFYVaultClient() {
   
   // Copy tracking
   const [copiedComment, setCopiedComment] = useState<string | null>(null)
+  
+  // Video player state
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   useEffect(() => {
     loadLibrary()
@@ -115,8 +118,6 @@ export default function DFYVaultClient() {
       </div>
     )
   }
-
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   return (
     <div className="max-w-7xl mx-auto space-y-8">
