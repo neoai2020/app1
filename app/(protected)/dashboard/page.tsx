@@ -6,7 +6,7 @@ import { CustomerListTable } from "@/components/customer-list-table"
 import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { EarningsShowcase } from "@/components/earnings-showcase"
 import { CommunityProgress } from "@/components/community-progress"
-import { LiveActivitiesSidebar } from "@/components/live-activities-sidebar"
+import { LiveActivityFeed, ManagerSupportCard } from "@/components/live-activities-sidebar"
 import { PremiumUpgradeCard } from "@/components/premium-upgrade-card"
 import { 
   BarChart2,
@@ -48,24 +48,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-8 max-w-[1700px] mx-auto pb-12">
-      {/* Top Header Section */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-zinc-500 text-sm font-bold">
-          <span className="hover:text-white transition-colors cursor-pointer">Dashboards</span>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-white">Overview</span>
-        </div>
-        
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-4 border-r border-white/5 pr-6">
-            <Sun className="w-5 h-5 text-zinc-500 hover:text-white cursor-pointer transition-colors" />
-            <RotateCcw className="w-5 h-5 text-zinc-500 hover:text-white cursor-pointer transition-colors" />
-            <Bell className="w-5 h-5 text-zinc-500 hover:text-white cursor-pointer transition-colors" />
-          </div>
-          <Globe className="w-5 h-5 text-zinc-500 hover:text-white cursor-pointer transition-colors" />
-        </div>
-      </div>
-
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
         {/* Main Content Area (3 Columns) */}
         <div className="xl:col-span-3 space-y-12">
@@ -80,9 +62,6 @@ export default async function DashboardPage() {
                 Command center: Initialized for {profile?.full_name?.split(' ')[0] || "Creator"}
               </p>
             </div>
-            <Button variant="outline" className="h-14 bg-white/2 border-white/5 rounded-2xl text-xs font-black uppercase tracking-widest px-8 hover:bg-white/5 transition-all">
-              DATA RANGE: TODAY <ChevronDown className="w-4 h-4 ml-3 text-[#B3FF00]" />
-            </Button>
           </div>
 
           {/* Quad 1: Top Stats */}
@@ -96,10 +75,10 @@ export default async function DashboardPage() {
           {/* Quad 2: Analytics & Video */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <SalesOverviewChart />
+              <FeaturedVideoCard />
             </div>
             <div>
-              <FeaturedVideoCard />
+              <SalesOverviewChart />
             </div>
           </div>
 
@@ -110,15 +89,16 @@ export default async function DashboardPage() {
             </div>
             <div className="space-y-8">
               <EarningsShowcase />
-              <CommunityProgress />
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar Area (1 Column) */}
-        <div className="space-y-8">
-           <LiveActivitiesSidebar />
+        {/* Right Sidebar Area (1 Column) - Granular Reordering */}
+        <div className="xl:mt-32 space-y-8">
+           <CommunityProgress />
+           <LiveActivityFeed />
            <PremiumUpgradeCard />
+           <ManagerSupportCard />
         </div>
       </div>
     </div>

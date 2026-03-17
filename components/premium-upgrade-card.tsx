@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Zap, ChevronRight } from "lucide-react"
@@ -24,9 +25,11 @@ export function PremiumUpgradeCard() {
           Unlock exclusive community insights, higher earnings cap, and priority manager support.
         </p>
 
-        <Button className="w-full h-14 bg-white/3 hover:bg-white/5 text-white font-black text-xs uppercase tracking-[0.2em] border border-white/10 rounded-2xl flex items-center justify-between px-8 group/btn">
-          <span>Go Premium</span>
-          <ChevronRight className="w-4 h-4 text-primary group-hover/btn:translate-x-1 transition-transform" />
+        <Button asChild className="w-full h-14 bg-white/3 hover:bg-white/5 text-white font-black text-xs uppercase tracking-[0.2em] border border-white/10 rounded-2xl flex items-center justify-between px-8 group/btn">
+          <Link href="/upgrades">
+            <span>Go Premium</span>
+            <ChevronRight className="w-4 h-4 text-primary group-hover/btn:translate-x-1 transition-transform" />
+          </Link>
         </Button>
         
         <p className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest text-center">Join 1,200+ active premium members</p>

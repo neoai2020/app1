@@ -12,16 +12,16 @@ export function FeaturedVideoCard() {
     <Card className="glass-card border-white/5 bg-[#111111] overflow-hidden group">
       <CardContent className="p-0">
         <div className="space-y-0">
-          {/* Video Info - Redesigned for High Fidelity */}
-          <div className="p-8 border-b border-white/5">
-            <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-primary" />
+          {/* Video Info - Minimized spacing */}
+          <div className="px-8 pt-3 pb-2 border-b border-white/5">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-6 h-6 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Sparkles className="w-3.5 h-3.5 text-primary" />
               </div>
-              <span className="text-primary font-black text-[10px] uppercase tracking-widest">Must Watch First</span>
+              <span className="text-primary font-black text-[9px] uppercase tracking-widest">Must Watch First</span>
             </div>
-            <h3 className="text-xl font-black text-white mb-2 tracking-tight uppercase">Get Started with Robinhood</h3>
-            <p className="text-xs text-zinc-500 font-bold uppercase tracking-tight">
+            <h3 className="text-base font-black text-white leading-none tracking-tight uppercase">Get Started with Robinhood</h3>
+            <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-tight mt-1">
               Watch this 5-minute guide to master the platform.
             </p>
           </div>

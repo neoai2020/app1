@@ -128,18 +128,8 @@ export function AppSidebar() {
 
       </div>
 
-      {/* Footer - Logo */}
+      {/* Footer - Logout only */}
       <div className="p-6 mt-auto">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <div className="flex items-center gap-0.5">
-                {[1,2,3].map(i => <div key={i} className="w-1 h-3.5 bg-[#B3FF00]/40 rounded-full" />)}
-              </div>
-              <span className="text-lg font-black text-white tracking-widest uppercase italic">DWISON</span>
-            </div>
-          </div>
-        </div>
         <button
           onClick={handleSignOut}
           className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold text-zinc-500 hover:text-white hover:bg-white/3 transition-all"
