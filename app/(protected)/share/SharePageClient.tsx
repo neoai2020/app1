@@ -48,8 +48,8 @@ export default function SharePageClient() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-20 h-20 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xl text-[#7dd3fc] font-bold">Loading your arsenal...</p>
+          <div className="w-20 h-20 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xl text-primary font-black uppercase tracking-widest">Loading Arsenal...</p>
         </div>
       </div>
     )
@@ -59,29 +59,29 @@ export default function SharePageClient() {
     <div className="max-w-6xl mx-auto space-y-10">
       {/* Header */}
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#0ea5e9]/20 to-[#ec4899]/20 border-2 border-[#0ea5e9]/40">
-          <Target className="w-5 h-5 text-[#ec4899]" />
+        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-linear-to-r from-primary/20 to-secondary/20 border-2 border-primary/40">
+          <Target className="w-5 h-5 text-primary" />
           <span className="text-sm font-black text-white uppercase tracking-wider">Distribution Command</span>
         </div>
         <h1 className="text-6xl font-black text-white tracking-tight">Deployment Center</h1>
-        <p className="text-2xl text-[#7dd3fc] font-bold">
+        <p className="text-2xl text-secondary font-bold">
           Copy links, blast social media, and spread your comment packs everywhere 🚀
         </p>
       </div>
 
       {!pages || pages.length === 0 ? (
-        <Card className="glass-strong border-2 border-[#0ea5e9]/40">
+        <Card className="glass-strong border-2 border-primary/40 glow-gold">
           <CardContent className="p-16 text-center space-y-8">
-            <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#ec4899]/20 to-[#f97316]/20 flex items-center justify-center mx-auto border-2 border-[#ec4899]/40">
-              <LinkIcon className="w-16 h-16 text-[#ec4899]" />
+            <div className="w-32 h-32 rounded-3xl bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center mx-auto border-2 border-primary/40">
+              <LinkIcon className="w-16 h-16 text-primary" />
             </div>
             <div>
               <h2 className="text-4xl font-black text-white mb-4">No Packs to Deploy Yet</h2>
-              <p className="text-xl text-[#7dd3fc] font-semibold">
+              <p className="text-xl text-secondary font-semibold">
                 Generate your first comment pack, then come back here to spread it
               </p>
             </div>
-            <Button asChild className="h-20 px-12 text-2xl font-black bg-gradient-to-r from-[#ec4899] to-[#f97316] hover:from-[#f97316] hover:to-[#ec4899] text-white rounded-2xl shadow-2xl">
+            <Button asChild className="h-20 px-12 text-2xl font-black bg-linear-to-r from-primary to-secondary text-primary-foreground rounded-2xl shadow-2xl glow-gold">
               <a href="/create">
                 <Flame className="w-6 h-6 mr-3" />
                 Create First Pack
@@ -92,23 +92,23 @@ export default function SharePageClient() {
       ) : (
         <div className="space-y-6">
           {pages.map((page) => (
-            <Card key={page.id} className="glass-strong border-2 border-[#0ea5e9]/30 hover:border-[#ec4899]/50 transition-all duration-300">
-              <CardHeader className="border-b-2 border-[#0ea5e9]/20 pb-6">
+            <Card key={page.id} className="glass-strong border-2 border-primary/30 hover:border-primary/50 transition-all duration-300">
+              <CardHeader className="border-b-2 border-primary/20 pb-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <CardTitle className="text-3xl font-black text-white mb-3">{page.title}</CardTitle>
                     <div className="flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-[#06b6d4]" />
-                        <span className="text-[#7dd3fc] font-bold">{page.views || 0} Opens</span>
+                        <TrendingUp className="w-4 h-4 text-primary" />
+                        <span className="text-secondary font-bold">{page.views || 0} Opens</span>
                       </div>
-                      <span className="text-[#7dd3fc]">•</span>
-                      <span className="text-[#7dd3fc] font-semibold">
+                      <span className="text-secondary/50">•</span>
+                      <span className="text-secondary font-semibold">
                         Created {new Date(page.created_at).toLocaleDateString()}
                       </span>
                     </div>
                   </div>
-                  <div className="px-4 py-2 rounded-xl bg-[#10b981]/20 border-2 border-[#10b981]/40 text-[#10b981] text-sm font-black">
+                  <div className="px-4 py-2 rounded-xl bg-primary/20 border-2 border-primary/40 text-primary text-sm font-black">
                     ACTIVE
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function SharePageClient() {
 
               <CardContent className="space-y-6 pt-6">
                 {/* Quick Copy Link */}
-                <div className="glass rounded-2xl p-4 border-2 border-[#0ea5e9]/30">
+                <div className="glass rounded-2xl p-4 border-2 border-primary/30">
                   <div className="flex items-center gap-3">
                     <Input
                       value={`${window.location.origin}/article/${page.id}`}
@@ -127,8 +127,8 @@ export default function SharePageClient() {
                       onClick={() => copyLink(page.id)}
                       className={`h-12 px-6 font-black rounded-xl transition-all ${
                         copiedId === page.id
-                          ? "bg-[#10b981] text-white"
-                          : "bg-gradient-to-r from-[#0ea5e9] to-[#06b6d4] hover:from-[#06b6d4] hover:to-[#0ea5e9] text-white"
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-linear-to-r from-primary to-secondary text-primary-foreground shadow-lg"
                       }`}
                     >
                       {copiedId === page.id ? (
@@ -200,7 +200,7 @@ export default function SharePageClient() {
                     </Button>
 
                     <Button
-                      className="h-16 glass-strong hover:scale-105 border-2 border-[#0ea5e9]/40 hover:border-[#0ea5e9] hover:text-[#0ea5e9] transition-all font-bold"
+                      className="h-16 glass-strong hover:scale-105 border-2 border-primary/40 hover:border-primary hover:text-primary transition-all font-bold"
                       onClick={() => {
                         window.location.href = `mailto:?subject=${encodeURIComponent(page.title)}&body=${encodeURIComponent(`Check this out: ${window.location.origin}/article/${page.id}`)}`
                       }}
@@ -217,36 +217,36 @@ export default function SharePageClient() {
       )}
 
       {/* Pro Tips */}
-      <Card className="glass-strong border-2 border-[#fbbf24]/40">
+      <Card className="glass-strong border-2 border-primary/40 glow-gold">
         <CardHeader>
           <CardTitle className="text-3xl font-black text-white flex items-center gap-3">
-            <Flame className="w-8 h-8 text-[#fbbf24]" />
+            <Flame className="w-8 h-8 text-primary" />
             Distribution Pro Tips
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6 text-lg">
             <div className="space-y-2">
-              <h4 className="font-black text-[#0ea5e9]">💎 Post When It's Hot</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-primary">💎 Post When It's Hot</h4>
+              <p className="text-secondary font-semibold">
                 Peak times: 1-3 PM weekdays for max engagement
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#ec4899]">💎 Mix Your Content</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-secondary">💎 Mix Your Content</h4>
+              <p className="text-secondary font-semibold">
                 Don't spam links - add value, then share
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#06b6d4]">💎 Track What Works</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-primary">💎 Track What Works</h4>
+              <p className="text-secondary font-semibold">
                 Check your Opens - double down on winners
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#10b981]">💎 Be Consistent</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-secondary">💎 Be Consistent</h4>
+              <p className="text-secondary font-semibold">
                 Daily shares = more eyeballs = more results
               </p>
             </div>

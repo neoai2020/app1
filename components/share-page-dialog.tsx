@@ -45,15 +45,15 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="h-12 px-6 glass bg-transparent">
+        <Button variant="outline" className="h-12 px-6 glass bg-transparent border-2 border-primary/30 text-white hover:bg-primary/10 transition-all font-bold">
           <Share2 className="w-5 h-5 mr-2" />
           Share
         </Button>
       </DialogTrigger>
       <DialogContent className="glass-strong border-border/50 max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-foreground">Share Your Page</DialogTitle>
-          <DialogDescription className="text-base text-muted-foreground">
+          <DialogTitle className="text-2xl font-extrabold text-white tracking-tight">Share Your Page</DialogTitle>
+          <DialogDescription className="text-base text-secondary font-semibold">
             Share your affiliate page across social media to maximize your reach
           </DialogDescription>
         </DialogHeader>
@@ -109,7 +109,7 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
               <FaTelegram className="w-5 h-5 mr-2" />
               Telegram
             </Button>
-            <Button onClick={() => handleShare("email")} className="h-14 text-base font-bold glass bg-transparent">
+            <Button onClick={() => handleShare("email")} className="h-14 text-base font-bold glass bg-transparent border-2 border-primary/20 text-white hover:bg-primary/10">
               <Mail className="w-5 h-5 mr-2" />
               Email
             </Button>
@@ -117,10 +117,10 @@ export function SharePageDialog({ pageUrl, pageTitle }: SharePageDialogProps) {
 
           {/* Copy Link */}
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-muted-foreground">Or copy link</p>
+            <p className="text-sm font-bold text-secondary uppercase tracking-wider">Or copy link</p>
             <div className="flex gap-2">
-              <div className="flex-1 px-4 py-3 rounded-xl glass text-base text-foreground truncate">{pageUrl}</div>
-              <Button onClick={handleCopyLink} className="h-auto px-6 glow-cyan">
+              <div className="flex-1 px-4 py-3 rounded-xl glass border-2 border-primary/20 text-base text-white truncate font-medium">{pageUrl}</div>
+              <Button onClick={handleCopyLink} className="h-auto px-6 glow-gold bg-linear-to-r from-primary to-secondary text-primary-foreground">
                 {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
               </Button>
             </div>

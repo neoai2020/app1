@@ -9,17 +9,17 @@ export function FeaturedVideoCard() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <Card className="glass-strong border-2 border-[#a855f7]/40 glow-purple overflow-hidden shadow-2xl shadow-[#a855f7]/20">
+    <Card className="glass-strong border-2 border-primary/40 glow-gold overflow-hidden shadow-2xl shadow-primary/20">
       <CardContent className="p-0">
         <div className="space-y-0">
           {/* Video Info - Clean header */}
-          <div className="p-6 border-b-2 border-[#a855f7]/20">
+          <div className="p-6 border-b-2 border-primary/20">
             <div className="flex items-center gap-3 mb-3">
-              <Sparkles className="w-6 h-6 text-[#fbbf24] animate-pulse" />
-              <span className="text-[#fbbf24] font-extrabold text-sm uppercase tracking-wider">Must Watch First</span>
+              <Sparkles className="w-6 h-6 text-primary animate-pulse" />
+              <span className="text-primary font-extrabold text-sm uppercase tracking-wider">Must Watch First</span>
             </div>
             <h3 className="text-3xl font-extrabold text-white mb-2 tracking-tight">Watch This Video To Get Started</h3>
-            <p className="text-lg text-[#c4b5fd] font-semibold">
+            <p className="text-lg text-secondary font-semibold">
               This 5-minute video shows you exactly how to use Robinhood
             </p>
           </div>
@@ -27,7 +27,7 @@ export function FeaturedVideoCard() {
           {/* Video Player */}
           <div className="relative aspect-video bg-black">
             {!isPlaying ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0d0a1a] to-[#1a1429]">
+              <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-background to-card">
                 {/* Video thumbnail preview */}
                 <div className="absolute inset-0">
                   <iframe
@@ -45,9 +45,9 @@ export function FeaturedVideoCard() {
                 <Button
                   size="lg"
                   onClick={() => setIsPlaying(true)}
-                  className="relative z-10 h-28 w-28 rounded-full bg-gradient-to-br from-[#a855f7] to-[#d946ef] hover:from-[#d946ef] hover:to-[#a855f7] text-white shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-[#fbbf24]/30 glow-purple"
+                  className="relative z-10 h-28 w-28 rounded-full bg-linear-to-br from-primary to-secondary text-primary-foreground shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-primary/30 glow-gold"
                 >
-                  <Play className="w-14 h-14 ml-1 fill-white" />
+                  <Play className="w-14 h-14 ml-1 fill-primary-foreground" />
                 </Button>
 
                 {/* Click to play text */}

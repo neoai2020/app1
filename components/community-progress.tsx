@@ -68,15 +68,15 @@ export function CommunityProgress() {
   }, [])
 
   return (
-    <Card className="glass-strong border-2 border-[#fbbf24]/40 glow-gold overflow-hidden relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#fbbf24]/5 via-[#fb923c]/5 to-[#fbbf24]/5" />
+    <Card className="glass-strong border-2 border-primary/40 glow-gold overflow-hidden relative">
+      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-secondary/5 to-primary/5" />
 
-      <CardHeader className="relative z-10 pb-4 border-b-2 border-[#fbbf24]/30">
+      <CardHeader className="relative z-10 pb-4 border-b-2 border-primary/30">
         <CardTitle className="text-2xl font-extrabold text-white flex items-center gap-3">
-          <Target className="w-7 h-7 text-[#fbbf24]" />
+          <Target className="w-7 h-7 text-primary" />
           <span>Community Goals</span>
         </CardTitle>
-        <p className="text-sm text-[#c4b5fd] mt-2 font-semibold">
+        <p className="text-sm text-secondary mt-2 font-semibold">
           Help us reach today's milestones together
         </p>
       </CardHeader>
@@ -90,22 +90,22 @@ export function CommunityProgress() {
             <div key={index} className="space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-bold text-white">{milestone.label}</p>
-                <p className="text-xs font-extrabold text-[#fbbf24]">
+                <p className="text-xs font-extrabold text-primary">
                   {milestone.current.toLocaleString()} / {milestone.goal.toLocaleString()}
                 </p>
               </div>
-              <div className="relative w-full h-3 rounded-full bg-[#231d35] border-2 border-[#fbbf24]/30 overflow-hidden">
+              <div className="relative w-full h-3 rounded-full bg-background border-2 border-primary/30 overflow-hidden">
                 <div
                   className={`h-full rounded-full transition-all duration-1000 ${
                     isComplete
-                      ? "bg-gradient-to-r from-[#fbbf24] to-[#fb923c] animate-pulse"
-                      : "bg-gradient-to-r from-[#a855f7] to-[#d946ef]"
+                      ? "bg-linear-to-r from-primary to-accent animate-pulse"
+                      : "bg-linear-to-r from-primary to-secondary"
                   }`}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
               {isComplete && (
-                <div className="flex items-center gap-2 text-[#fbbf24] animate-in fade-in slide-in-from-bottom-2">
+                <div className="flex items-center gap-2 text-primary animate-in fade-in slide-in-from-bottom-2">
                   <Award className="w-4 h-4" />
                   <p className="text-xs font-extrabold">Goal Reached! 🎉</p>
                 </div>
@@ -115,9 +115,9 @@ export function CommunityProgress() {
         })}
 
         {celebration && (
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-[#fbbf24]/20 to-[#fb923c]/20 border-2 border-[#fbbf24]/50 animate-in fade-in zoom-in duration-500">
+          <div className="p-4 rounded-2xl bg-linear-to-r from-primary/20 to-secondary/20 border-2 border-primary/50 animate-in fade-in zoom-in duration-500">
             <div className="flex items-center gap-3 justify-center">
-              <Award className="w-6 h-6 text-[#fbbf24]" />
+              <Award className="w-6 h-6 text-primary" />
               <p className="text-base font-extrabold text-white">
                 🎉 Community hit: {celebration}!
               </p>
@@ -125,10 +125,10 @@ export function CommunityProgress() {
           </div>
         )}
 
-        <div className="pt-3 border-t-2 border-[#a855f7]/20">
+        <div className="pt-3 border-t-2 border-primary/20">
           <div className="flex items-center justify-center gap-2">
-            <TrendingUp className="w-5 h-5 text-[#fbbf24]" />
-            <p className="text-sm font-bold text-[#c4b5fd]">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <p className="text-sm font-bold text-secondary">
               Together we're stronger - keep going!
             </p>
           </div>

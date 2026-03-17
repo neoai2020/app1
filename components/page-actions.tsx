@@ -50,7 +50,7 @@ export function PageActions({ pageId, status, affiliateLink, videoUrl }: PageAct
     <div className="flex items-center gap-2">
       <Button 
         asChild 
-        className="flex-1 h-14 text-base font-black bg-gradient-to-r from-[#0ea5e9] to-[#06b6d4] hover:from-[#06b6d4] hover:to-[#0ea5e9] text-white rounded-xl border-0 shadow-lg shadow-[#0ea5e9]/30"
+        className="flex-1 h-14 text-base font-black bg-linear-to-r from-primary to-secondary hover:brightness-110 text-primary-foreground rounded-xl border-0 shadow-lg shadow-primary/30"
       >
         <Link href={`/article/${pageId}`} target="_blank">
           <MessageSquare className="w-5 h-5 mr-2" />
@@ -60,7 +60,7 @@ export function PageActions({ pageId, status, affiliateLink, videoUrl }: PageAct
       
       <Button 
         asChild 
-        className="flex-1 h-14 text-base font-black bg-gradient-to-r from-[#ec4899] to-[#f97316] hover:from-[#f97316] hover:to-[#ec4899] text-white rounded-xl border-0 shadow-lg shadow-[#ec4899]/30"
+        className="flex-1 h-14 text-base font-black bg-linear-to-r from-primary/80 to-accent hover:brightness-110 text-primary-foreground rounded-xl border-0 shadow-lg shadow-secondary/30"
       >
         <a href={videoUrl || affiliateLink} target="_blank" rel="noopener noreferrer">
           <Youtube className="w-5 h-5 mr-2" />
@@ -72,7 +72,7 @@ export function PageActions({ pageId, status, affiliateLink, videoUrl }: PageAct
         variant="outline"
         onClick={handleToggleStatus}
         disabled={loading}
-        className="h-14 px-5 glass bg-transparent border-2 border-[#0ea5e9]/30 text-white font-bold hover:bg-[#0ea5e9]/10 rounded-xl"
+        className="h-14 px-5 glass bg-transparent border-2 border-primary/30 text-white font-bold hover:bg-primary/10 rounded-xl"
       >
         {status === "active" ? (
           <>
@@ -89,7 +89,7 @@ export function PageActions({ pageId, status, affiliateLink, videoUrl }: PageAct
         variant="outline"
         onClick={handleDelete}
         disabled={loading}
-        className="h-14 px-5 glass bg-transparent border-2 border-[#ef4444]/30 text-[#ef4444] hover:bg-[#ef4444]/10 hover:text-[#ef4444] font-bold rounded-xl"
+        className="h-14 px-5 glass bg-transparent border-2 border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive font-bold rounded-xl"
       >
         <Trash2 className="w-5 h-5" />
       </Button>

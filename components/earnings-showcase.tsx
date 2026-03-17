@@ -41,19 +41,19 @@ export function EarningsShowcase() {
   const currentSuccess = SUCCESS_CASES[currentCase]
 
   return (
-    <Card className="glass-strong border-2 border-[#fbbf24]/40 glow-gold overflow-hidden relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#fbbf24]/5 via-transparent to-[#fb923c]/5" />
+    <Card className="glass-strong border-2 border-primary/40 glow-gold overflow-hidden relative">
+      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-secondary/5" />
       
-      <CardHeader className="relative z-10 pb-5 border-b-2 border-[#fbbf24]/20">
+      <CardHeader className="relative z-10 pb-5 border-b-2 border-primary/20">
         <div className="flex items-center gap-3 mb-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#fbbf24] to-[#fb923c] flex items-center justify-center shadow-lg">
-            <DollarSign className="w-7 h-7 text-[#0d0a1a]" />
+          <div className="w-12 h-12 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+            <DollarSign className="w-7 h-7 text-background" />
           </div>
           <div>
             <CardTitle className="text-2xl font-extrabold text-white">
               Member Earnings Dashboard
             </CardTitle>
-            <p className="text-sm text-[#c4b5fd] font-semibold mt-1">
+            <p className="text-sm text-secondary font-semibold mt-1">
               Real results from Robinhood members
             </p>
           </div>
@@ -63,67 +63,67 @@ export function EarningsShowcase() {
       <CardContent className="space-y-6 relative z-10 pt-6">
         {/* Featured Success Story */}
         <div
-          className={`p-6 rounded-2xl border-2 border-[#fbbf24]/40 bg-gradient-to-br from-[#fbbf24]/10 to-[#fb923c]/5 transition-all duration-300 ${
+          className={`p-6 rounded-2xl border-2 border-primary/40 bg-linear-to-br from-primary/10 to-secondary/5 transition-all duration-300 ${
             isAnimating ? "opacity-50 scale-95" : "opacity-100 scale-100"
           }`}
         >
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#a855f7] to-[#d946ef] flex items-center justify-center text-white font-bold text-lg shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-linear-to-br from-[#a855f7] to-[#d946ef] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                 {currentSuccess.name.charAt(0)}
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <p className="text-xl font-extrabold text-white">{currentSuccess.name}</p>
-                  <Star className="w-4 h-4 text-[#fbbf24] fill-[#fbbf24]" />
+                  <Star className="w-4 h-4 text-primary fill-primary" />
                 </div>
-                <p className="text-xs text-[#fbbf24] font-bold uppercase tracking-wide">Verified Member</p>
+                <p className="text-xs text-primary font-bold uppercase tracking-wide">Verified Member</p>
               </div>
             </div>
           </div>
 
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <span className="text-5xl font-black bg-gradient-to-r from-[#fbbf24] to-[#fb923c] bg-clip-text text-transparent">
+              <span className="text-5xl font-black bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">
                 ${currentSuccess.amount.toLocaleString()}
               </span>
             </div>
-            <p className="text-base text-[#c4b5fd]">
+            <p className="text-base text-secondary">
               Earned in <span className="font-bold text-white">{currentSuccess.timeframe}</span>
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#a855f7]/20 border border-[#a855f7]/30">
-              <Sparkles className="w-4 h-4 text-[#a855f7]" />
-              <span className="text-sm font-bold text-[#a855f7]">{currentSuccess.method}</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/20 border border-primary/30">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-bold text-primary">{currentSuccess.method}</span>
             </div>
           </div>
         </div>
 
         {/* Community Stats Grid */}
         <div className="grid grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl glass border-2 border-[#a855f7]/30 text-center hover:scale-105 transition-transform">
-            <DollarSign className="w-6 h-6 text-[#fbbf24] mx-auto mb-2" />
+          <div className="p-4 rounded-xl glass border-2 border-primary/30 text-center hover:scale-105 transition-transform">
+            <DollarSign className="w-6 h-6 text-primary mx-auto mb-2" />
             <p className="text-2xl font-black text-white">
               ${(COMMUNITY_STATS.totalEarnings / 1000).toFixed(0)}K+
             </p>
-            <p className="text-xs text-[#c4b5fd] font-bold mt-1">Community Total</p>
+            <p className="text-xs text-secondary font-bold mt-1">Community Total</p>
           </div>
 
-          <div className="p-4 rounded-xl glass border-2 border-[#d946ef]/30 text-center hover:scale-105 transition-transform">
-            <Users className="w-6 h-6 text-[#d946ef] mx-auto mb-2" />
+          <div className="p-4 rounded-xl glass border-2 border-secondary/30 text-center hover:scale-105 transition-transform">
+            <Users className="w-6 h-6 text-secondary mx-auto mb-2" />
             <p className="text-2xl font-black text-white">{COMMUNITY_STATS.activeEarners.toLocaleString()}</p>
-            <p className="text-xs text-[#c4b5fd] font-bold mt-1">Active Earners</p>
+            <p className="text-xs text-secondary font-bold mt-1">Active Earners</p>
           </div>
 
-          <div className="p-4 rounded-xl glass border-2 border-[#fbbf24]/30 text-center hover:scale-105 transition-transform">
-            <TrendingUp className="w-6 h-6 text-[#fbbf24] mx-auto mb-2" />
+          <div className="p-4 rounded-xl glass border-2 border-primary/30 text-center hover:scale-105 transition-transform">
+            <TrendingUp className="w-6 h-6 text-primary mx-auto mb-2" />
             <p className="text-2xl font-black text-white">${COMMUNITY_STATS.avgPerMember}</p>
-            <p className="text-xs text-[#c4b5fd] font-bold mt-1">Avg/Member</p>
+            <p className="text-xs text-secondary font-bold mt-1">Avg/Member</p>
           </div>
         </div>
 
         {/* Disclaimer */}
-        <div className="p-4 rounded-xl bg-[#1a1429]/80 border border-[#a855f7]/20">
-          <p className="text-xs text-[#c4b5fd] leading-relaxed">
+        <div className="p-4 rounded-xl bg-card/80 border border-primary/20">
+          <p className="text-xs text-secondary leading-relaxed">
             <span className="font-bold text-white">⚠️ Disclaimer:</span> Results shown are from
             select members and not typical. Your results will vary. No earnings are guaranteed.
             Past performance does not indicate future results.

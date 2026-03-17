@@ -52,18 +52,18 @@ export function SuccessStories() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-500">
-      <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 p-[2px] rounded-lg shadow-2xl shadow-emerald-500/50">
-        <div className="bg-background rounded-lg p-4 flex items-start gap-3 min-w-[320px] max-w-[400px]">
-          <div className="flex-shrink-0 mt-1">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+      <div className="bg-linear-to-r from-primary to-secondary p-[2.5px] rounded-xl shadow-2xl shadow-primary/40 glow-gold">
+        <div className="bg-background rounded-lg p-5 flex items-start gap-4 min-w-[340px] max-w-[420px] border border-white/10">
+          <div className="shrink-0 mt-1">
+            <CheckCircle2 className="w-6 h-6 text-primary animate-pulse" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-bold text-foreground mb-1">
+            <p className="text-base font-extrabold text-white mb-1.5 leading-tight">
               {currentStory.name} just {currentStory.action}!
             </p>
-            <div className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4 text-emerald-400" />
-              <p className="text-lg font-black text-emerald-400">{currentStory.amount.toLocaleString()}</p>
+            <div className="flex items-center gap-2.5">
+              <MessageCircle className="w-5 h-5 text-secondary" />
+              <p className="text-xl font-black text-secondary tracking-tight">{currentStory.amount.toLocaleString()}</p>
             </div>
           </div>
         </div>

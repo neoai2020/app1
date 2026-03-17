@@ -56,33 +56,33 @@ export function OfferSelector({ nicheId, onSelect, onBack }: OfferSelectorProps)
       </div>
 
       <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold text-foreground">Select an Offer</h2>
-        <p className="text-lg text-muted-foreground">Choose the product you want to promote</p>
+        <h2 className="text-3xl font-extrabold text-white tracking-tight">Select an Offer</h2>
+        <p className="text-lg text-secondary font-semibold">Choose the product you want to promote</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
         {offers.map((offer) => (
           <Card
             key={offer.id}
-            className="glass glow-violet border-border/50 cursor-pointer hover:scale-[1.02] transition-all duration-300"
+            className="glass glow-gold border-primary/50 cursor-pointer hover:scale-[1.02] transition-all duration-300"
             onClick={() => onSelect(offer.id)}
           >
             <CardContent className="p-8">
               <div className="flex items-start gap-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary to-accent flex items-center justify-center flex-shrink-0 glow-violet">
+                <div className="w-20 h-20 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center shrink-0 glow-gold">
                   <TrendingUp className="w-10 h-10 text-background" />
                 </div>
                 <div className="flex-1 space-y-3">
-                  <h3 className="text-2xl font-bold text-foreground">{offer.title}</h3>
-                  <p className="text-base text-muted-foreground leading-relaxed">{offer.description}</p>
+                  <h3 className="text-2xl font-extrabold text-white">{offer.title}</h3>
+                  <p className="text-base text-secondary font-semibold leading-relaxed">{offer.description}</p>
                   <div className="flex items-center gap-6 pt-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground">Commission:</span>
-                      <span className="text-lg font-bold text-accent">{offer.commission_rate}</span>
+                      <span className="text-sm text-secondary font-bold">Commission:</span>
+                      <span className="text-lg font-black text-primary">{offer.commission_rate}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground">Network:</span>
-                      <span className="text-base font-semibold text-foreground">{offer.affiliate_network}</span>
+                      <span className="text-sm text-secondary font-bold">Network:</span>
+                      <span className="text-base font-extrabold text-white">{offer.affiliate_network}</span>
                     </div>
                   </div>
                 </div>

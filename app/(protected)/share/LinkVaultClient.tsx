@@ -12,7 +12,8 @@ import { createClient } from "@/lib/supabase/client"
 interface AffiliateLink {
   id: string
   niche: string
-  offer_name: string
+  title: string
+  offer_name?: string
   affiliate_link: string
   notes?: string
   created_at: string
@@ -91,8 +92,8 @@ export default function LinkVaultClient() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-20 h-20 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xl text-[#7dd3fc] font-bold">Loading your links...</p>
+          <div className="w-20 h-20 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xl text-primary font-black uppercase tracking-widest">Loading Links...</p>
         </div>
       </div>
     )
@@ -102,12 +103,12 @@ export default function LinkVaultClient() {
     <div className="max-w-6xl mx-auto space-y-10">
       {/* Header */}
       <div className="space-y-4">
-        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#fbbf24]/20 to-[#f97316]/20 border-2 border-[#fbbf24]/40">
-          <DollarSign className="w-5 h-5 text-[#fbbf24]" />
+        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-linear-to-r from-primary/20 to-secondary/20 border-2 border-primary/40">
+          <DollarSign className="w-5 h-5 text-primary" />
           <span className="text-sm font-black text-white uppercase tracking-wider">Money Link Storage</span>
         </div>
         <h1 className="text-6xl font-black text-white tracking-tight">Link Vault</h1>
-        <p className="text-2xl text-[#7dd3fc] font-bold">
+        <p className="text-2xl text-secondary font-bold">
           Store your DigiStore, ClickBank, and affiliate links here. Use them in your comment campaigns 💰
         </p>
       </div>
@@ -115,7 +116,7 @@ export default function LinkVaultClient() {
       {/* Add New Link Button */}
       <Button
         onClick={() => setIsAdding(!isAdding)}
-        className="h-16 px-8 text-lg font-black bg-gradient-to-r from-[#fbbf24] to-[#f97316] hover:from-[#f97316] hover:to-[#fbbf24] text-white rounded-2xl shadow-lg"
+        className="h-16 px-8 text-lg font-black bg-linear-to-r from-primary to-secondary text-primary-foreground rounded-2xl shadow-lg glow-gold"
       >
         <Plus className="w-6 h-6 mr-2" />
         Add New Affiliate Link
@@ -123,7 +124,7 @@ export default function LinkVaultClient() {
 
       {/* Add Link Form */}
       {isAdding && (
-        <Card className="glass-strong border-2 border-[#fbbf24]/40 animate-in slide-in-from-top duration-300">
+        <Card className="glass-strong border-2 border-primary/40 animate-in slide-in-from-top duration-300 shadow-2xl glow-gold">
           <CardHeader>
             <CardTitle className="text-2xl font-black text-white">Add Your Money Link</CardTitle>
           </CardHeader>
@@ -135,7 +136,7 @@ export default function LinkVaultClient() {
                   value={niche}
                   onChange={(e) => setNiche(e.target.value)}
                   placeholder="e.g., Weight Loss, Make Money, Dating"
-                  className="h-12 glass border-2 border-[#0ea5e9]/30 text-white"
+                  className="h-12 glass border-2 border-primary/30 text-white rounded-xl"
                 />
               </div>
               <div className="space-y-2">
@@ -144,7 +145,7 @@ export default function LinkVaultClient() {
                   value={offerName}
                   onChange={(e) => setOfferName(e.target.value)}
                   placeholder="e.g., Ultimate Weight Loss System"
-                  className="h-12 glass border-2 border-[#0ea5e9]/30 text-white"
+                  className="h-12 glass border-2 border-primary/30 text-white rounded-xl"
                 />
               </div>
             </div>
@@ -155,7 +156,7 @@ export default function LinkVaultClient() {
                 value={affiliateLink}
                 onChange={(e) => setAffiliateLink(e.target.value)}
                 placeholder="https://hop.clickbank.net/... or https://digistore24.com/..."
-                className="h-12 glass border-2 border-[#0ea5e9]/30 text-white font-mono"
+                className="h-12 glass border-2 border-primary/30 text-white font-mono rounded-xl"
               />
             </div>
 
@@ -165,7 +166,7 @@ export default function LinkVaultClient() {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Commission rate, target audience, best performing platform, etc."
-                className="glass border-2 border-[#0ea5e9]/30 text-white"
+                className="glass border-2 border-primary/30 text-white rounded-xl"
                 rows={3}
               />
             </div>
@@ -173,14 +174,14 @@ export default function LinkVaultClient() {
             <div className="flex gap-4">
               <Button
                 onClick={handleAddLink}
-                className="h-14 px-8 font-black bg-gradient-to-r from-[#10b981] to-[#06b6d4] text-white rounded-xl"
+                className="h-14 px-8 font-black bg-linear-to-r from-primary to-secondary text-primary-foreground rounded-xl shadow-lg"
               >
                 Save Link
               </Button>
               <Button
                 onClick={() => setIsAdding(false)}
                 variant="outline"
-                className="h-14 px-8 font-bold border-2 border-[#0ea5e9]/30 text-white rounded-xl"
+                className="h-14 px-8 font-bold border-2 border-primary/30 text-white rounded-xl hover:bg-primary/10"
               >
                 Cancel
               </Button>
@@ -191,14 +192,14 @@ export default function LinkVaultClient() {
 
       {/* Links List */}
       {links.length === 0 ? (
-        <Card className="glass-strong border-2 border-[#0ea5e9]/40">
+        <Card className="glass-strong border-2 border-primary/40 glow-gold">
           <CardContent className="p-16 text-center space-y-8">
-            <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#fbbf24]/20 to-[#f97316]/20 flex items-center justify-center mx-auto border-2 border-[#fbbf24]/40">
-              <DollarSign className="w-16 h-16 text-[#fbbf24]" />
+            <div className="w-32 h-32 rounded-3xl bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center mx-auto border-2 border-primary/40">
+              <DollarSign className="w-16 h-16 text-primary" />
             </div>
             <div>
               <h2 className="text-4xl font-black text-white mb-4">No Affiliate Links Yet</h2>
-              <p className="text-xl text-[#7dd3fc] font-semibold">
+              <p className="text-xl text-secondary font-semibold">
                 Add your DigiStore or ClickBank links to start making money with your comment campaigns
               </p>
             </div>
@@ -207,31 +208,31 @@ export default function LinkVaultClient() {
       ) : (
         <div className="space-y-4">
           {links.map((link) => (
-            <Card key={link.id} className="glass-strong border-2 border-[#0ea5e9]/30 hover:border-[#fbbf24]/50 transition-all">
+            <Card key={link.id} className="glass-strong border-2 border-primary/30 hover:border-primary/60 transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex-1 space-y-4">
                     <div>
                       <h3 className="text-2xl font-black text-white mb-2">{link.title}</h3>
-                      <p className="text-sm text-[#7dd3fc] font-semibold">
+                      <p className="text-sm text-secondary font-semibold">
                         Added {new Date(link.created_at).toLocaleDateString()}
                       </p>
                     </div>
 
-                    <div className="glass rounded-xl p-4 border-2 border-[#0ea5e9]/20 flex items-center gap-3">
-                      <Input
-                        value={link.affiliate_link}
-                        readOnly
-                        className="flex-1 bg-transparent border-0 text-white font-mono text-sm"
-                      />
-                      <Button
-                        onClick={() => copyLink(link.affiliate_link, link.id)}
-                        className={`h-10 px-4 font-black rounded-lg ${
-                          copiedId === link.id
-                            ? "bg-[#10b981] text-white"
-                            : "bg-gradient-to-r from-[#0ea5e9] to-[#06b6d4] text-white"
-                        }`}
-                      >
+                      <div className="glass rounded-xl p-4 border-2 border-primary/20 flex items-center gap-3">
+                        <Input
+                          value={link.affiliate_link}
+                          readOnly
+                          className="flex-1 bg-transparent border-0 text-white font-mono text-sm"
+                        />
+                        <Button
+                          onClick={() => copyLink(link.affiliate_link, link.id)}
+                          className={`h-10 px-4 font-black rounded-lg transition-all ${
+                            copiedId === link.id
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-linear-to-r from-primary to-secondary text-primary-foreground"
+                          }`}
+                        >
                         {copiedId === link.id ? "✓ Copied!" : <Copy className="w-4 h-4" />}
                       </Button>
                     </div>
@@ -240,9 +241,9 @@ export default function LinkVaultClient() {
                   <div className="flex gap-2">
                     <Button
                       onClick={() => window.open(link.affiliate_link, "_blank")}
-                      className="h-12 w-12 glass-strong border-2 border-[#0ea5e9]/30 hover:border-[#0ea5e9] rounded-xl"
+                      className="h-12 w-12 glass-strong border-2 border-primary/30 hover:border-primary rounded-xl transition-all"
                     >
-                      <ExternalLink className="w-5 h-5 text-[#0ea5e9]" />
+                      <ExternalLink className="w-5 h-5 text-primary" />
                     </Button>
                   </div>
                 </div>
@@ -253,36 +254,36 @@ export default function LinkVaultClient() {
       )}
 
       {/* Pro Tips */}
-      <Card className="glass-strong border-2 border-[#ec4899]/40">
+      <Card className="glass-strong border-2 border-primary/40 glow-gold">
         <CardHeader>
           <CardTitle className="text-3xl font-black text-white flex items-center gap-3">
-            <Flame className="w-8 h-8 text-[#ec4899]" />
+            <Flame className="w-8 h-8 text-primary" />
             Link Vault Pro Tips
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid md:grid-cols-2 gap-6 text-lg">
             <div className="space-y-2">
-              <h4 className="font-black text-[#fbbf24]">💎 Organize by Niche</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-primary">💎 Organize by Niche</h4>
+              <p className="text-secondary font-semibold">
                 Match your links to specific niches for better targeting
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#10b981]">💎 Test Multiple Offers</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-secondary">💎 Test Multiple Offers</h4>
+              <p className="text-secondary font-semibold">
                 Try different products in the same niche to find winners
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#0ea5e9]">💎 Track Your Links</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-primary">💎 Track Your Links</h4>
+              <p className="text-secondary font-semibold">
                 Use link shorteners with analytics (Bitly, TinyURL)
               </p>
             </div>
             <div className="space-y-2">
-              <h4 className="font-black text-[#ec4899]">💎 High Ticket = High Cash</h4>
-              <p className="text-[#7dd3fc]">
+              <h4 className="font-black text-secondary">💎 High Ticket = High Cash</h4>
+              <p className="text-secondary font-semibold">
                 Focus on offers $100+ for serious commissions
               </p>
             </div>

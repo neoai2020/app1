@@ -40,19 +40,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-6 bg-gradient-to-br from-[#0d0a1a] via-[#1a1429] to-[#0d0a1a]">
+    <div className="flex min-h-screen w-full items-center justify-center p-6 bg-linear-to-br from-background via-card to-background">
       <div className="w-full max-w-lg">
-        <Card className="glass-strong glow-purple border-2 border-[#a855f7]/40">
+        <Card className="glass-strong glow-gold border-2 border-primary/40">
           <CardHeader className="space-y-4">
             <div className="flex items-center justify-center mb-6">
-              <div className="relative w-20 h-20 rounded-3xl bg-gradient-to-br from-[#a855f7] via-[#d946ef] to-[#fbbf24] flex items-center justify-center shadow-[0_0_80px_rgba(168,85,247,0.6)]">
-                <div className="w-[72px] h-[72px] rounded-[22px] bg-[#0d0a1a] flex items-center justify-center">
-                  <Brain className="w-10 h-10 text-[#a855f7]" />
+              <div className="relative w-20 h-20 rounded-3xl bg-linear-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.4)]">
+                <div className="w-[72px] h-[72px] rounded-[22px] bg-background flex items-center justify-center">
+                  <Brain className="w-10 h-10 text-primary" />
                 </div>
               </div>
             </div>
             <CardTitle className="text-4xl font-extrabold text-white text-center tracking-tight">Access Robinhood</CardTitle>
-            <CardDescription className="text-lg text-[#c4b5fd] text-center font-semibold">
+            <CardDescription className="text-lg text-secondary text-center font-semibold">
               Neural Engagement Platform
             </CardDescription>
           </CardHeader>
@@ -69,7 +69,7 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 text-lg glass border-2 border-[#a855f7]/30 focus:border-[#a855f7] rounded-2xl"
+                  className="h-14 text-lg glass border-2 border-primary/30 focus:border-primary rounded-2xl"
                 />
               </div>
               <div className="space-y-3">
@@ -82,7 +82,7 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-14 text-lg glass border-2 border-[#a855f7]/30 focus:border-[#a855f7] rounded-2xl"
+                  className="h-14 text-lg glass border-2 border-primary/30 focus:border-primary rounded-2xl"
                 />
               </div>
               {error && (
@@ -90,13 +90,13 @@ export default function LoginPage() {
                   <p className="text-sm text-destructive font-semibold">{error}</p>
                 </div>
               )}
-              <Button type="submit" className="w-full h-16 text-lg font-extrabold glow-purple bg-gradient-to-r from-[#a855f7] to-[#d946ef] hover:from-[#d946ef] hover:to-[#a855f7] rounded-2xl transition-all duration-300" disabled={isLoading}>
+              <Button type="submit" className="w-full h-16 text-lg font-extrabold glow-gold bg-linear-to-r from-primary to-secondary text-primary-foreground hover:brightness-110 rounded-2xl transition-all duration-300" disabled={isLoading}>
                 {isLoading ? "Authenticating..." : "Enter Platform"}
               </Button>
               <div className="text-center pt-2">
-                <p className="text-base text-[#c4b5fd]">
+                <p className="text-base text-secondary/80">
                   New user?{" "}
-                  <Link href="/auth/sign-up" className="text-[#fbbf24] hover:text-[#fb923c] font-bold transition-colors">
+                  <Link href="/auth/sign-up" className="text-primary hover:text-accent font-bold transition-colors">
                     Create Account
                   </Link>
                 </p>

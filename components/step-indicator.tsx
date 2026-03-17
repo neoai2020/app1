@@ -17,29 +17,29 @@ export function StepIndicator({ currentStep }: StepIndicatorProps) {
           <div key={step.number} className="flex items-center flex-1">
             <div className="flex flex-col items-center gap-3 flex-1">
               <div
-                className={`w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold transition-all duration-300 ${
+                className={`w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-black transition-all duration-300 ${
                   currentStep > step.number
-                    ? "bg-accent text-background glow-jade"
+                    ? "bg-primary text-primary-foreground glow-gold"
                     : currentStep === step.number
-                      ? "bg-primary text-background glow-cyan"
-                      : "bg-muted text-muted-foreground"
+                      ? "bg-secondary text-primary-foreground glow-emerald"
+                      : "bg-card text-muted-foreground border-2 border-primary/10"
                 }`}
               >
                 {currentStep > step.number ? <Check className="w-8 h-8" /> : step.number}
               </div>
               <div className="text-center">
                 <p
-                  className={`text-lg font-bold ${currentStep >= step.number ? "text-foreground" : "text-muted-foreground"}`}
+                  className={`text-lg font-extrabold ${currentStep >= step.number ? "text-white" : "text-secondary/50"}`}
                 >
                   {step.title}
                 </p>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
+                <p className="text-sm text-secondary font-semibold">{step.description}</p>
               </div>
             </div>
             {index < steps.length - 1 && (
-              <div className="flex-1 h-1 mx-4 rounded-full bg-muted overflow-hidden">
+              <div className="flex-1 h-1 mx-4 rounded-full bg-card overflow-hidden border border-primary/10">
                 <div
-                  className={`h-full transition-all duration-500 ${currentStep > step.number ? "bg-accent w-full" : "bg-transparent w-0"}`}
+                  className={`h-full transition-all duration-500 ${currentStep > step.number ? "bg-primary w-full" : "bg-transparent w-0"}`}
                 />
               </div>
             )}

@@ -47,8 +47,8 @@ export function ProfileForm({ profile, userEmail }: ProfileFormProps) {
         <Label htmlFor="email" className="text-lg font-semibold">
           Email Address
         </Label>
-        <Input id="email" type="email" value={userEmail} disabled className="h-12 text-lg glass" />
-        <p className="text-sm text-muted-foreground">Email cannot be changed</p>
+        <Input id="email" type="email" value={userEmail} disabled className="h-12 text-lg glass border-2 border-primary/20" />
+        <p className="text-sm text-secondary font-semibold">Email cannot be changed</p>
       </div>
 
       <div className="space-y-3">
@@ -60,22 +60,22 @@ export function ProfileForm({ profile, userEmail }: ProfileFormProps) {
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          className="h-12 text-lg glass"
+          className="h-12 text-lg glass border-2 border-primary/20 focus:border-primary"
           placeholder="Enter your full name"
         />
       </div>
 
       {message && (
         <div
-          className={`p-4 rounded-xl ${message.includes("success") ? "bg-accent/10 border border-accent/30" : "bg-destructive/10 border border-destructive/30"}`}
+          className={`p-4 rounded-xl ${message.includes("success") ? "bg-primary/10 border border-primary/30" : "bg-destructive/10 border border-destructive/30"}`}
         >
-          <p className={`text-base font-semibold ${message.includes("success") ? "text-accent" : "text-destructive"}`}>
+          <p className={`text-base font-semibold ${message.includes("success") ? "text-primary" : "text-destructive"}`}>
             {message}
           </p>
         </div>
       )}
 
-      <Button type="submit" disabled={loading} className="h-14 text-lg font-bold glow-cyan">
+      <Button type="submit" disabled={loading} className="h-14 text-lg font-black glow-gold bg-linear-to-r from-primary to-secondary text-primary-foreground">
         {loading ? (
           <>
             <Loader2 className="w-5 h-5 mr-2 animate-spin" />

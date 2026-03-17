@@ -48,19 +48,19 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-6 bg-gradient-to-br from-[#0d0a1a] via-[#1a1429] to-[#0d0a1a]">
+    <div className="flex min-h-screen w-full items-center justify-center p-6 bg-linear-to-br from-background via-card to-background">
       <div className="w-full max-w-lg">
-        <Card className="glass-strong glow-magenta border-2 border-[#d946ef]/40">
+        <Card className="glass-strong glow-gold border-2 border-primary/40">
           <CardHeader className="space-y-4">
             <div className="flex items-center justify-center mb-6">
-              <div className="relative w-20 h-20 rounded-3xl bg-gradient-to-br from-[#d946ef] via-[#a855f7] to-[#fbbf24] flex items-center justify-center shadow-[0_0_80px_rgba(217,70,239,0.6)]">
-                <div className="w-[72px] h-[72px] rounded-[22px] bg-[#0d0a1a] flex items-center justify-center">
-                  <Brain className="w-10 h-10 text-[#d946ef]" />
+              <div className="relative w-20 h-20 rounded-3xl bg-linear-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.4)]">
+                <div className="w-[72px] h-[72px] rounded-[22px] bg-background flex items-center justify-center">
+                  <Brain className="w-10 h-10 text-primary" />
                 </div>
               </div>
             </div>
             <CardTitle className="text-4xl font-extrabold text-white text-center tracking-tight">Join Robinhood</CardTitle>
-            <CardDescription className="text-lg text-[#c4b5fd] text-center font-semibold">
+            <CardDescription className="text-lg text-secondary text-center font-semibold">
               Activate your AI engagement agent in seconds
             </CardDescription>
           </CardHeader>
@@ -77,7 +77,7 @@ export default function SignUpPage() {
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="h-14 text-lg glass border-2 border-[#d946ef]/30 focus:border-[#d946ef] rounded-2xl"
+                  className="h-14 text-lg glass border-2 border-primary/30 focus:border-primary rounded-2xl"
                 />
               </div>
               <div className="space-y-3">
@@ -91,7 +91,7 @@ export default function SignUpPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 text-lg glass border-2 border-[#d946ef]/30 focus:border-[#d946ef] rounded-2xl"
+                  className="h-14 text-lg glass border-2 border-primary/30 focus:border-primary rounded-2xl"
                 />
               </div>
               <div className="space-y-3">
@@ -105,7 +105,7 @@ export default function SignUpPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-14 text-lg glass border-2 border-[#d946ef]/30 focus:border-[#d946ef] rounded-2xl"
+                  className="h-14 text-lg glass border-2 border-primary/30 focus:border-primary rounded-2xl"
                 />
               </div>
               {error && (
@@ -113,7 +113,7 @@ export default function SignUpPage() {
                   <p className="text-sm text-destructive font-semibold">{error}</p>
                 </div>
               )}
-              <Button type="submit" className="w-full h-16 text-lg font-extrabold glow-magenta bg-gradient-to-r from-[#d946ef] to-[#a855f7] hover:from-[#a855f7] hover:to-[#d946ef] rounded-2xl transition-all duration-300" disabled={isLoading}>
+              <Button type="submit" className="w-full h-16 text-lg font-extrabold glow-gold bg-linear-to-r from-primary to-secondary text-primary-foreground hover:brightness-110 rounded-2xl transition-all duration-300" disabled={isLoading}>
                 {isLoading ? "Initializing Agent..." : "Activate Account"}
               </Button>
               <div className="text-center pt-2">
