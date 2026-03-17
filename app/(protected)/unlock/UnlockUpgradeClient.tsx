@@ -38,7 +38,7 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D]">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <Loader2 className="w-20 h-20 text-[#B3FF00] animate-spin mx-auto mb-6" />
           <p className="text-lg font-black text-white uppercase tracking-widest">Activating Neural Link...</p>
@@ -49,7 +49,7 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
 
   if (status === "error") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D] p-6">
+      <div className="min-h-screen flex items-center justify-center bg-background p-6">
         <div className="max-w-md w-full glass-strong rounded-3xl p-10 border-2 border-red-500/20 text-center">
           <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">⚠️</span>
@@ -69,7 +69,7 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D] p-6">
+    <div className="min-h-screen flex items-center justify-center bg-background p-6">
       {showConfetti && <Confetti recycle={false} numberOfPieces={500} />}
 
       <div className="max-w-2xl w-full glass-strong rounded-[2.5rem] p-12 border-2 border-[#B3FF00]/20 relative overflow-hidden">

@@ -35,7 +35,6 @@ export default function SignUpPage() {
           data: {
             full_name: fullName,
           },
-          emailConfirm: false, // Disable email verification
         },
       })
       if (error) throw error
