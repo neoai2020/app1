@@ -4,27 +4,27 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Robinhood - Emerald & Gold Premium Theme */
-  --background: #062822;
-  --foreground: #f7f7f7;
-  --card: #0a3d35;
-  --card-foreground: #f7f7f7;
-  --popover: #0a3d35;
-  --popover-foreground: #f7f7f7;
-  --primary: #d4af37;
-  --primary-foreground: #062822;
-  --secondary: #9dc183;
-  --secondary-foreground: #062822;
-  --muted: #0d4d42;
-  --muted-foreground: #9dc183;
-  --accent: #d4af37;
-  --accent-foreground: #062822;
-  --destructive: #ef4444;
-  --destructive-foreground: #f7f7f7;
-  --border: rgba(212, 175, 55, 0.2);
-  --input: rgba(212, 175, 55, 0.1);
-  --ring: #d4af37;
-  --radius: 1.25rem;
+  /* Midnight & Lime - Ultra Premium Theme */
+  --background: #0D0D0D;
+  --foreground: #F7F7F7;
+  --card: #111111;
+  --card-foreground: #F7F7F7;
+  --popover: #111111;
+  --popover-foreground: #F7F7F7;
+  --primary: #B3FF00;
+  --primary-foreground: #000000;
+  --secondary: #262626;
+  --secondary-foreground: #F7F7F7;
+  --muted: #1A1A1A;
+  --muted-foreground: #A1A1AA;
+  --accent: #B3FF00;
+  --accent-foreground: #000000;
+  --destructive: #EF4444;
+  --destructive-foreground: #F7F7F7;
+  --border: rgba(179, 255, 0, 0.1);
+  --input: rgba(179, 255, 0, 0.05);
+  --ring: #B3FF00;
+  --radius: 2rem;
 
   /* Custom tokens */
   --emerald-deep: #062822;
@@ -40,14 +40,14 @@
   --chart-5: oklch(0.75 0.16 75);
 
   /* Sidebar colors */
-  --sidebar: #05221d;
-  --sidebar-foreground: #f7f7f7;
-  --sidebar-primary: #d4af37;
-  --sidebar-primary-foreground: #062822;
-  --sidebar-accent: rgba(212, 175, 55, 0.1);
-  --sidebar-accent-foreground: #f7f7f7;
-  --sidebar-border: rgba(212, 175, 55, 0.15);
-  --sidebar-ring: #d4af37;
+  --sidebar: #0D0D0D;
+  --sidebar-foreground: #F7F7F7;
+  --sidebar-primary: #B3FF00;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: rgba(179, 255, 0, 0.1);
+  --sidebar-accent-foreground: #F7F7F7;
+  --sidebar-border: rgba(179, 255, 0, 0.08);
+  --sidebar-ring: #B3FF00;
 }
 
 .dark {
@@ -86,25 +86,25 @@
 @theme inline {
   --font-sans: "Plus Jakarta Sans", "Inter", "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --color-background: #062822;
-  --color-foreground: #f7f7f7;
-  --color-card: #0a3d35;
-  --color-card-foreground: #f7f7f7;
-  --color-popover: #0a3d35;
-  --color-popover-foreground: #f7f7f7;
-  --color-primary: #d4af37;
-  --color-primary-foreground: #062822;
-  --color-secondary: #9dc183;
-  --color-secondary-foreground: #062822;
-  --color-muted: #0d4d42;
-  --color-muted-foreground: #9dc183;
-  --color-accent: #d4af37;
-  --color-accent-foreground: #062822;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #f7f7f7;
-  --color-border: rgba(212, 175, 55, 0.2);
-  --color-input: rgba(212, 175, 55, 0.1);
-  --color-ring: #d4af37;
+  --color-background: #0D0D0D;
+  --color-foreground: #F7F7F7;
+  --color-card: #111111;
+  --color-card-foreground: #F7F7F7;
+  --color-popover: #111111;
+  --color-popover-foreground: #F7F7F7;
+  --color-primary: #B3FF00;
+  --color-primary-foreground: #000000;
+  --color-secondary: #262626;
+  --color-secondary-foreground: #F7F7F7;
+  --color-muted: #1A1A1A;
+  --color-muted-foreground: #A1A1AA;
+  --color-accent: #B3FF00;
+  --color-accent-foreground: #000000;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #F7F7F7;
+  --color-border: rgba(179, 255, 0, 0.1);
+  --color-input: rgba(179, 255, 0, 0.05);
+  --color-ring: #B3FF00;
   --color-chart-1: oklch(0.7 0.15 80);
   --color-chart-2: oklch(0.6 0.12 140);
   --color-chart-3: oklch(0.5 0.1 100);
@@ -135,41 +135,34 @@
 
   /* Neumorphic card utilities */
   .glass {
-    background: linear-gradient(135deg, rgba(10, 61, 53, 0.8) 0%, rgba(6, 40, 34, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.8) 0%, rgba(13, 13, 13, 0.6) 100%);
     backdrop-filter: blur(20px);
-    border: 2px solid rgba(212, 175, 55, 0.2);
+    border: 2px solid rgba(179, 255, 0, 0.1);
     box-shadow: 
-      0 8px 32px 0 rgba(6, 40, 34, 0.4),
+      0 8px 32px 0 rgba(0, 0, 0, 0.4),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
   }
 
   .glass-strong {
-    background: linear-gradient(135deg, rgba(10, 61, 53, 0.95) 0%, rgba(6, 40, 34, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95) 0%, rgba(13, 13, 13, 0.9) 100%);
     backdrop-filter: blur(24px);
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    border: 2px solid rgba(179, 255, 0, 0.2);
     box-shadow: 
       0 12px 40px 0 rgba(0, 0, 0, 0.5),
-      inset 0 2px 0 0 rgba(255, 255, 255, 0.1);
+      inset 0 2px 0 0 rgba(255, 255, 255, 0.08);
   }
 
-  /* Premium glow effects - Softened for better readability */
-  .glow-gold {
+  /* Premium glow effects */
+  .glow-lime {
     box-shadow: 
-      0 0 20px rgba(212, 175, 55, 0.25), 
-      0 0 40px rgba(212, 175, 55, 0.1);
+      0 0 20px rgba(179, 255, 0, 0.25), 
+      0 0 40px rgba(179, 255, 0, 0.1);
   }
 
-  .glow-emerald {
+  .glow-white {
     box-shadow: 
-      0 0 20px rgba(157, 193, 131, 0.25), 
-      0 0 40px rgba(157, 193, 131, 0.1);
-  }
-
-  .glow-cream {
-    box-shadow: 
-      0 0 30px rgba(247, 247, 247, 0.4), 
-      0 0 60px rgba(247, 247, 247, 0.2),
-      0 0 100px rgba(247, 247, 247, 0.1);
+      0 0 30px rgba(247, 247, 247, 0.2), 
+      0 0 60px rgba(247, 247, 247, 0.1);
   }
 
   /* Headings with Plus Jakarta Sans */

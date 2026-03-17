@@ -38,10 +38,10 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0A0E12]">
+      <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D]">
         <div className="text-center">
-          <Loader2 className="w-16 h-16 text-[#00F0FF] animate-spin mx-auto mb-4" />
-          <p className="text-xl text-white/80">Unlocking your upgrade...</p>
+          <Loader2 className="w-20 h-20 text-[#B3FF00] animate-spin mx-auto mb-6" />
+          <p className="text-lg font-black text-white uppercase tracking-widest">Activating Neural Link...</p>
         </div>
       </div>
     )
@@ -49,18 +49,18 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
 
   if (status === "error") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0A0E12] p-6">
-        <div className="max-w-md w-full bg-[#131820]/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10 text-center">
-          <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl">❌</span>
+      <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D] p-6">
+        <div className="max-w-md w-full glass-strong rounded-3xl p-10 border-2 border-red-500/20 text-center">
+          <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">⚠️</span>
           </div>
-          <h1 className="text-2xl font-bold text-white mb-2">Unlock Failed</h1>
-          <p className="text-white/60 mb-6">
-            We couldn't unlock your upgrade. Please make sure you're logged in and try again.
+          <h1 className="text-3xl font-black text-white uppercase tracking-tight italic mb-3">Link Failed</h1>
+          <p className="text-zinc-400 font-bold mb-8">
+            The neural handshake failed. Please ensure you are authenticated and try again.
           </p>
           <Link href="/dashboard">
-            <Button className="w-full bg-[#00F0FF] hover:bg-[#00F0FF]/90 text-[#0A0E12] font-bold">
-              Go to Dashboard
+            <Button className="w-full bg-white/5 hover:bg-white/10 text-white font-black uppercase py-6 rounded-2xl border border-white/5">
+              Return to Control Hub
             </Button>
           </Link>
         </div>
@@ -69,67 +69,75 @@ export function UnlockUpgradeClient({ upgradeLevel, upgradeName, upgradeValue, f
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0A0E12] p-6">
+    <div className="min-h-screen flex items-center justify-center bg-[#0D0D0D] p-6">
       {showConfetti && <Confetti recycle={false} numberOfPieces={500} />}
 
-      <div className="max-w-2xl w-full bg-[#131820]/80 backdrop-blur-xl rounded-3xl p-8 border border-[#00F0FF]/30 shadow-[0_0_50px_rgba(0,240,255,0.3)]">
+      <div className="max-w-2xl w-full glass-strong rounded-[2.5rem] p-12 border-2 border-[#B3FF00]/20 relative overflow-hidden">
+        {/* Glow effect */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-[#B3FF00]/40 blur-sm" />
+        
         {/* Success Icon */}
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-8">
           <div className="relative">
-            <div className="w-24 h-24 bg-gradient-to-br from-[#00F0FF] to-[#7A5CFF] rounded-full flex items-center justify-center animate-pulse">
-              <CheckCircle2 className="w-12 h-12 text-white" />
+            <div className="w-28 h-28 bg-[#B3FF00] rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(179,255,0,0.3)]">
+              <CheckCircle2 className="w-14 h-14 text-black" />
             </div>
-            <Sparkles className="absolute -top-2 -right-2 w-8 h-8 text-[#FFC857] animate-bounce" />
+            <Sparkles className="absolute -top-4 -right-4 w-10 h-10 text-[#B3FF00] animate-pulse" />
           </div>
         </div>
 
         {/* Success Message */}
-        <h1 className="text-4xl font-bold text-center text-white mb-3">🎉 Congratulations!</h1>
-        <p className="text-xl text-center text-[#00F0FF] mb-6">
-          You've unlocked <span className="font-bold">{upgradeName}</span>!
-        </p>
+        <div className="text-center mb-10">
+          <p className="text-[10px] font-black text-[#B3FF00] uppercase tracking-[0.4em] mb-3">System Optimized</p>
+          <h1 className="text-5xl font-black text-white uppercase tracking-tighter italic mb-4">ACCESS GRANTED</h1>
+          <p className="text-xl text-zinc-400 font-bold">
+            Neural access to <span className="text-white italic">{upgradeName}</span> is now active.
+          </p>
+        </div>
 
         {/* Upgrade Value */}
-        <div className="bg-[#0A0E12]/50 rounded-2xl p-6 mb-6 border border-[#00F0FF]/20">
-          <div className="text-center mb-4">
-            <span className="text-white/60 text-sm">Upgrade Value</span>
-            <p className="text-5xl font-bold text-[#1CE5A1]">{upgradeValue}</p>
+        <div className="bg-white/3 rounded-3xl p-8 mb-10 border border-white/5">
+          <div className="flex items-center justify-between mb-8 pb-8 border-b border-white/5">
+              <span className="text-zinc-500 font-black uppercase tracking-widest text-xs">Internal Value</span>
+              <p className="text-3xl font-black text-[#B3FF00] italic">{upgradeValue}</p>
           </div>
 
           {/* Features */}
-          <div className="space-y-3">
-            <p className="text-white/80 font-semibold mb-3">What You Just Unlocked:</p>
+          <div className="space-y-4">
+            <p className="text-white font-black uppercase tracking-widest text-xs mb-6 px-1">Active Protocols:</p>
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-[#1CE5A1] flex-shrink-0 mt-0.5" />
-                <span className="text-white/80">{feature}</span>
+              <div key={index} className="flex items-start gap-4 p-4 rounded-xl bg-white/2 hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 group">
+                <div className="w-5 h-5 rounded bg-[#B3FF00]/10 flex items-center justify-center group-hover:bg-[#B3FF00] transition-colors">
+                  <CheckCircle2 className="w-3 h-3 text-[#B3FF00] group-hover:text-black transition-colors" />
+                </div>
+                <span className="text-zinc-300 font-bold text-sm tracking-tight">{feature}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* CTA Buttons */}
-        <div className="space-y-3">
-          <Link href="/dashboard" className="block">
-            <Button className="w-full bg-gradient-to-r from-[#00F0FF] to-[#7A5CFF] hover:opacity-90 text-white font-bold text-lg py-6 rounded-xl shadow-[0_0_30px_rgba(0,240,255,0.5)]">
-              Go to Dashboard
-              <ArrowRight className="ml-2 w-5 h-5" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Link href="/dashboard">
+            <Button className="w-full bg-[#B3FF00] hover:bg-[#B3FF00]/90 text-black font-black uppercase py-7 rounded-2xl flex items-center justify-center gap-2 group">
+              Dashboard
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
 
-          <Link href="/training" className="block">
+          <Link href="/training">
             <Button
               variant="outline"
-              className="w-full border-[#00F0FF]/30 text-[#00F0FF] hover:bg-[#00F0FF]/10 font-semibold py-6 rounded-xl bg-transparent"
+              className="w-full border-white/10 text-white font-black uppercase py-7 rounded-2xl bg-white/3 hover:bg-white/7"
             >
-              Access Training
+              Access Labs
             </Button>
           </Link>
         </div>
 
         {/* Footer Message */}
-        <p className="text-center text-white/40 text-sm mt-6">
-          Your account has been upgraded. All premium features are now available!
+        <p className="text-center text-zinc-600 text-[10px] font-black uppercase tracking-[0.2em] mt-10">
+          Neural synchronization complete. Hardware acceleration enabled.
         </p>
       </div>
     </div>

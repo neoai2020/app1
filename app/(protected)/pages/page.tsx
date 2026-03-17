@@ -2,7 +2,7 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Eye, Copy, Calendar, Zap, Flame, ExternalLink, Youtube, MessageCircle } from "lucide-react"
+import { Eye, Copy, Calendar, Zap, Flame, ExternalLink, Youtube, MessageCircle, Sparkles } from "lucide-react"
 import Link from "next/link"
 import { PageActions } from "@/components/page-actions"
 
@@ -29,42 +29,47 @@ export default async function MyVaultPage() {
     .order("created_at", { ascending: false })
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
-      <div className="flex items-center justify-between">
-        <div className="space-y-2">
-          <h1 className="text-5xl font-black text-white tracking-tight">Your Comment Vault</h1>
-          <p className="text-xl text-[#7dd3fc] font-bold">All your AI-generated comment packs in one place 🔥</p>
+    <div className="max-w-7xl mx-auto space-y-12">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-1.5 h-8 bg-[#B3FF00] rounded-full" />
+            <h1 className="text-5xl font-black text-white tracking-tighter uppercase italic">ASSET LIBRARY</h1>
+          </div>
+          <p className="text-xl text-zinc-500 font-bold uppercase tracking-tight">Access your tactical comment payloads</p>
         </div>
-        <Button asChild className="h-16 px-8 text-lg font-black bg-gradient-to-r from-[#ec4899] to-[#f97316] hover:from-[#f97316] hover:to-[#ec4899] text-white rounded-2xl shadow-lg" size="lg">
+        <Button asChild className="h-16 px-10 text-lg font-black bg-[#B3FF00] hover:bg-[#B3FF00]/90 text-black rounded-2xl shadow-[0_4px_20px_rgba(179,255,0,0.3)] group transition-all" size="lg">
           <Link href="/create">
-            <Flame className="w-5 h-5 mr-2" />
-            Generate New Pack
+            <Flame className="w-6 h-6 mr-3 group-hover:animate-bounce" />
+            GENERATE NEW PACK
           </Link>
         </Button>
       </div>
 
       {!pages || pages.length === 0 ? (
-        <Card className="glass-strong border-2 border-[#0ea5e9]/40">
-          <CardContent className="p-16 text-center space-y-8">
-            <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-[#0ea5e9]/20 to-[#ec4899]/20 flex items-center justify-center mx-auto border-2 border-[#0ea5e9]/40">
-              <Zap className="w-16 h-16 text-[#0ea5e9]" />
+        <Card className="glass-strong border-2 border-white/5 bg-[#111111] overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-1 bg-[#B3FF00]/20" />
+          <CardContent className="p-20 text-center space-y-10">
+            <div className="w-40 h-40 rounded-[2.5rem] bg-white/3 flex items-center justify-center mx-auto border-2 border-white/5 relative group-hover:border-[#B3FF00]/30 transition-all">
+              <Zap className="w-20 h-20 text-[#B3FF00] drop-shadow-[0_0_15px_rgba(179,255,0,0.4)]" />
+              <Sparkles className="absolute -top-4 -right-4 w-12 h-12 text-[#B3FF00]/50 animate-pulse" />
             </div>
-            <div>
-              <h2 className="text-4xl font-black text-white mb-4">Your Vault is Empty</h2>
-              <p className="text-xl text-[#7dd3fc] font-semibold max-w-xl mx-auto">
-                Fire up the Gold Rush Generator and create your first AI comment pack in 60 seconds
+            <div className="space-y-4">
+              <h2 className="text-4xl font-black text-white uppercase tracking-tighter italic">Varying protocols detected...</h2>
+              <p className="text-xl text-zinc-500 font-bold max-w-xl mx-auto">
+                No active comment packs found in your secure vault. Start a search and capture session to populate your library.
               </p>
             </div>
-            <Button asChild className="h-20 px-12 text-2xl font-black bg-gradient-to-r from-[#0ea5e9] to-[#ec4899] hover:from-[#ec4899] hover:to-[#0ea5e9] text-white rounded-2xl shadow-2xl" size="lg">
+            <Button asChild className="h-20 px-16 text-2xl font-black bg-[#B3FF00] hover:bg-[#B3FF00]/90 text-black rounded-2xl shadow-2xl transition-all hover:scale-105" size="lg">
               <Link href="/create">
-                <Flame className="w-6 h-6 mr-3" />
-                Start Making Packs Now
+                <Flame className="w-8 h-8 mr-4" />
+                INITIATE GENERATOR
               </Link>
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-8">
           {pages.map((page) => {
             // Parse comment pack to get count
             let commentCount = 0
@@ -76,80 +81,84 @@ export default async function MyVaultPage() {
             }
 
             return (
-              <Card key={page.id} className="glass-strong border-2 border-[#0ea5e9]/30 hover:border-[#ec4899]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ec4899]/10">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1 space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0ea5e9]/30 to-[#ec4899]/30 flex items-center justify-center text-3xl border-2 border-[#0ea5e9]/40">
+              <Card key={page.id} className="glass-strong border-2 border-white/5 bg-[#111111] overflow-hidden group hover:border-[#B3FF00]/30 transition-all duration-500 relative">
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#B3FF00]/0 group-hover:bg-[#B3FF00]/40 transition-all" />
+                
+                <CardHeader className="p-8 pb-4">
+                  <div className="flex flex-col lg:flex-row items-start justify-between gap-8">
+                    <div className="flex-1 space-y-6 w-full">
+                      <div className="flex items-center gap-6">
+                        <div className="w-20 h-20 rounded-3xl bg-white/3 flex items-center justify-center text-4xl border-2 border-white/5 group-hover:bg-[#B3FF00]/10 group-hover:border-[#B3FF00]/30 transition-all transform group-hover:rotate-12">
                           {page.niches?.icon || "💎"}
                         </div>
-                        <div className="flex-1">
-                          <CardTitle className="text-2xl font-black text-white mb-1">{page.offer_name || "Comment Pack"}</CardTitle>
-                          <div className="flex items-center gap-2 text-sm text-[#7dd3fc]">
-                            <Youtube className="w-4 h-4" />
-                            <span className="font-semibold truncate">{page.video_title || page.title}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-2">
+                             <span className="text-[10px] font-black text-[#B3FF00] uppercase tracking-[0.3em] bg-[#B3FF00]/10 px-3 py-1 rounded-full border border-[#B3FF00]/20">Active Asset</span>
+                             <span className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">{new Date(page.created_at).toLocaleDateString()}</span>
+                          </div>
+                          <CardTitle className="text-3xl font-black text-white mb-2 uppercase italic tracking-tight truncate">
+                            {page.offer_name || "UNNAMED PROTOCOL"}
+                          </CardTitle>
+                          <div className="flex items-center gap-2 text-zinc-500 font-bold text-sm">
+                            <Youtube className="w-4 h-4 text-red-500" />
+                            <span className="truncate">{page.video_title || page.title}</span>
                           </div>
                         </div>
                       </div>
                       
-                      {/* What to do card */}
-                      <div className="glass rounded-xl p-4 border-2 border-[#06b6d4]/30 bg-gradient-to-r from-[#06b6d4]/10 to-[#0ea5e9]/10">
-                        <div className="flex items-start gap-3">
-                          <MessageCircle className="w-5 h-5 text-[#06b6d4] mt-0.5 flex-shrink-0" />
-                          <div className="text-sm">
-                            <p className="font-bold text-white mb-1">💰 How to Use This Pack:</p>
-                            <ol className="text-[#7dd3fc] space-y-1 list-decimal list-inside">
-                              <li className="font-semibold">Click <span className="text-white">"View Comments"</span> below</li>
-                              <li className="font-semibold">Copy any comment you like (one-click copy)</li>
-                              <li className="font-semibold">Click <span className="text-white">"Open Video"</span> to go to the YouTube Short</li>
-                              <li className="font-semibold">Paste the comment on the video</li>
-                              <li className="font-semibold">Your profile drives traffic to your affiliate link 🔥</li>
-                            </ol>
+                      {/* Operational Guidelines */}
+                      <div className="bg-white/2 rounded-2xl p-6 border border-white/5 group-hover:bg-white/3 transition-colors">
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 rounded-xl bg-[#B3FF00]/10 flex items-center justify-center shrink-0 border border-[#B3FF00]/20">
+                            <Zap className="w-5 h-5 text-[#B3FF00]" />
+                          </div>
+                          <div>
+                            <p className="font-black text-white uppercase tracking-widest text-xs mb-3">Deployment Sequence:</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+                               {[
+                                 { id: "01", text: "Select comment payload" },
+                                 { id: "02", text: "Execute one-click copy" },
+                                 { id: "03", text: "Access targeting video" },
+                                 { id: "04", text: "Deploy and capture traffic" }
+                               ].map(step => (
+                                 <div key={step.id} className="flex items-center gap-3">
+                                   <span className="text-[10px] font-black text-[#B3FF00]/40 tracking-tighter">{step.id}</span>
+                                   <span className="text-zinc-500 font-bold text-xs uppercase">{step.text}</span>
+                                 </div>
+                               ))}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div
-                      className={`px-4 py-2 rounded-xl text-sm font-black border-2 ${
-                        page.status === "active"
-                          ? "bg-[#10b981]/20 text-[#10b981] border-[#10b981]/40"
-                          : page.status === "paused"
-                            ? "bg-[#fbbf24]/20 text-[#fbbf24] border-[#fbbf24]/40"
-                            : "bg-[#ef4444]/20 text-[#ef4444] border-[#ef4444]/40"
-                      }`}
-                    >
-                      {page.status.toUpperCase()}
+
+                    <div className="flex flex-row lg:flex-col items-center gap-4 w-full lg:w-auto">
+                      <div className="px-6 py-2.5 rounded-full text-xs font-black border-2 bg-black text-[#B3FF00] border-[#B3FF00]/30 uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(179,255,0,0.1)]">
+                        {page.status || "STANDBY"}
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="space-y-4 pt-4">
-                  <div className="grid grid-cols-4 gap-3">
-                    <div className="glass rounded-xl p-3 text-center border-2 border-[#ec4899]/30 bg-gradient-to-br from-[#ec4899]/10 to-[#f97316]/10">
-                      <MessageCircle className="w-5 h-5 text-[#ec4899] mx-auto mb-1" />
-                      <p className="text-2xl font-black text-white">{commentCount}</p>
-                      <p className="text-xs text-[#7dd3fc] font-bold mt-0.5">Comments</p>
-                    </div>
-                    <div className="glass rounded-xl p-3 text-center border-2 border-[#0ea5e9]/30">
-                      <Eye className="w-5 h-5 text-[#0ea5e9] mx-auto mb-1" />
-                      <p className="text-2xl font-black text-white">{page.views || 0}</p>
-                      <p className="text-xs text-[#7dd3fc] font-bold mt-0.5">Opens</p>
-                    </div>
-                    <div className="glass rounded-xl p-3 text-center border-2 border-[#06b6d4]/30">
-                      <Copy className="w-5 h-5 text-[#06b6d4] mx-auto mb-1" />
-                      <p className="text-2xl font-black text-white">{page.clicks || 0}</p>
-                      <p className="text-xs text-[#7dd3fc] font-bold mt-0.5">Copies</p>
-                    </div>
-                    <div className="glass rounded-xl p-3 text-center border-2 border-[#a855f7]/30">
-                      <Calendar className="w-5 h-5 text-[#a855f7] mx-auto mb-1" />
-                      <p className="text-xs font-black text-white leading-tight">
-                        {new Date(page.created_at).toLocaleDateString()}
-                      </p>
-                      <p className="text-xs text-[#7dd3fc] font-bold mt-0.5">Created</p>
-                    </div>
+
+                <CardContent className="p-8 pt-4 space-y-8">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {[
+                      { icon: MessageCircle, label: "Payloads", val: commentCount, color: "text-[#B3FF00]" },
+                      { icon: Eye, label: "Analysis", val: page.views || 0, color: "text-white" },
+                      { icon: Copy, label: "Executions", val: page.clicks || 0, color: "text-white" },
+                      { icon: Zap, label: "Velocity", val: "94%", color: "text-white" }
+                    ].map((stat, i) => (
+                      <div key={i} className="glass rounded-2xl p-4 border border-white/5 bg-white/2 hover:bg-white/5 transition-all group/stat">
+                        <stat.icon className={`w-4 h-4 ${stat.color} mb-3 group-hover/stat:scale-125 transition-transform`} />
+                        <p className="text-3xl font-black text-white tracking-tighter italic">{stat.val}</p>
+                        <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest mt-1">{stat.label}</p>
+                      </div>
+                    ))}
                   </div>
 
-                  <PageActions pageId={page.id} status={page.status} affiliateLink={page.video_url || page.affiliate_link} videoUrl={page.video_url} />
+                  <div className="pt-4 border-t border-white/5">
+                    <PageActions pageId={page.id} status={page.status} affiliateLink={page.video_url || page.affiliate_link} videoUrl={page.video_url} />
+                  </div>
                 </CardContent>
               </Card>
             )

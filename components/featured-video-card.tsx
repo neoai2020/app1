@@ -9,27 +9,29 @@ export function FeaturedVideoCard() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <Card className="glass-strong border-2 border-primary/40 glow-gold overflow-hidden shadow-2xl shadow-primary/20">
+    <Card className="glass-card border-white/5 bg-[#111111] overflow-hidden group">
       <CardContent className="p-0">
         <div className="space-y-0">
-          {/* Video Info - Clean header */}
-          <div className="p-6 border-b-2 border-primary/20">
-            <div className="flex items-center gap-3 mb-3">
-              <Sparkles className="w-6 h-6 text-primary animate-pulse" />
-              <span className="text-primary font-extrabold text-sm uppercase tracking-wider">Must Watch First</span>
+          {/* Video Info - Redesigned for High Fidelity */}
+          <div className="p-8 border-b border-white/5">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-primary" />
+              </div>
+              <span className="text-primary font-black text-[10px] uppercase tracking-widest">Must Watch First</span>
             </div>
-            <h3 className="text-3xl font-extrabold text-white mb-2 tracking-tight">Watch This Video To Get Started</h3>
-            <p className="text-lg text-secondary font-semibold">
-              This 5-minute video shows you exactly how to use Robinhood
+            <h3 className="text-xl font-black text-white mb-2 tracking-tight uppercase">Get Started with Robinhood</h3>
+            <p className="text-xs text-zinc-500 font-bold uppercase tracking-tight">
+              Watch this 5-minute guide to master the platform.
             </p>
           </div>
 
           {/* Video Player */}
-          <div className="relative aspect-video bg-black">
+          <div className="relative aspect-video bg-black/40">
             {!isPlaying ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-background to-card">
-                {/* Video thumbnail preview */}
-                <div className="absolute inset-0">
+              <div className="absolute inset-0 flex items-center justify-center">
+                {/* Video thumbnail preview with high-fidelity overlay */}
+                <div className="absolute inset-0 opacity-40">
                   <iframe
                     src="https://player.vimeo.com/video/1151044408?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1"
                     title="Robinhood Welcome Preview"
@@ -38,21 +40,21 @@ export function FeaturedVideoCard() {
                   />
                 </div>
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/50" />
+                {/* Dark Vignette */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/20" />
 
-                {/* Large play button */}
+                {/* Large play button - Matching Sidebar Style */}
                 <Button
                   size="lg"
                   onClick={() => setIsPlaying(true)}
-                  className="relative z-10 h-28 w-28 rounded-full bg-linear-to-br from-primary to-secondary text-primary-foreground shadow-2xl hover:scale-110 transition-all duration-300 border-4 border-primary/30 glow-gold"
+                  className="relative z-10 h-20 w-20 rounded-full bg-primary text-black shadow-[0_0_30px_rgba(179,255,0,0.3)] hover:scale-110 transition-all duration-300 border-none"
                 >
-                  <Play className="w-14 h-14 ml-1 fill-primary-foreground" />
+                  <Play className="w-8 h-8 ml-1 fill-black" />
                 </Button>
 
                 {/* Click to play text */}
-                <div className="absolute bottom-8 left-0 right-0 text-center">
-                  <p className="text-white text-xl font-extrabold drop-shadow-lg">▶ Click to Play Video</p>
+                <div className="absolute bottom-6 left-0 right-0 text-center">
+                  <p className="text-white text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">Click to Play Video</p>
                 </div>
               </div>
             ) : (

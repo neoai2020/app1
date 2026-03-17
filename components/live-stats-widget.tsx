@@ -74,16 +74,19 @@ export function LiveStatsWidget() {
   }, [nextId])
 
   return (
-    <Card className="glass-strong border-2 border-secondary/40 glow-emerald overflow-hidden relative">
-      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-secondary/5 to-accent/5" />
+    <Card className="glass-card border-primary/10 overflow-hidden relative">
+      <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-primary/5" />
 
-      <CardHeader className="relative z-10 pb-4 border-b-2 border-secondary/30">
+      <CardHeader className="relative z-10 pb-4 border-b border-zinc-800">
         <CardTitle className="text-2xl font-extrabold text-white flex items-center gap-3">
-          <Activity className="w-7 h-7 text-secondary" />
+          <Activity className="w-7 h-7 text-primary shadow-[0_0_10px_rgba(193,255,0,0.3)]" />
           <span>Live Activity Feed</span>
         </CardTitle>
-        <p className="text-sm text-secondary mt-2 font-semibold flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" />
+        <p className="text-sm text-zinc-400 mt-2 font-semibold flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
           Real-time updates from Robinhood members
         </p>
       </CardHeader>
@@ -98,7 +101,7 @@ export function LiveStatsWidget() {
               }`}
             >
               <div className="flex items-start gap-3">
-                <div className={`w-10 h-10 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center shrink-0 text-white font-bold text-sm shadow-lg`}>
+                <div className="w-10 h-10 rounded-xl bg-zinc-800 flex items-center justify-center shrink-0 text-primary font-black text-sm border border-primary/20">
                   {activity.user.charAt(0)}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -116,8 +119,8 @@ export function LiveStatsWidget() {
           ))}
         </div>
 
-        <div className="p-4 bg-linear-to-r from-primary/20 to-secondary/20 border-t-2 border-primary/30">
-          <p className="text-xs text-center text-secondary font-semibold">
+        <div className="p-4 bg-primary/5 border-t border-zinc-800">
+          <p className="text-xs text-center text-zinc-400 font-bold tracking-tight">
             ✨ Join {Math.floor(Math.random() * 200 + 800)} active members taking action right now
           </p>
         </div>

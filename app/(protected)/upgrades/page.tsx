@@ -69,57 +69,76 @@ export default async function UpgradesPage() {
   const { data: profile } = await supabase.from("users").select("*").eq("id", user.id).single()
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto space-y-12">
       <div className="text-center space-y-4">
-        <h1 className="text-4xl lg:text-5xl font-bold text-foreground">Your Premium Content</h1>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Access your exclusive training materials, templates, and tools
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#B3FF00]/10 border border-[#B3FF00]/20 mb-4">
+          <Crown className="w-4 h-4 text-[#B3FF00]" />
+          <span className="text-[10px] font-black text-white uppercase tracking-[0.2em]">Premium Access Level</span>
+        </div>
+        <h1 className="text-6xl font-black text-white tracking-tighter uppercase italic">COMMAND UPGRADES</h1>
+        <p className="text-xl text-zinc-500 font-bold uppercase tracking-tight max-w-2xl mx-auto">
+          Elevate your operational capabilities and unlock advanced profit extraction protocols.
         </p>
       </div>
 
       {profile?.upgrade_level !== "free" && (
-        <Card className="glass-strong glow-jade border-border/50">
-          <CardContent className="p-6 text-center">
-            <p className="text-lg font-bold text-accent">
-              Current Plan:{" "}
+        <div className="glass-strong border-2 border-[#B3FF00]/20 bg-[#B3FF00]/5 rounded-3xl p-8 flex items-center justify-center gap-4 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-[#B3FF00]/40 blur-sm" />
+          <Zap className="w-6 h-6 text-[#B3FF00]" />
+          <p className="text-lg font-black text-white uppercase italic tracking-wider">
+            CURRENT ACCESS PROTOCOL:{" "}
+            <span className="text-[#B3FF00]">
               {profile?.upgrade_level === "dfy_vault"
-                ? "DFY Vault"
+                ? "DFY VAULT"
                 : profile?.upgrade_level === "instant_income"
-                  ? "Instant Income"
-                  : "Automated Income"}
-            </p>
-          </CardContent>
-        </Card>
+                  ? "INSTANT INCOME"
+                  : "AUTOMATED INCOME"}
+            </span>
+          </p>
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {upgrades.map((upgrade) => {
           const Icon = upgrade.icon
           const isCurrentPlan = profile?.upgrade_level === upgrade.id
-          const glowClass =
-            upgrade.color === "cyan" ? "glow-cyan" : upgrade.color === "violet" ? "glow-violet" : "glow-jade"
-
+          
           return (
-            <Card key={upgrade.id} className={`glass-strong border-border/50 ${glowClass} flex flex-col`}>
-              <CardHeader className="text-center pb-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto mb-4 glow-cyan">
-                  <Icon className="w-10 h-10 text-background" />
+            <Card key={upgrade.id} className="glass-strong border-2 border-white/5 bg-[#111111] overflow-hidden group hover:border-[#B3FF00]/30 transition-all duration-500 flex flex-col rounded-4xl relative">
+              <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-[#B3FF00]/40 transition-all" />
+              
+              <CardHeader className="p-10 text-center pb-8 border-b border-white/5">
+                <div className="w-24 h-24 rounded-4xl bg-white/3 flex items-center justify-center mx-auto mb-6 border-2 border-white/5 group-hover:bg-[#B3FF00] group-hover:rotate-12 transition-all duration-500 shadow-xl">
+                  <Icon className="w-12 h-12 text-white group-hover:text-black" />
                 </div>
-                <CardTitle className="text-3xl font-bold text-foreground mb-2">{upgrade.name}</CardTitle>
-                <p className="text-base text-muted-foreground">{upgrade.tagline}</p>
+                <div className="space-y-2">
+                   <p className="text-[10px] font-black text-[#B3FF00] uppercase tracking-[0.3em]">{upgrade.tagline}</p>
+                   <CardTitle className="text-3xl font-black text-white uppercase italic tracking-tighter">{upgrade.name}</CardTitle>
+                </div>
               </CardHeader>
-              <CardContent className="flex-1 flex flex-col">
-                <div className="space-y-3 mb-8 flex-1">
+
+              <CardContent className="p-10 flex-1 flex flex-col space-y-10">
+                <div className="space-y-4 flex-1">
+                  <p className="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-6">Unlocked Features:</p>
                   {upgrade.features.map((feature, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                      <p className="text-base text-foreground leading-relaxed">{feature}</p>
+                    <div key={index} className="flex items-start gap-3 group/feat">
+                      <div className="w-5 h-5 rounded bg-[#B3FF00]/10 flex items-center justify-center shrink-0 border border-[#B3FF00]/20 group-hover/feat:bg-[#B3FF00]">
+                         <Check className="w-3 h-3 text-[#B3FF00] group-hover/feat:text-black" />
+                      </div>
+                      <p className="text-sm font-bold text-zinc-400 group-hover/feat:text-white transition-colors">{feature}</p>
                     </div>
                   ))}
                 </div>
-                <Button asChild className={`w-full h-14 text-lg font-bold ${glowClass}`}>
-                  <Link href={upgrade.href}>{isCurrentPlan ? "Access Your Content" : "View Details"}</Link>
-                </Button>
+
+                <Link href={upgrade.href} className="w-full">
+                  <Button className={`w-full h-16 text-lg font-black uppercase italic rounded-2xl transition-all ${
+                    isCurrentPlan 
+                      ? "bg-white/5 border border-white/10 text-white hover:bg-white/10" 
+                      : "bg-[#B3FF00] text-black shadow-[0_8px_30px_rgba(179,255,0,0.2)] hover:scale-105"
+                  }`}>
+                    {isCurrentPlan ? "ACCESS COMMAND" : "VIEW DETAILS"}
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           )

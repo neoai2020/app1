@@ -12,25 +12,24 @@ interface QuickActionCardProps {
   glowColor?: "primary" | "secondary" | "accent"
 }
 
-export function QuickActionCard({ title, description, icon: Icon, href, buttonText, glowColor = "primary" }: QuickActionCardProps) {
-  const glowClass = "glow-gold"
-  const borderClass = "border-primary/40"
-  const iconColorClass = "text-primary"
-  const buttonClass = "bg-linear-to-r from-primary to-secondary text-primary-foreground hover:brightness-110"
+export function QuickActionCard({ title, description, icon: Icon, href, buttonText }: QuickActionCardProps) {
+  const borderClass = "border-primary/20 hover:border-primary/50"
+  const iconColorClass = "text-primary shadow-[0_0_10px_rgba(193,255,0,0.5)]"
+  const buttonClass = "bg-primary text-[#0B0F12] font-black hover:brightness-110 shadow-[0_0_15px_rgba(193,255,0,0.3)] hover:shadow-[0_0_25px_rgba(193,255,0,0.5)]"
 
   return (
-    <Card className={`glass-strong border-2 ${borderClass} ${glowClass} hover:scale-105 transition-transform duration-300`}>
+    <Card className={`glass-card ${borderClass} transition-all duration-300 group`}>
       <CardHeader className="space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center border-2 border-primary/20">
+          <div className="w-14 h-14 rounded-2xl bg-zinc-800/50 flex items-center justify-center border border-zinc-700 group-hover:border-primary/30 transition-colors">
             <Icon className={`w-7 h-7 ${iconColorClass}`} />
           </div>
           <CardTitle className="text-2xl font-extrabold text-white tracking-tight">{title}</CardTitle>
         </div>
-        <CardDescription className="text-base text-secondary leading-relaxed">{description}</CardDescription>
+        <CardDescription className="text-base text-zinc-400 leading-relaxed font-medium">{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <Button asChild className={`w-full h-14 text-base font-extrabold rounded-2xl ${buttonClass} text-white shadow-lg transition-all duration-300`}>
+        <Button asChild className={`w-full h-14 text-base font-extrabold rounded-2xl ${buttonClass} transition-all duration-300`}>
           <Link href={href}>{buttonText}</Link>
         </Button>
       </CardContent>
