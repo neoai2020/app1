@@ -18,6 +18,8 @@ import {
   Zap,
   Crown,
   Sparkles,
+  Diamond,
+  Target,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -25,16 +27,17 @@ import { createClient } from "@/lib/supabase/client"
 
 const dashboardItems = [
   { title: "Control Hub", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Trend Hijacker", url: "/create", icon: TrendingUp },
+  { title: "Trend Hijacker", url: "/create", icon: Target },
   { title: "Asset Library", url: "/pages", icon: FileText },
+  { title: "Scale Your Robinhood", url: "/scale", icon: TrendingUp },
   { title: "Link Hub", url: "/share", icon: Zap },
   { title: "Training Hub", url: "/training", icon: Brain },
 ]
 
 const premiumItems = [
-  { title: "Unlock", url: "/unlock", icon: Sparkles },
-  { title: "Bonus Training", url: "/bonus-training", icon: Video },
-  { title: "Upgrades", url: "/upgrades", icon: Crown },
+  { title: "Robinhood DFY", url: "/dfy-vault", icon: Diamond },
+  { title: "Robinhood Instant Income", url: "/instant-income", icon: Sparkles },
+  { title: "Robinhood Autopilot", url: "/autopilot", icon: Zap },
 ]
 
 

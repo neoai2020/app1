@@ -7,7 +7,6 @@ import { FeaturedVideoCard } from "@/components/featured-video-card"
 import { EarningsShowcase } from "@/components/earnings-showcase"
 import { CommunityProgress } from "@/components/community-progress"
 import { LiveActivityFeed, ManagerSupportCard } from "@/components/live-activities-sidebar"
-import { PremiumUpgradeCard } from "@/components/premium-upgrade-card"
 import { 
   BarChart2,
   Users,
@@ -97,7 +96,6 @@ export default async function DashboardPage() {
         <div className="xl:mt-32 space-y-8">
            <CommunityProgress />
            <LiveActivityFeed />
-           <PremiumUpgradeCard />
            <ManagerSupportCard />
         </div>
       </div>

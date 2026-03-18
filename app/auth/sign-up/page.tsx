@@ -11,6 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Brain } from "lucide-react"
+import { signUpAction } from "./actions"
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("")
@@ -22,25 +23,18 @@ export default function SignUpPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    const supabase = createClient()
     setIsLoading(true)
     setError(null)
 
     try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/dashboard`,
-          data: {
-            full_name: fullName,
-          },
-        },
-      })
-      if (error) throw error
-      router.push("/dashboard") // Redirect directly to dashboard instead of verify-email page
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred")
+      const result = await signUpAction({ email, password, fullName })
+      if (result.error) {
+        setError(result.error)
+      } else {
+        router.push("/")
+      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An error occurred")
     } finally {
       setIsLoading(false)
     }
